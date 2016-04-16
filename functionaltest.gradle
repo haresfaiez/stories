@@ -1,7 +1,7 @@
 ext {
-    cucumber_version= '1.2.4'
-    cucumber_package = 'stories'
+    cucumber_package          = 'stories'
     cucumber_stories_location = 'src/functionaltest/resources'
+    cucumber_version          = '1.2.4'
 }
 
 configurations {
@@ -21,22 +21,22 @@ sourceSets {
 task functionaltest() {
     doLast {
         javaexec {
-            main = "cucumber.api.cli.Main"
+            main      = "cucumber.api.cli.Main"
             classpath = sourceSets.functionaltest.runtimeClasspath
-            args = ['--plugin',
-                    'pretty',
-                    '--glue',
-                    cucumber_package,
-                    cucumber_stories_location]
+            args      = ['--plugin',
+                         'pretty',
+                         '--glue',
+                         cucumber_package,
+                         cucumber_stories_location]
         }
     }
 }
 
 dependencies {
-    testCompile group: 'info.cukes',
-                          name: 'cucumber-java',
-                          version: cucumber_version
-    testCompile group: 'info.cukes',
-                          name: 'cucumber-junit',
-                          version: cucumber_version
+    testCompile group:   'info.cukes',
+                name:    'cucumber-java',
+                version: cucumber_version
+    testCompile group:   'info.cukes',
+                name:    'cucumber-junit',
+                version: cucumber_version
 }
