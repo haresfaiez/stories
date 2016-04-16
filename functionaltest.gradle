@@ -32,6 +32,8 @@ task functionaltest() {
     }
 }
 
+check.dependsOn functionaltest
+
 dependencies {
     testCompile group:   'info.cukes',
                 name:    'cucumber-java',
