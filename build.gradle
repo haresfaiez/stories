@@ -1,13 +1,17 @@
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'idea'
 
 apply from  : 'functionaltest.gradle'
 
 ext {
     junit_version = '4.12'
+    groovy_version = '2.4.6'
 }
 
 dependencies {
+    compile group:'org.codehaus.groovy', name:'groovy-all', version: groovy_version
+
     testCompile group:'junit', name:'junit', version: junit_version
 }
 

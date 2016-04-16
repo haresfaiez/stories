@@ -1,7 +1,7 @@
 ext {
-    cucumber_package          = 'stories'
-    cucumber_stories_location = 'src/functionaltest/resources'
-    cucumber_version          = '1.2.4'
+    cucumber_implementation_location = 'src/functionaltest/groovy'
+    cucumber_stories_location        = 'src/functionaltest/resources'
+    cucumber_version                 = '1.2.4'
 }
 
 configurations {
@@ -11,7 +11,6 @@ configurations {
 
 sourceSets {
     functionaltest {
-        java.srcDir file('src/functionaltest/java')
         resources.srcDir file('src/functionaltest/resources')
         compileClasspath = sourceSets.main.output + configurations.functionaltestCompile
         runtimeClasspath = output + configurations.functionaltestRuntime
@@ -26,7 +25,7 @@ task functionaltest() {
             args      = ['--plugin',
                          'pretty',
                          '--glue',
-                         cucumber_package,
+                         cucumber_implementation_location,
                          cucumber_stories_location]
         }
     }
@@ -36,7 +35,7 @@ check.dependsOn functionaltest
 
 dependencies {
     testCompile group:   'info.cukes',
-                name:    'cucumber-java',
+                name:    'cucumber-groovy',
                 version: cucumber_version
     testCompile group:   'info.cukes',
                 name:    'cucumber-junit',
