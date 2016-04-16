@@ -1,8 +1,5 @@
-ext {
-    cucumber_implementation_location = 'src/functionaltest/groovy'
-    cucumber_stories_location        = 'src/functionaltest/resources'
-    cucumber_version                 = '1.2.4'
-}
+def resources_location = 'src/functionaltest/resources'
+def source_location    = 'src/functionaltest/groovy'
 
 configurations {
     functionaltestCompile.extendsFrom testCompile
@@ -11,12 +8,14 @@ configurations {
 
 sourceSets {
     functionaltest {
-        resources.srcDir file('src/functionaltest/resources')
+        resources.srcDir file(resources_location)
         compileClasspath = sourceSets.main.output + configurations.functionaltestCompile
         runtimeClasspath = output + configurations.functionaltestRuntime
     }
 }
 
+def cucumber_implementation_location = source_location
+def cucumber_stories_location        = resources_location
 task functionaltest() {
     doLast {
         javaexec {
@@ -30,9 +29,9 @@ task functionaltest() {
         }
     }
 }
-
 check.dependsOn functionaltest
 
+def cucumber_version                 = '1.2.4'
 dependencies {
     testCompile group:   'info.cukes',
                 name:    'cucumber-groovy',
