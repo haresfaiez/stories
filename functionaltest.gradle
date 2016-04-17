@@ -29,7 +29,7 @@ task functionaltest() {
 }
 check.dependsOn functionaltest
 
-def cucumber_version                 = '1.2.4'
+def cucumber_version = '1.2.4'
 dependencies {
     testCompile group:   'info.cukes',
                 name:    'cucumber-groovy',
