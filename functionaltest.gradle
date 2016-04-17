@@ -8,16 +8,13 @@ configurations {
 
 sourceSets {
     functionaltest {
-        resources.srcDir file(resources_location)
-        compileClasspath = sourceSets.main.output + configurations.functionaltestCompile
-        runtimeClasspath = output + compileClasspath + configurations.functionaltestRuntime
+        runtimeClasspath = sourceSets.main.output + configurations.functionaltestRuntime
     }
 }
 
 def cucumber_implementation_location = source_location
 def cucumber_stories_location        = resources_location
 task functionaltest() {
-    dependsOn assemble
     doLast {
         javaexec {
             main      = "cucumber.api.cli.Main"
