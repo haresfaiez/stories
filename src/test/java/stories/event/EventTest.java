@@ -1,5 +1,6 @@
+package stories.event;
+
 import org.junit.Test;
-import stories.event.Event;
 
 import java.time.LocalDateTime;
 import java.time.Month;
