@@ -14,14 +14,14 @@ public class Event {
         this.id         = id;
         this.title      = title;
         this.time       = time;
-        this.attendees = Attendees.noOne();
+        this.attendees  = Attendees.noOne();
     }
 
     public void attendee(Person newAttendee) {
         attendees = attendees.with(newAttendee);
     }
 
-    public boolean hasAttendee(Person potentialAttendee) {
+    public Boolean hasAttendee(Person potentialAttendee) {
         return attendees.contains(potentialAttendee);
     }
 
