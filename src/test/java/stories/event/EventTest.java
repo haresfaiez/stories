@@ -14,9 +14,11 @@ public class EventTest {
 
     @Test
     public void eventHasOneAttendee() {
-        Person bill = new Person(1L, "Bill");
-        Event concert = new Event(1L, "Concert title", someTime());
+        Person bill    = new Person(1L, "Bill");
+        Event concert  = new Event (1L, "Concert title", someTime());
+
         concert.attendee(bill);
+
         assertTrue(bill.isAttending(concert));
     }
 
@@ -35,6 +37,7 @@ public class EventTest {
     @Test
     public void anEventHasATitleAndATime() {
         Event concert = new Event(1L, "Concert title", someTime());
+
         assertEquals("Concert title", concert.title());
         assertEquals(someTime(), concert.time());
     }
