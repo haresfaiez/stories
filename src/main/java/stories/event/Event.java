@@ -21,7 +21,7 @@ public class Event {
         attendees = attendees.with(newAttendee);
     }
 
-    public Boolean hasAttendee(Person potentialAttendee) {
+    protected Boolean hasAttendee(Person potentialAttendee) {
         return attendees.contains(potentialAttendee);
     }
 

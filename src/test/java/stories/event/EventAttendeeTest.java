@@ -1,7 +1,7 @@
-package stories.person;
+package stories.event;
 
 import org.junit.Test;
-import stories.event.Event;
+import stories.person.Person;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -21,9 +21,9 @@ public class EventAttendeeTest {
         attendee     .attend(concert);
         otherAttendee.attend(concert);
 
-        assertTrue (attendee     .isAttending(concert));
-        assertTrue (otherAttendee.isAttending(concert));
-        assertFalse(notAttendee  .isAttending(concert));
+        assertTrue (concert.hasAttendee(attendee));
+        assertTrue (concert.hasAttendee(otherAttendee));
+        assertFalse(concert.hasAttendee(notAttendee));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class EventAttendeeTest {
 
         bill.attend(concert);
 
-        assertTrue(bill.isAttending(concert));
+        assertTrue(concert.hasAttendee(bill));
     }
 
     private LocalDateTime someTime() {

@@ -12,12 +12,8 @@ public class Person {
         this.name = name;
     }
 
-    public void attend(Event concert) {
-        concert.attendee(this);
-    }
-
-    public Boolean isAttending(Event concert) {
-        return concert.hasAttendee(this);
+    public void attend(Event event) {
+        event.attendee(this);
     }
 
     @Override
