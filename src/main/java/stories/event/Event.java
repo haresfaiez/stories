@@ -3,17 +3,28 @@ package stories.event;
 import stories.person.Person;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public class Event {
-    private Long id;
-    private String title;
+    private Long          id;
+    private String        title;
     private LocalDateTime time;
-    public Person attendee;
+    private Collection    attendees;
 
     public Event(Long id, String title, LocalDateTime time) {
-        this.id = id;
-        this.title = title;
-        this.time = time;
+        this.id         = id;
+        this.title      = title;
+        this.time       = time;
+        this.attendees  = new LinkedList();
+    }
+
+    public void attendee(Person attendee) {
+        attendees.add(attendee);
+    }
+
+    public boolean hasAttendee(Person potentialAttendee) {
+        return attendees.contains(potentialAttendee);
     }
 
     @Override
@@ -44,13 +55,5 @@ public class Event {
 
     public String title() {
         return title;
-    }
-
-    public void attendee(Person attendee) {
-        this.attendee = attendee;
-    }
-
-    public boolean hasAttendee(Person potentialAttendee) {
-        return attendee.equals(potentialAttendee);
     }
 }

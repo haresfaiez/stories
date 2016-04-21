@@ -22,6 +22,7 @@ public class PersonTest {
     @Test
     public void aPersonHasAName() {
         Person bill = new Person(1L, "Bill");
+
         assertEquals("Bill", bill.name());
     }
 }

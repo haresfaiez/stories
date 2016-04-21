@@ -4,14 +4,21 @@ import stories.event.Event;
 
 public class Person {
 
-    private Long id;
+    private Long   id;
     private String name;
 
     public Person(Long id, String name) {
-        this.id = id;
+        this.id   = id;
         this.name = name;
     }
 
+    public void attend(Event concert) {
+        concert.attendee(this);
+    }
+
+    public Boolean isAttending(Event concert) {
+        return concert.hasAttendee(this);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -38,9 +45,4 @@ public class Person {
     public String name() {
         return name;
     }
-
-    public boolean isAttending(Event concert) {
-        return concert.hasAttendee(this);
-    }
-
 }
