@@ -44,7 +44,7 @@ public class Attendees {
         return attendees.toString();
     }
 
-    public static Attendees none() {
+    public static Attendees noOne() {
         return new Attendees(new LinkedList());
     }
 }

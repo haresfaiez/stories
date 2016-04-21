@@ -14,7 +14,7 @@ public class Event {
         this.id         = id;
         this.title      = title;
         this.time       = time;
-        this.attendees = Attendees.none();
+        this.attendees = Attendees.noOne();
     }
 
     public void attendee(Person newAttendee) {
