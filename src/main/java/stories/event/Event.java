@@ -3,24 +3,22 @@ package stories.event;
 import stories.person.Person;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.LinkedList;
 
 public class Event {
     private Long          id;
     private String        title;
     private LocalDateTime time;
-    private Collection    attendees;
+    private Attendees     attendees;
 
     public Event(Long id, String title, LocalDateTime time) {
         this.id         = id;
         this.title      = title;
         this.time       = time;
-        this.attendees  = new LinkedList();
+        this.attendees = Attendees.none();
     }
 
-    public void attendee(Person attendee) {
-        attendees.add(attendee);
+    public void attendee(Person newAttendee) {
+        attendees = attendees.with(newAttendee);
     }
 
     public boolean hasAttendee(Person potentialAttendee) {
