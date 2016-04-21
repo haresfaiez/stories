@@ -22,7 +22,7 @@ public class EventTest {
     }
 
     @Test
-    public void anEventHaveATitleAndATime() {
+    public void anEventHasATitleAndATime() {
         Event concert = new Event(1L, "Concert title", someTime());
         assertEquals("Concert title", concert.title());
         assertEquals(someTime(),      concert.time());
