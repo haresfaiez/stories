@@ -1,11 +1,14 @@
 package stories.event;
 
+import stories.person.Person;
+
 import java.time.LocalDateTime;
 
 public class Event {
     private Long id;
     private String title;
     private LocalDateTime time;
+    public Person attendee;
 
     public Event(Long id, String title, LocalDateTime time) {
         this.id = id;
@@ -41,5 +44,13 @@ public class Event {
 
     public String title() {
         return title;
+    }
+
+    public void attendee(Person attendee) {
+        this.attendee = attendee;
+    }
+
+    public boolean hasAttendee(Person potentialAttendee) {
+        return attendee.equals(potentialAttendee);
     }
 }

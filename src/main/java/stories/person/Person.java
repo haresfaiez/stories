@@ -1,5 +1,7 @@
 package stories.person;
 
+import stories.event.Event;
+
 public class Person {
 
     private Long id;
@@ -36,4 +38,9 @@ public class Person {
     public String name() {
         return name;
     }
+
+    public boolean isAttending(Event concert) {
+        return concert.hasAttendee(this);
+    }
+
 }
