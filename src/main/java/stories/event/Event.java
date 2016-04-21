@@ -32,7 +32,7 @@ public class Event {
 
     @Override
     public String toString() {
-        throw new RuntimeException("toString not implemented on Event");
+        return String.format("%s, %s, %s", id, title, time);
     }
 
     public LocalDateTime time() {

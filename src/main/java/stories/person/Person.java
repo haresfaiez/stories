@@ -30,7 +30,7 @@ public class Person {
 
     @Override
     public String toString() {
-        throw new RuntimeException("toString not implemented on Person");
+        return String.format("%s, %s", id, name);
     }
 
     public String name() {
