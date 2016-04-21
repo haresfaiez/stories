@@ -15,7 +15,7 @@ sourceSets {
 def cucumber_implementation_location = source_location
 def cucumber_stories_location        = resources_location
 task functionaltest() {
-    dependsOn assemble
+    dependsOn test, assemble
     doLast {
         javaexec {
             main      = "cucumber.api.cli.Main"
