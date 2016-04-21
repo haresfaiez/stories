@@ -3,8 +3,8 @@ package stories.event;
 import org.junit.Test;
 
 import java.util.Collection;
+import java.util.Collections;
 
-import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -23,6 +23,6 @@ public class AttendeesTest {
     }
 
     private Collection emptyCollection() {
-        return asList();
+        return Collections.EMPTY_LIST;
     }
 }
