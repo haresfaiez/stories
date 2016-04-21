@@ -37,6 +37,14 @@ public class Event {
         return id.equals(otherId);
     }
 
+    protected Boolean hasTittle(String otherTitle) {
+        return title.equals(otherTitle);
+    }
+
+    protected Boolean hasTime(LocalDateTime otherTime) {
+        return time.equals(otherTime);
+    }
+
     @Override
     public int hashCode() {
         return id.hashCode();
@@ -47,11 +55,4 @@ public class Event {
         return String.format("%s, %s, %s", id, title, time);
     }
 
-    public LocalDateTime time() {
-        return time;
-    }
-
-    public String title() {
-        return title;
-    }
 }

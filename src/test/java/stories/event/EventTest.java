@@ -7,6 +7,7 @@ import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class EventTest {
 
@@ -26,8 +27,8 @@ public class EventTest {
     public void anEventHasATitleAndATime() {
         Event concert = new Event(1L, "Concert title", someTime());
 
-        assertEquals("Concert title", concert.title());
-        assertEquals(someTime(),      concert.time());
+        assertTrue(concert.hasTittle("Concert title"));
+        assertTrue(concert.hasTime  (someTime()));
     }
 
     private LocalDateTime someTime() {
