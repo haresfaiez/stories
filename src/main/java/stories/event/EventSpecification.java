@@ -6,14 +6,15 @@ public class EventSpecification {
     protected String        title;
     protected LocalDateTime time;
 
-    private EventSpecification(String title,
-                               LocalDateTime time) {
-        this.title = title;
+    public EventSpecification(LocalDateTime time,
+                              String title) {
         this.time  = time;
+        this.title = title;
     }
 
-    public static EventSpecification with(String title,
-                                          LocalDateTime time) {
-        return new EventSpecification(title, time);
+    public static EventSpecification at(LocalDateTime time,
+                                        String title) {
+        return new EventSpecification(time, title);
     }
+
 }

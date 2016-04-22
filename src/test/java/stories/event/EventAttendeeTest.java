@@ -8,6 +8,8 @@ import java.time.Month;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static stories.event.Event.withNoAttendees;
+import static stories.event.EventSpecification.at;
 
 public class EventAttendeeTest {
 
@@ -16,7 +18,7 @@ public class EventAttendeeTest {
         Person attendee      = new Person(  1L, "Bill");
         Person otherAttendee = new Person(122L, "Mike");
         Person notAttendee   = new Person(828L, "Bob");
-        Event concert        = Event.withNoAttendees(  8L, EventSpecification.with("Concert title", someTime()));
+        Event concert        = withNoAttendees(  8L, at(someTime(), "Concert title"));
 
         attendee     .attend(concert);
         otherAttendee.attend(concert);
@@ -29,7 +31,7 @@ public class EventAttendeeTest {
     @Test
     public void aPersonCanAttendAnEvent() {
         Person bill    = new Person(1L, "Bill");
-        Event concert  = Event.withNoAttendees(1L, EventSpecification.with("Concert title", someTime()));
+        Event concert  = withNoAttendees(1L, at(someTime(), "Concert title"));
 
         bill.attend(concert);
 
