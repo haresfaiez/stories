@@ -16,16 +16,24 @@ public class EventUpdate {
         if (null == o)                   return Boolean.FALSE;
         if (!(o instanceof EventUpdate)) return Boolean.FALSE;
         EventUpdate other = (EventUpdate) o;
-        return other.editor.equals(editor) && other.update.equals(update);
+        return other.hasEditor(editor) && other.hasUpdate(update);
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return update.hashCode();
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return String.format("%s, %s", editor, update);
+    }
+
+    private Boolean hasEditor(Person otherEditor) {
+        return editor.equals(otherEditor);
+    }
+
+    private Boolean hasUpdate(PersonUpdate otherUpdate) {
+        return update.equals(otherUpdate);
     }
 }
