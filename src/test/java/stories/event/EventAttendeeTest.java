@@ -27,7 +27,7 @@ public class EventAttendeeTest {
     }
 
     @Test
-    public void aPersonCanAttendAEvent() {
+    public void aPersonCanAttendAnEvent() {
         Person bill    = new Person(1L, "Bill");
         Event concert  = Event.withNoAttendees(1L, EventSpecification.with("Concert title", someTime()));
 

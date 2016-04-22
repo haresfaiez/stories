@@ -14,7 +14,7 @@ import static stories.event.EventSpecification.with;
 public class EventTest {
 
     @Test
-    public void eventEquality() {
+    public void equality() {
         Event concert      = withNoAttendees(1L, someSpecification());
         Event sameConcert  = withNoAttendees(1L, someSpecification());
         Event otherConcert = withNoAttendees(2L, someSpecification());
@@ -26,7 +26,7 @@ public class EventTest {
     }
 
     @Test
-    public void anEventHasATitleAndATime() {
+    public void hasATitleAndATime() {
         Event concert = withNoAttendees(1L, with("Concert title", someTime()));
 
         assertTrue(concert.specification.hasTitle("Concert title"));

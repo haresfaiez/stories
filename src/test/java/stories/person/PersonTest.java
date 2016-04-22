@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotEquals;
 public class PersonTest {
 
     @Test
-    public void personEquality() {
+    public void equality() {
         Person bill        = new Person( 1L, "Bill");
         Person sameBill    = new Person( 1L, "Bill");
         Person anotherBill = new Person(82L, "Bill");
@@ -20,7 +20,7 @@ public class PersonTest {
     }
 
     @Test
-    public void aPersonHasAName() {
+    public void hasAName() {
         Person bill = new Person(1L, "Bill");
 
         assertEquals("Bill", bill.name());
