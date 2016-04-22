@@ -16,7 +16,7 @@ public class EventAttendeeTest {
         Person attendee      = new Person(  1L, "Bill");
         Person otherAttendee = new Person(122L, "Mike");
         Person notAttendee   = new Person(828L, "Bob");
-        Event concert        = Event.withNoAttendees(  8L, new EventSpecification("Concert title", someTime()));
+        Event concert        = Event.withNoAttendees(  8L, EventSpecification.with("Concert title", someTime()));
 
         attendee     .attend(concert);
         otherAttendee.attend(concert);
@@ -29,7 +29,7 @@ public class EventAttendeeTest {
     @Test
     public void aPersonCanAttendAEvent() {
         Person bill    = new Person(1L, "Bill");
-        Event concert  = Event.withNoAttendees(1L, new EventSpecification("Concert title", someTime()));
+        Event concert  = Event.withNoAttendees(1L, EventSpecification.with("Concert title", someTime()));
 
         bill.attend(concert);
 
