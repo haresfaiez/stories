@@ -19,6 +19,8 @@ public class UpdateToAnEventTest {
         bill.attend(concert);
         bill.update(concert, billUpdate);
 
-        assertTrue(concert.updates.contains(EventUpdate.by(bill, billUpdate)));
+        EventUpdate billEventUpdate = EventUpdate.by(bill, billUpdate);
+        assertTrue(concert.updates.contains(billEventUpdate));
     }
+
 }

@@ -2,27 +2,25 @@ package stories.event;
 
 import stories.person.Person;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 public class Event {
     protected Long               id;
     protected EventSpecification specification;
     protected Attendees          attendees;
-    public Collection updates;
+    protected Updates            updates;
 
     private Event(Long id,
                   EventSpecification specification,
-                  Attendees attendees) {
+                  Attendees attendees,
+                  Updates updates) {
         this.id            = id;
         this.specification = specification;
         this.attendees     = attendees;
-        updates = new LinkedList();
+        this.updates       = updates;
     }
 
     public void updateBy(Person editor,
                          PersonUpdate update) {
-        updates.add(EventUpdate.by(editor, update));
+        updates = updates.with(EventUpdate.by(editor, update));
     }
 
     public void attendee(Person newAttendee) {
@@ -53,6 +51,7 @@ public class Event {
 
     public static Event withNoAttendees(Long id,
                                         EventSpecification specification) {
-        return new Event(id, specification, Attendees.noOne());
+        return new Event(id, specification, Attendees.noOne(), Updates.noOne());
     }
+
 }
