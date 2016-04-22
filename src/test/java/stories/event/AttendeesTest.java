@@ -12,17 +12,17 @@ public class AttendeesTest {
 
     @Test
     public void noOneAttendeeFactory() {
-        assertEquals(new Attendees(emptyCollection()), Attendees.noOne());
+        assertEquals(new Attendees(empty()), Attendees.noOne());
     }
 
     @Test
     public void equality() {
-        assertEquals(new Attendees(emptyCollection()), new Attendees(emptyCollection()));
-        assertNotEquals(new Attendees(emptyCollection()), null);
-        assertNotEquals(new Attendees(emptyCollection()), new Object());
+        assertEquals   (new Attendees(empty()), new Attendees(empty()));
+        assertNotEquals(new Attendees(empty()), null);
+        assertNotEquals(new Attendees(empty()), new Object());
     }
 
-    private Collection emptyCollection() {
+    private Collection empty() {
         return Collections.EMPTY_LIST;
     }
 }

@@ -5,24 +5,18 @@ import stories.person.Person;
 import java.time.LocalDateTime;
 
 public class Event {
-    private Long          id;
-    private String        title;
-    private LocalDateTime time;
-    private Attendees     attendees;
+    protected Long               id;
+    protected EventSpecification specification;
+    protected Attendees          attendees;
 
     public Event(Long id, String title, LocalDateTime time) {
-        this.id         = id;
-        this.title      = title;
-        this.time       = time;
-        this.attendees  = Attendees.noOne();
+        this.id            = id;
+        this.specification = new EventSpecification(title, time);
+        this.attendees     = Attendees.noOne();
     }
 
     public void attendee(Person newAttendee) {
         attendees = attendees.with(newAttendee);
-    }
-
-    protected Boolean hasAttendee(Person potentialAttendee) {
-        return attendees.contains(potentialAttendee);
     }
 
     @Override
@@ -37,14 +31,6 @@ public class Event {
         return id.equals(otherId);
     }
 
-    protected Boolean hasTittle(String otherTitle) {
-        return title.equals(otherTitle);
-    }
-
-    protected Boolean hasTime(LocalDateTime otherTime) {
-        return time.equals(otherTime);
-    }
-
     @Override
     public int hashCode() {
         return id.hashCode();
@@ -52,7 +38,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s", id, title, time);
+        return String.format("%s, %s, %s", id, specification.title, specification.time);
     }
 
 }

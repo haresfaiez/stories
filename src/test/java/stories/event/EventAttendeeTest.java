@@ -21,19 +21,19 @@ public class EventAttendeeTest {
         attendee     .attend(concert);
         otherAttendee.attend(concert);
 
-        assertTrue (concert.hasAttendee(attendee));
-        assertTrue (concert.hasAttendee(otherAttendee));
-        assertFalse(concert.hasAttendee(notAttendee));
+        assertTrue (concert.attendees.contains(attendee));
+        assertTrue (concert.attendees.contains(otherAttendee));
+        assertFalse(concert.attendees.contains(notAttendee));
     }
 
     @Test
-    public void aPersonCanAttendAConcert() {
+    public void aPersonCanAttendAEvent() {
         Person bill    = new Person(1L, "Bill");
         Event concert  = new Event (1L, "Concert title", someTime());
 
         bill.attend(concert);
 
-        assertTrue(concert.hasAttendee(bill));
+        assertTrue(concert.attendees.contains(bill));
     }
 
     private LocalDateTime someTime() {

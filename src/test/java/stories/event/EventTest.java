@@ -27,8 +27,8 @@ public class EventTest {
     public void anEventHasATitleAndATime() {
         Event concert = new Event(1L, "Concert title", someTime());
 
-        assertTrue(concert.hasTittle("Concert title"));
-        assertTrue(concert.hasTime  (someTime()));
+        assertTrue(concert.specification.hasTitle("Concert title"));
+        assertTrue(concert.specification.isAt    (someTime()));
     }
 
     private LocalDateTime someTime() {
