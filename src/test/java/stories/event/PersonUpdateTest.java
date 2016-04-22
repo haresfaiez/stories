@@ -11,7 +11,7 @@ public class PersonUpdateTest {
 
     @Test
     public void hasATimeAndAMessage() {
-        PersonUpdate update =  new PersonUpdate(someTime(), "Some message");
+        PersonUpdate update = PersonUpdate.at(someTime(), "Some message");
         assertEquals(someTime(),     update.time);
         assertEquals("Some message", update.message);
     }
