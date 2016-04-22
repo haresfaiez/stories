@@ -9,7 +9,7 @@ import static stories.builder.ConcertBuilder.someConcert;
 import static stories.builder.ConcertBuilder.someTime;
 import static stories.builder.PersonBuilder.*;
 import static stories.event.Event.withNoAttendees;
-import static stories.event.EventSpecification.at;
+import static stories.event.EventStatement.at;
 
 public class EventAttendeeTest {
 

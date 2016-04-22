@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 import static stories.event.Event.withNoAttendees;
-import static stories.event.EventSpecification.at;
+import static stories.event.EventStatement.at;
 
 public class ConcertBuilder {
     public static Event someConcert() {

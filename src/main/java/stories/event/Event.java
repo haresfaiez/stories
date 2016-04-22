@@ -4,16 +4,16 @@ import stories.person.Person;
 
 public class Event {
     protected Long               id;
-    protected EventSpecification specification;
+    protected EventStatement     statement;
     protected Attendees          attendees;
     protected Updates            updates;
 
     private Event(Long id,
-                  EventSpecification specification,
+                  EventStatement statement,
                   Attendees attendees,
                   Updates updates) {
         this.id            = id;
-        this.specification = specification;
+        this.statement     = statement;
         this.attendees     = attendees;
         this.updates       = updates;
     }
@@ -46,11 +46,11 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("%s, %s", id, specification);
+        return String.format("%s, %s", id, statement);
     }
 
     public static Event withNoAttendees(Long id,
-                                        EventSpecification specification) {
+                                        EventStatement specification) {
         return new Event(id, specification, Attendees.noOne(), Updates.noOne());
     }
 

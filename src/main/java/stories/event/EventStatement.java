@@ -2,19 +2,19 @@ package stories.event;
 
 import java.time.LocalDateTime;
 
-public class EventSpecification {
+public class EventStatement {
     protected String        title;
     protected LocalDateTime time;
 
-    public EventSpecification(LocalDateTime time,
-                              String title) {
+    public EventStatement(LocalDateTime time,
+                          String title) {
         this.time  = time;
         this.title = title;
     }
 
-    public static EventSpecification at(LocalDateTime time,
-                                        String title) {
-        return new EventSpecification(time, title);
+    public static EventStatement at(LocalDateTime time,
+                                    String title) {
+        return new EventStatement(time, title);
     }
 
     @Override
