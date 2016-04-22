@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class Attendees {
-    protected final Collection collection;
+    private final Collection collection;
 
     protected Attendees(Collection collection) {
         this.collection = collection;

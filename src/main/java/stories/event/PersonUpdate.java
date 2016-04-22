@@ -3,8 +3,8 @@ package stories.event;
 import java.time.LocalDateTime;
 
 public class PersonUpdate {
-    protected final LocalDateTime time;
-    protected final String        message;
+    private final LocalDateTime time;
+    private final String        message;
 
     private PersonUpdate(LocalDateTime time,
                          String message) {
