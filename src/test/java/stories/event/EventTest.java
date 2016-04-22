@@ -7,7 +7,6 @@ import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static stories.event.Event.withNoAttendees;
 import static stories.event.EventSpecification.with;
 
@@ -29,8 +28,8 @@ public class EventTest {
     public void hasATitleAndATime() {
         Event concert = withNoAttendees(1L, with("Concert title", someTime()));
 
-        assertTrue(concert.specification.hasTitle("Concert title"));
-        assertTrue(concert.specification.isAt    (someTime()));
+        assertEquals("Concert title", concert.specification.title);
+        assertEquals(someTime(),      concert.specification.time);
     }
 
     private EventSpecification someSpecification() {
