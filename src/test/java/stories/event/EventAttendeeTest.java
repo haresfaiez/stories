@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static stories.builder.ConcertBuilder.someConcert;
 import static stories.builder.ConcertBuilder.someTime;
 import static stories.builder.PersonBuilder.*;
-import static stories.event.Event.withNoAttendees;
+import static stories.event.Event.withNoUpdates;
 import static stories.event.EventStatement.at;
 
 public class EventAttendeeTest {
@@ -23,19 +23,19 @@ public class EventAttendeeTest {
         attendee     .attend(concert);
         otherAttendee.attend(concert);
 
-        assertTrue (concert.attendees.contains(attendee));
-        assertTrue (concert.attendees.contains(otherAttendee));
-        assertFalse(concert.attendees.contains(notAttendee));
+        assertTrue (concert.specification.attendees.contains(attendee));
+        assertTrue (concert.specification.attendees.contains(otherAttendee));
+        assertFalse(concert.specification.attendees.contains(notAttendee));
     }
 
     @Test
     public void aPersonCanAttendAnEvent() {
         Person bill    = bill(1L);
-        Event concert  = withNoAttendees(1L, at(someTime(), "Concert title"));
+        Event concert  = withNoUpdates(1L, EventSpecification.withNoAttendees(at(someTime(), "Concert title")));
 
         bill.attend(concert);
 
-        assertTrue(concert.attendees.contains(bill));
+        assertTrue(concert.specification.attendees.contains(bill));
     }
 
 }

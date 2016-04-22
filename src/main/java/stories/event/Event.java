@@ -4,17 +4,14 @@ import stories.person.Person;
 
 public class Event {
     protected Long               id;
-    protected EventStatement     statement;
-    protected Attendees          attendees;
+    protected EventSpecification specification;
     protected Updates            updates;
 
     private Event(Long id,
-                  EventStatement statement,
-                  Attendees attendees,
-                  Updates updates) {
+                  Updates updates,
+                  EventSpecification specification) {
         this.id            = id;
-        this.statement     = statement;
-        this.attendees     = attendees;
+        this.specification = specification;
         this.updates       = updates;
     }
 
@@ -24,7 +21,7 @@ public class Event {
     }
 
     public void attendee(Person newAttendee) {
-        attendees = attendees.with(newAttendee);
+        specification = specification.withAttendee(newAttendee);
     }
 
     @Override
@@ -46,12 +43,12 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("%s, %s", id, statement);
+        return String.format("%s, %s", id, specification);
     }
 
-    public static Event withNoAttendees(Long id,
-                                        EventStatement specification) {
-        return new Event(id, specification, Attendees.noOne(), Updates.noOne());
+    public static Event withNoUpdates(Long id,
+                                      EventSpecification specification) {
+        return new Event(id, Updates.noOne(), specification);
     }
 
 }
