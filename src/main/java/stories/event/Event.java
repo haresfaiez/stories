@@ -2,17 +2,17 @@ package stories.event;
 
 import stories.person.Person;
 
-import java.time.LocalDateTime;
-
 public class Event {
     protected Long               id;
     protected EventSpecification specification;
     protected Attendees          attendees;
 
-    public Event(Long id, String title, LocalDateTime time) {
+    private Event(Long id,
+                  EventSpecification specification,
+                  Attendees attendees) {
         this.id            = id;
-        this.specification = new EventSpecification(title, time);
-        this.attendees     = Attendees.noOne();
+        this.specification = specification;
+        this.attendees     = attendees;
     }
 
     public void attendee(Person newAttendee) {
@@ -41,4 +41,8 @@ public class Event {
         return String.format("%s, %s, %s", id, specification.title, specification.time);
     }
 
+    public static Event withNoAttendees(Long id,
+                                        EventSpecification specification) {
+        return new Event(id, specification, Attendees.noOne());
+    }
 }

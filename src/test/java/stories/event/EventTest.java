@@ -13,9 +13,9 @@ public class EventTest {
 
     @Test
     public void eventEquality() {
-        Event concert      = new Event(1L, "Concert title", someTime());
-        Event sameConcert  = new Event(1L, "Concert title", someTime());
-        Event otherConcert = new Event(2L, "Concert title", someTime());
+        Event concert      = Event.withNoAttendees(1L, someSpecification());
+        Event sameConcert  = Event.withNoAttendees(1L, someSpecification());
+        Event otherConcert = Event.withNoAttendees(2L, someSpecification());
 
         assertEquals   (sameConcert,  concert);
         assertNotEquals(otherConcert, concert);
@@ -25,10 +25,16 @@ public class EventTest {
 
     @Test
     public void anEventHasATitleAndATime() {
-        Event concert = new Event(1L, "Concert title", someTime());
+        EventSpecification specification
+                = new EventSpecification("Concert title", someTime());
+        Event concert = Event.withNoAttendees(1L, specification);
 
         assertTrue(concert.specification.hasTitle("Concert title"));
         assertTrue(concert.specification.isAt    (someTime()));
+    }
+
+    private EventSpecification someSpecification() {
+        return new EventSpecification("Concert title", someTime());
     }
 
     private LocalDateTime someTime() {
