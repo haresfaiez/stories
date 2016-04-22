@@ -17,4 +17,8 @@ public class EventSpecification {
         return new EventSpecification(time, title);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s, %s", title, time);
+    }
 }

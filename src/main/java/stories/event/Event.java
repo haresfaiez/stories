@@ -46,7 +46,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s", id, specification.title, specification.time);
+        return String.format("%s, %s", id, specification);
     }
 
     public static Event withNoAttendees(Long id,
