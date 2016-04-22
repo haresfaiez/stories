@@ -2,10 +2,14 @@ package stories.event;
 
 import stories.person.Person;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 public class Event {
     protected Long               id;
     protected EventSpecification specification;
     protected Attendees          attendees;
+    public Collection updates;
 
     private Event(Long id,
                   EventSpecification specification,
@@ -13,6 +17,12 @@ public class Event {
         this.id            = id;
         this.specification = specification;
         this.attendees     = attendees;
+        updates = new LinkedList();
+    }
+
+    public void updateBy(Person editor,
+                         PersonUpdate update) {
+        updates.add(EventUpdate.by(editor, update));
     }
 
     public void attendee(Person newAttendee) {

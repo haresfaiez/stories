@@ -4,7 +4,6 @@ import stories.event.Event;
 import stories.event.PersonUpdate;
 
 public class Person {
-
     private Long   id;
     private String name;
 
@@ -14,7 +13,9 @@ public class Person {
         this.name = name;
     }
 
-    public void update(Event concert, PersonUpdate billUpdate) {
+    public void update(Event target,
+                       PersonUpdate update) {
+        target.updateBy(this, update);
     }
 
     public void attend(Event event) {
