@@ -3,10 +3,11 @@ package stories.event;
 import stories.person.Person;
 
 public class EventUpdate {
-    protected final Person editor;
+    protected final Person       editor;
     protected final PersonUpdate update;
 
-    public EventUpdate(Person editor, PersonUpdate update) {
+    private EventUpdate(Person editor,
+                        PersonUpdate update) {
         this.editor = editor;
         this.update = update;
     }
@@ -35,5 +36,10 @@ public class EventUpdate {
 
     private Boolean hasUpdate(PersonUpdate otherUpdate) {
         return update.equals(otherUpdate);
+    }
+
+    public static EventUpdate by(Person editor,
+                                 PersonUpdate update) {
+        return new EventUpdate(editor, update);
     }
 }

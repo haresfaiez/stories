@@ -14,7 +14,7 @@ public class UpdateBuilder {
     }
 
     public static EventUpdate someEventUpdate() {
-        return new EventUpdate(bill(1L), somePersonUpdate());
+        return EventUpdate.by(bill(1L), somePersonUpdate());
     }
 
     public static LocalDateTime someTime() {
