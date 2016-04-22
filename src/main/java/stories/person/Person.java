@@ -1,6 +1,7 @@
 package stories.person;
 
 import stories.event.Event;
+import stories.event.PersonUpdate;
 
 public class Person {
 
@@ -11,6 +12,9 @@ public class Person {
                   String name) {
         this.id   = id;
         this.name = name;
+    }
+
+    public void update(Event concert, PersonUpdate billUpdate) {
     }
 
     public void attend(Event event) {
