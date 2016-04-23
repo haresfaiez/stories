@@ -2,21 +2,21 @@ package stories.event;
 
 import stories.person.Attendee;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
 
 class Attendees {
-    private final Collection collection;
+    private final Set collection;
 
-    protected Attendees(Collection collection) {
+    protected Attendees(Set collection) {
         this.collection = collection;
     }
 
     public Attendees with(Attendee newAttendee) {
-        Collection resultCollection = new LinkedList(collection);
-        resultCollection.add(newAttendee);
-        return new Attendees(resultCollection);
+        Set resultSet = new HashSet(collection);
+        resultSet.add(newAttendee);
+        return new Attendees(resultSet);
     }
 
     public Boolean contains(Attendee potentialAttendee) {
@@ -31,7 +31,7 @@ class Attendees {
         return other.hasAttendees(collection);
     }
 
-    private Boolean hasAttendees(Collection otherAttendees) {
+    private Boolean hasAttendees(Set otherAttendees) {
         return collection.equals(otherAttendees);
     }
 
@@ -46,6 +46,6 @@ class Attendees {
     }
 
     public static Attendees noOne() {
-        return new Attendees(Collections.EMPTY_LIST);
+        return new Attendees(Collections.emptySet());
     }
 }
