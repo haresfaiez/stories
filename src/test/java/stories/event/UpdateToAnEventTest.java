@@ -46,7 +46,7 @@ public class UpdateToAnEventTest {
     }
 
     private LocalDateTime billUpdateTime() {
-        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+        return eventTime().plusHours(1);
     }
 
     private LocalDateTime eventTime() {
