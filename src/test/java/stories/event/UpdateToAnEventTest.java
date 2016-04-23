@@ -39,7 +39,7 @@ public class UpdateToAnEventTest {
     }
 
     private AttendeeUpdate billUpdate() {
-        return AttendeeUpdate.at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Some message");
+        return AttendeeUpdate.from("Some message");
     }
 
 }
