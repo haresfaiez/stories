@@ -11,6 +11,10 @@ public class Person {
         this.name = name;
     }
 
+    public void attend(Event target) {
+        target.attendee(new Attendee(this));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (null == o)                return Boolean.FALSE;
@@ -31,9 +35,5 @@ public class Person {
     @Override
     public String toString() {
         return String.format("%s, %s", id, name);
-    }
-
-    public void attend(Event target) {
-        target.attendee(new Attendee(this));
     }
 }
