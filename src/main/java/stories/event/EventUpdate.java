@@ -3,7 +3,6 @@ package stories.event;
 import stories.person.Attendee;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 
 class EventUpdate {
     protected final Attendee       editor;
@@ -60,10 +59,8 @@ class EventUpdate {
     }
 
     public static EventUpdate by(Attendee editor,
+                                 LocalDateTime time,
                                  AttendeeUpdate update) {
-        return new EventUpdate(editor, update, someTime());
-    }
-    private static LocalDateTime someTime() {
-        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+        return new EventUpdate(editor, update, time);
     }
 }

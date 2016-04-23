@@ -2,6 +2,8 @@ package stories.event;
 
 import stories.person.Attendee;
 
+import java.time.LocalDateTime;
+
 public class Event {
     protected Long               id;
     protected EventSpecification specification;
@@ -16,8 +18,9 @@ public class Event {
     }
 
     public void updateBy(Attendee editor,
-                         AttendeeUpdate update) {
-        updates = updates.with(EventUpdate.by(editor, update));
+                         AttendeeUpdate update,
+                         LocalDateTime time) {
+        updates = updates.with(EventUpdate.by(editor, time, update));
     }
 
     public void attendee(Attendee newAttendee) {

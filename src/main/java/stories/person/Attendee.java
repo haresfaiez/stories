@@ -1,7 +1,9 @@
 package stories.person;
 
-import stories.event.Event;
 import stories.event.AttendeeUpdate;
+import stories.event.Event;
+
+import java.time.LocalDateTime;
 
 public class Attendee {
     private Person person;
@@ -11,8 +13,9 @@ public class Attendee {
     }
 
     public void update(Event target,
-                       AttendeeUpdate update) {
-        target.updateBy(this, update);
+                       AttendeeUpdate update,
+                       LocalDateTime time) {
+        target.updateBy(this, update, time);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class UpdateToAnEventTest {
     @Test
     public void personCanUpdateToAnEvent() {
         bill.attend(concert);
-        billAttendee.update(concert, billUpdate());
+        billAttendee.update(concert, billUpdate(), someTime());
 
         EventUpdate billEventUpdate = EventUpdate.by(billAttendee, concert(), someTime(), billUpdate());
         assertTrue(concert.updates.contains(billEventUpdate));
