@@ -1,6 +1,6 @@
 package stories.event;
 
-import stories.person.Person;
+import stories.person.Attendee;
 
 public class Event {
     protected Long               id;
@@ -15,12 +15,12 @@ public class Event {
         this.updates       = updates;
     }
 
-    public void updateBy(Person editor,
-                         PersonUpdate update) {
+    public void updateBy(Attendee editor,
+                         AttendeeUpdate update) {
         updates = updates.with(EventUpdate.by(editor, update));
     }
 
-    public void attendee(Person newAttendee) {
+    public void attendee(Attendee newAttendee) {
         specification = specification.withAttendee(newAttendee);
     }
 

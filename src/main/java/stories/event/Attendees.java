@@ -1,6 +1,6 @@
 package stories.event;
 
-import stories.person.Person;
+import stories.person.Attendee;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -13,13 +13,13 @@ public class Attendees {
         this.collection = collection;
     }
 
-    public Attendees with(Person newAttendee) {
+    public Attendees with(Attendee newAttendee) {
         Collection resultCollection = new LinkedList(collection);
         resultCollection.add(newAttendee);
         return new Attendees(resultCollection);
     }
 
-    public Boolean contains(Person potentialAttendee) {
+    public Boolean contains(Attendee potentialAttendee) {
         return collection.contains(potentialAttendee);
     }
 

@@ -4,18 +4,18 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static stories.builder.PersonBuilder.bill;
+import static stories.builder.AttendeeBuilder.bill;
 import static stories.builder.UpdateBuilder.someEventUpdate;
-import static stories.builder.UpdateBuilder.somePersonUpdate;
+import static stories.builder.UpdateBuilder.someAttendeeUpdate;
 import static stories.event.EventUpdate.by;
 
 public class EventUpdateTest {
 
     @Test
     public void equality() {
-        assertEquals   (by(bill(1L), somePersonUpdate()),
-                        by(bill(1L), somePersonUpdate()));
+        assertEquals   (by(bill(1L), someAttendeeUpdate()),
+                        by(bill(1L), someAttendeeUpdate()));
         assertNotEquals(someEventUpdate(), null);
-        assertNotEquals(somePersonUpdate(), new Object());
+        assertNotEquals(someAttendeeUpdate(), new Object());
     }
 }

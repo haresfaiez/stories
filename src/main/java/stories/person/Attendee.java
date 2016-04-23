@@ -1,20 +1,20 @@
 package stories.person;
 
 import stories.event.Event;
-import stories.event.PersonUpdate;
+import stories.event.AttendeeUpdate;
 
-public class Person {
+public class Attendee {
     private Long   id;
     private String name;
 
-    public Person(Long id,
-                  String name) {
+    public Attendee(Long id,
+                    String name) {
         this.id   = id;
         this.name = name;
     }
 
     public void update(Event target,
-                       PersonUpdate update) {
+                       AttendeeUpdate update) {
         target.updateBy(this, update);
     }
 
@@ -25,8 +25,8 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (null == o)              return Boolean.FALSE;
-        if (!(o instanceof Person)) return Boolean.FALSE;
-        Person other = (Person) o;
+        if (!(o instanceof Attendee)) return Boolean.FALSE;
+        Attendee other = (Attendee) o;
         return other.hasId(id);
     }
 

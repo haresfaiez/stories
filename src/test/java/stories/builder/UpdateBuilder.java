@@ -1,20 +1,20 @@
 package stories.builder;
 
 import stories.event.EventUpdate;
-import stories.event.PersonUpdate;
+import stories.event.AttendeeUpdate;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import static stories.builder.PersonBuilder.bill;
+import static stories.builder.AttendeeBuilder.bill;
 
 public class UpdateBuilder {
-    public static PersonUpdate somePersonUpdate() {
-       return PersonUpdate.at(someTime(), "Some message");
+    public static AttendeeUpdate someAttendeeUpdate() {
+       return AttendeeUpdate.at(someTime(), "Some message");
     }
 
     public static EventUpdate someEventUpdate() {
-        return EventUpdate.by(bill(1L), somePersonUpdate());
+        return EventUpdate.by(bill(1L), someAttendeeUpdate());
     }
 
     public static LocalDateTime someTime() {

@@ -1,6 +1,6 @@
 package stories.event;
 
-import stories.person.Person;
+import stories.person.Attendee;
 
 public class EventSpecification {
     protected final EventStatement statement;
@@ -11,7 +11,7 @@ public class EventSpecification {
         this.attendees = attendees;
     }
 
-    protected EventSpecification withAttendee(Person newAttendee) {
+    protected EventSpecification withAttendee(Attendee newAttendee) {
         return new EventSpecification(statement, attendees.with(newAttendee));
     }
 

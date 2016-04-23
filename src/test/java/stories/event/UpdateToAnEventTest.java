@@ -1,20 +1,20 @@
 package stories.event;
 
 import org.junit.Test;
-import stories.person.Person;
+import stories.person.Attendee;
 
 import static org.junit.Assert.assertTrue;
 import static stories.builder.ConcertBuilder.someConcert;
-import static stories.builder.PersonBuilder.bill;
-import static stories.builder.UpdateBuilder.somePersonUpdate;
+import static stories.builder.AttendeeBuilder.bill;
+import static stories.builder.UpdateBuilder.someAttendeeUpdate;
 
 public class UpdateToAnEventTest {
 
     @Test
     public void personCanUpdateToAnEvent() {
         Event concert = someConcert();
-        Person bill = bill(1L);
-        PersonUpdate billUpdate = somePersonUpdate();
+        Attendee bill = bill(1L);
+        AttendeeUpdate billUpdate = someAttendeeUpdate();
 
         bill.attend(concert);
         bill.update(concert, billUpdate);

@@ -1,13 +1,13 @@
 package stories.event;
 
-import stories.person.Person;
+import stories.person.Attendee;
 
 public class EventUpdate {
-    protected final Person       editor;
-    protected final PersonUpdate update;
+    protected final Attendee editor;
+    protected final AttendeeUpdate update;
 
-    private EventUpdate(Person editor,
-                        PersonUpdate update) {
+    private EventUpdate(Attendee editor,
+                        AttendeeUpdate update) {
         this.editor = editor;
         this.update = update;
     }
@@ -30,16 +30,16 @@ public class EventUpdate {
         return String.format("%s, %s", editor, update);
     }
 
-    private Boolean hasEditor(Person otherEditor) {
+    private Boolean hasEditor(Attendee otherEditor) {
         return editor.equals(otherEditor);
     }
 
-    private Boolean hasUpdate(PersonUpdate otherUpdate) {
+    private Boolean hasUpdate(AttendeeUpdate otherUpdate) {
         return update.equals(otherUpdate);
     }
 
-    public static EventUpdate by(Person editor,
-                                 PersonUpdate update) {
+    public static EventUpdate by(Attendee editor,
+                                 AttendeeUpdate update) {
         return new EventUpdate(editor, update);
     }
 }

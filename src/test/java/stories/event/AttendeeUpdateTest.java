@@ -7,16 +7,16 @@ import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static stories.builder.UpdateBuilder.somePersonUpdate;
+import static stories.builder.UpdateBuilder.someAttendeeUpdate;
 
-public class PersonUpdateTest {
+public class AttendeeUpdateTest {
 
     @Test
     public void equality() {
-        assertEquals   (PersonUpdate.at(someTime(), "Some message"),
-                        PersonUpdate.at(someTime(), "Some message"));
-        assertNotEquals(somePersonUpdate(), null);
-        assertNotEquals(somePersonUpdate(), new Object());
+        assertEquals   (AttendeeUpdate.at(someTime(), "Some message"),
+                        AttendeeUpdate.at(someTime(), "Some message"));
+        assertNotEquals(someAttendeeUpdate(), null);
+        assertNotEquals(someAttendeeUpdate(), new Object());
     }
 
     private LocalDateTime someTime() {
