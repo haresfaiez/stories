@@ -2,6 +2,7 @@ package test.stories.event
 
 import stories.event.Event
 import stories.person.Attendee
+import stories.person.Person
 import stories.person.PersonStream
 import stories.event.AttendeeUpdate
 
@@ -16,13 +17,13 @@ Given(~/^there is a concert tonight$/) { ->
     // The aggregate Event contains: Attendee, EventUpdate
     concert = new Event(1L, "Concert title", thisNight)
 
-    def bill = new Attendee(1L, "Bill")
+    def bill = new Attendee(new Person(1L, "Bill"))
     bill.attend concert
     beforeEmmaGetsIn = thisNight.plusMinutes 20
     billUpdate = new AttendeeUpdate(beforeEmmaGetsIn, "This is great !")
     concert.updateBy(bill, billUpdate)
 
-    def mike = new Attendee(2L, "Mike")
+    def mike = new Attendee(new Person(2L, "Mike"))
     mike.attend concert
     beforeEmmaGetsIn = thisNight.plusMinutes 25
     mikeUpdate = new AttendeeUpdate(beforeEmmaGetsIn, "So much fun !")
@@ -30,7 +31,7 @@ Given(~/^there is a concert tonight$/) { ->
 }
 
 When(~/^Emma attends it$/) { ->
-    emma = new Attendee(3L, "Emma")
+    emma = new Attendee(new Person(3L, "Emma"))
     concert.attendee emma
 }
 
