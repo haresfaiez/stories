@@ -15,10 +15,6 @@ public class Attendee {
         target.updateBy(this, update);
     }
 
-    public void attend(Event event) {
-        event.attendee(this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (null == o)                return Boolean.FALSE;

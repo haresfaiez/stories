@@ -1,5 +1,7 @@
 package stories.person;
 
+import stories.event.Event;
+
 public class Person {
     private Long   id;
     private String name;
@@ -29,5 +31,9 @@ public class Person {
     @Override
     public String toString() {
         return String.format("%s, %s", id, name);
+    }
+
+    public void attend(Event target) {
+        target.attendee(new Attendee(this));
     }
 }
