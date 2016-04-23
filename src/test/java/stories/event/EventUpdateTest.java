@@ -11,25 +11,24 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static stories.event.AttendeeUpdate.from;
 import static stories.event.EventSpecification.withNoAttendees;
-import static stories.event.EventUpdate.by;
 
 public class EventUpdateTest {
 
     @Test
     public void equality() {
-        assertEquals   (by(bill(), concert(), someTime(), from("Some message")),
-                        by(bill(), concert(), someTime(), from("Some message")));
+        assertEquals   (new EventUpdate(bill(), from("Some message"), someTime(), concert()),
+                new EventUpdate(bill(), from("Some message"), someTime(), concert()));
 
-        assertEquals   (by(bill(), concert(), someTime(), from("Some message")),
-                        by(bill(), concert(), someTime(), from("Oth message")));
+        assertEquals   (new EventUpdate(bill(), from("Some message"), someTime(), concert()),
+                new EventUpdate(bill(), from("Oth message"), someTime(), concert()));
 
-        assertNotEquals(by(bill(), concert(), someTime().plusDays(1), from("Some message")),
-                        by(bill(), concert(), someTime(), from("Some message")));
+        assertNotEquals(new EventUpdate(bill(), from("Some message"), someTime().plusDays(1), concert()),
+                new EventUpdate(bill(), from("Some message"), someTime(), concert()));
 
-        assertNotEquals(by(bill(), concert(), someTime(), from("Some message")),
-                        by(bill(), otherConcert(), someTime(), from("Some message")));
+        assertNotEquals(new EventUpdate(bill(), from("Some message"), someTime(), concert()),
+                new EventUpdate(bill(), from("Some message"), someTime(), otherConcert()));
 
-        assertNotEquals(by(bill(), concert(), someTime(), from("Some message")), null);
+        assertNotEquals(new EventUpdate(bill(), from("Some message"), someTime(), concert()), null);
         assertNotEquals(from("Some message"), new Object());
     }
 

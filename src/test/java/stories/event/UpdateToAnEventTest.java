@@ -31,7 +31,7 @@ public class UpdateToAnEventTest {
         bill.attend(concert);
         billAttendee.update(concert, billUpdate(), someTime());
 
-        EventUpdate billEventUpdate = EventUpdate.by(billAttendee, concert, someTime(), billUpdate());
+        EventUpdate billEventUpdate = new EventUpdate(billAttendee, billUpdate(), someTime(), concert);
         assertTrue(concert.updates.contains(billEventUpdate));
     }
 

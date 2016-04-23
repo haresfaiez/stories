@@ -5,15 +5,15 @@ import stories.person.Attendee;
 import java.time.LocalDateTime;
 
 class EventUpdate {
-    protected final Attendee       editor;
-    protected final Event          event;
-    protected final LocalDateTime  time;
-    protected final AttendeeUpdate update;
+    protected Attendee       editor;
+    protected Event          event;
+    protected LocalDateTime  time;
+    protected AttendeeUpdate update;
 
-    private EventUpdate(Attendee editor,
-                        AttendeeUpdate update,
-                        LocalDateTime time,
-                        Event event) {
+    protected EventUpdate(Attendee editor,
+                          AttendeeUpdate update,
+                          LocalDateTime time,
+                          Event event) {
         this.editor = editor;
         this.update = update;
         this.event = event;
@@ -54,12 +54,5 @@ class EventUpdate {
 
     private Boolean hasEditor(Attendee otherEditor) {
         return editor.equals(otherEditor);
-    }
-
-    public static EventUpdate by(Attendee editor,
-                                 Event concert,
-                                 LocalDateTime time,
-                                 AttendeeUpdate update) {
-        return new EventUpdate(editor, update, time, concert);
     }
 }
