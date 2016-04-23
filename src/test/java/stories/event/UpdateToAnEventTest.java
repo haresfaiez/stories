@@ -15,36 +15,41 @@ import static stories.event.EventStatement.at;
 
 public class UpdateToAnEventTest {
 
-    private Event concert;
-    private Person bill;
-    private Attendee billAttendee;
+    private Event aConcert;
+    private Attendee billAsAttendee;
 
     @Before
     public void setUp() {
-        concert = someConcert();
-        bill = new Person(1L, "Bill");
-        billAttendee = new Attendee(bill);
+        aConcert = withNoUpdates(8L, someSpecification());
+        Person billAsPerson = new Person(1L, "Bill");
+        billAsPerson.attend(aConcert);
+        billAsAttendee = new Attendee(billAsPerson);
     }
 
     @Test
     public void personCanUpdateToAnEvent() {
-        bill.attend(concert);
-        billAttendee.update(concert, billUpdate(), someTime());
+        billAsAttendee.update(aConcert, billUpdate(), billUpdateTime());
 
-        EventUpdate billEventUpdate = new EventUpdate(billAttendee, billUpdate(), someTime(), concert);
-        assertTrue(concert.updates.contains(billEventUpdate));
-    }
-
-    private LocalDateTime someTime() {
-        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
-    }
-
-    private Event someConcert() {
-        return withNoUpdates(8L, withNoAttendees(at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Concert title")));
+        EventUpdate expectedEventUpdate = new EventUpdate(billAsAttendee,
+                                                          billUpdate(),
+                                                          billUpdateTime(),
+                                                          aConcert);
+        assertTrue(aConcert.updates.contains(expectedEventUpdate));
     }
 
     private AttendeeUpdate billUpdate() {
-        return AttendeeUpdate.from("Some message");
+        return AttendeeUpdate.from("Bill message");
     }
 
+    private EventSpecification someSpecification() {
+        return withNoAttendees(at(eventTime(), "Concert title"));
+    }
+
+    private LocalDateTime billUpdateTime() {
+        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+    }
+
+    private LocalDateTime eventTime() {
+        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+    }
 }
