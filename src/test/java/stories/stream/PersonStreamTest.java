@@ -14,8 +14,8 @@ public class PersonStreamTest {
 
     @Test
     public void equality() {
-        assertEquals(new PersonStream(billAttendee(1L), empty),
-                     new PersonStream(billAttendee(1L), empty));
+        assertEquals   (new PersonStream(billAttendee(1L), empty),
+                        new PersonStream(billAttendee(1L), empty));
         assertNotEquals(new PersonStream(billAttendee(1L), empty), null);
         assertNotEquals(new PersonStream(billAttendee(1L), empty), new Object());
     }
