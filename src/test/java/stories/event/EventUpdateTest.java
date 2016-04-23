@@ -1,54 +1,42 @@
 package stories.event;
 
 import org.junit.Test;
-import stories.person.Attendee;
-import stories.person.Person;
-
-import java.time.LocalDateTime;
-import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static stories.event.AttendeeUpdate.from;
-import static stories.event.EventSpecification.withNoAttendees;
+import static stories.event.EventUpdateBuilder.*;
 
 public class EventUpdateTest {
 
     @Test
-    public void equality() {
-        assertEquals   (new EventUpdate(bill(), from("Some message"), someTime(), concert()),
-                new EventUpdate(bill(), from("Some message"), someTime(), concert()));
-
-        assertEquals   (new EventUpdate(bill(), from("Some message"), someTime(), concert()),
-                new EventUpdate(bill(), from("Oth message"), someTime(), concert()));
-
-        assertNotEquals(new EventUpdate(bill(), from("Some message"), someTime().plusDays(1), concert()),
-                new EventUpdate(bill(), from("Some message"), someTime(), concert()));
-
-        assertNotEquals(new EventUpdate(bill(), from("Some message"), someTime(), concert()),
-                new EventUpdate(bill(), from("Some message"), someTime(), otherConcert()));
-
-        assertNotEquals(new EventUpdate(bill(), from("Some message"), someTime(), concert()), null);
-        assertNotEquals(from("Some message"), new Object());
+    public void equalityWithSameIdentity() {
+        assertEquals(aSameEventUpdate(),
+                     aSameEventUpdate());
     }
 
-    private Event otherConcert() {
-        return Event.withNoUpdates(3L, someSpecification());
+    @Test
+    public void equalityWithDifferentMessage() {
+        assertEquals(eventUpdateWith(from("First message")),
+                     eventUpdateWith(from("An other message")));
     }
 
-    private Event concert() {
-        return Event.withNoUpdates(1L, someSpecification());
+    @Test
+    public void equalityWithDifferentTime() {
+        assertNotEquals(eventUpdateAt(someTime()),
+                        eventUpdateAt(someTime().plusDays(1)));
     }
 
-    private EventSpecification someSpecification() {
-        return withNoAttendees(new EventStatement(someTime(), "Some Concert"));
+    @Test
+    public void equalityWithDifferentEvent() {
+        assertNotEquals(eventUpdateFor(eventWithId(1L)),
+                        eventUpdateFor(eventWithId(813L)));
     }
 
-    private LocalDateTime someTime() {
-        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+    @Test
+    public void equalityTowardNullAndObject() {
+        assertNotEquals(someEventUpdate(), null);
+        assertNotEquals(someEventUpdate(), new Object());
     }
 
-    private Attendee bill() {
-        return new Attendee(new Person(1L, "Bill"));
-    }
 }
