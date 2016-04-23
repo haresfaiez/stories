@@ -40,7 +40,11 @@ class EventUpdate {
 
     @Override
     public String toString() {
-        return String.format("%s, %s", editor, update);
+        return String.format("%s, %s, %s, %s",
+                             editor,
+                             event,
+                             time,
+                             update);
     }
 
     private Boolean hasEditor(Attendee otherEditor) {
