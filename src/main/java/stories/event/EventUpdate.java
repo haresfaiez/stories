@@ -4,7 +4,7 @@ import stories.person.Attendee;
 
 import java.time.LocalDateTime;
 
-class EventUpdate {
+public class EventUpdate {
     protected Attendee       editor;
     protected Event          event;
     protected LocalDateTime  time;
