@@ -6,7 +6,8 @@ class EventSpecification {
     protected final EventStatement statement;
     protected final Attendees      attendees;
 
-    public EventSpecification(EventStatement statement, Attendees attendees) {
+    private EventSpecification(EventStatement statement,
+                               Attendees attendees) {
         this.statement = statement;
         this.attendees = attendees;
     }
@@ -20,7 +21,7 @@ class EventSpecification {
         return String.format("%s, %s", statement, attendees);
     }
 
-    public static EventSpecification withNoAttendees(EventStatement specification) {
-        return new EventSpecification(specification, Attendees.noOne());
+    public static EventSpecification withNoAttendees(EventStatement statement) {
+        return new EventSpecification(statement, Attendees.noOne());
     }
 }
