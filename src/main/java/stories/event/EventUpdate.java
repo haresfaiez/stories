@@ -12,10 +12,11 @@ class EventUpdate {
 
     private EventUpdate(Attendee editor,
                         AttendeeUpdate update,
-                        LocalDateTime time) {
+                        LocalDateTime time,
+                        Event event) {
         this.editor = editor;
         this.update = update;
-        event = null;
+        this.event = event;
         this.time = time;
     }
 
@@ -25,17 +26,21 @@ class EventUpdate {
         if (!(o instanceof EventUpdate)) return Boolean.FALSE;
         EventUpdate other = (EventUpdate) o;
         return other.hasEditor(editor)
-                && other.hasUpdate(update)
-                && other.hasTime(time);
+                && other.isAt(time)
+                && other.isFor(event);
     }
 
-    private boolean hasTime(LocalDateTime otherTime) {
+    private boolean isFor(Event otherEvent) {
+        return event.equals(otherEvent);
+    }
+
+    private boolean isAt(LocalDateTime otherTime) {
         return time.equals(otherTime);
     }
 
     @Override
     public int hashCode() {
-        return update.hashCode();
+        return editor.hashCode();
     }
 
     @Override
@@ -51,20 +56,10 @@ class EventUpdate {
         return editor.equals(otherEditor);
     }
 
-    private Boolean hasUpdate(AttendeeUpdate otherUpdate) {
-        return update.equals(otherUpdate);
-    }
-
     public static EventUpdate by(Attendee editor,
                                  Event concert,
                                  LocalDateTime time,
                                  AttendeeUpdate update) {
-        return new EventUpdate(editor, update, time);
-    }
-
-    public static EventUpdate by(Attendee editor,
-                                 LocalDateTime time,
-                                 AttendeeUpdate update) {
-        return new EventUpdate(editor, update, time);
+        return new EventUpdate(editor, update, time, concert);
     }
 }

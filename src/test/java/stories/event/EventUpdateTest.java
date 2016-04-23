@@ -9,6 +9,7 @@ import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static stories.event.AttendeeUpdate.from;
 import static stories.event.EventSpecification.withNoAttendees;
 import static stories.event.EventUpdate.by;
 
@@ -16,14 +17,24 @@ public class EventUpdateTest {
 
     @Test
     public void equality() {
-        assertEquals   (by(bill(), concert(), someTime(), billUpdate()),
-                        by(bill(), concert(), someTime(), billUpdate()));
+        assertEquals   (by(bill(), concert(), someTime(), from("Some message")),
+                        by(bill(), concert(), someTime(), from("Some message")));
 
-        assertNotEquals(by(bill(), concert(), someTime().plusDays(1), billUpdate()),
-                        by(bill(), concert(), someTime(), billUpdate()));
+        assertEquals   (by(bill(), concert(), someTime(), from("Some message")),
+                        by(bill(), concert(), someTime(), from("Oth message")));
 
-        assertNotEquals(by(bill(), concert(), someTime(), billUpdate()), null);
-        assertNotEquals(billUpdate(), new Object());
+        assertNotEquals(by(bill(), concert(), someTime().plusDays(1), from("Some message")),
+                        by(bill(), concert(), someTime(), from("Some message")));
+
+        assertNotEquals(by(bill(), concert(), someTime(), from("Some message")),
+                        by(bill(), otherConcert(), someTime(), from("Some message")));
+
+        assertNotEquals(by(bill(), concert(), someTime(), from("Some message")), null);
+        assertNotEquals(from("Some message"), new Object());
+    }
+
+    private Event otherConcert() {
+        return Event.withNoUpdates(3L, someSpecification());
     }
 
     private Event concert() {
@@ -36,10 +47,6 @@ public class EventUpdateTest {
 
     private LocalDateTime someTime() {
         return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
-    }
-
-    private AttendeeUpdate billUpdate() {
-        return AttendeeUpdate.from("Some message");
     }
 
     private Attendee bill() {

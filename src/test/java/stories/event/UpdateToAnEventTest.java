@@ -31,16 +31,8 @@ public class UpdateToAnEventTest {
         bill.attend(concert);
         billAttendee.update(concert, billUpdate(), someTime());
 
-        EventUpdate billEventUpdate = EventUpdate.by(billAttendee, concert(), someTime(), billUpdate());
+        EventUpdate billEventUpdate = EventUpdate.by(billAttendee, concert, someTime(), billUpdate());
         assertTrue(concert.updates.contains(billEventUpdate));
-    }
-
-    private Event concert() {
-        return Event.withNoUpdates(1L, someSpecification());
-    }
-
-    private EventSpecification someSpecification() {
-        return withNoAttendees(new EventStatement(someTime(), "Some Concert"));
     }
 
     private LocalDateTime someTime() {

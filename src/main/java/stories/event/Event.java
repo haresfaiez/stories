@@ -20,7 +20,7 @@ public class Event {
     public void updateBy(Attendee editor,
                          AttendeeUpdate update,
                          LocalDateTime time) {
-        updates = updates.with(EventUpdate.by(editor, time, update));
+        updates = updates.with(EventUpdate.by(editor, this, time, update));
     }
 
     public void attendee(Attendee newAttendee) {
