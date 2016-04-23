@@ -3,7 +3,7 @@ package test.stories.event
 import stories.event.Event
 import stories.person.Attendee
 import stories.person.Person
-import stories.person.PersonStream
+import stories.stream.PersonStream
 import stories.event.AttendeeUpdate
 
 import java.time.LocalDateTime

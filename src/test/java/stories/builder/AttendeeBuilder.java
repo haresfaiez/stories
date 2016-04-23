@@ -8,11 +8,19 @@ public class AttendeeBuilder {
         return new Attendee(new Person(id, "Bob"));
     }
 
-    public static Attendee mike(Long id) {
-        return new Attendee(new Person(id, "Mike"));
+    public static Attendee mikeAttendee(Long id) {
+        return new Attendee(mike(id));
     }
 
-    public static Attendee bill(Long id) {
-        return new Attendee(new Person(id, "Bill"));
+    public static Person mike(Long id) {
+        return new Person(id, "Mike");
+    }
+
+    public static Attendee billAttendee(Long id) {
+        return new Attendee(bill(id));
+    }
+
+    public static Person bill(Long id) {
+        return new Person(id, "Bill");
     }
 }

@@ -15,8 +15,8 @@ public class EventAttendeeTest {
 
     @Test
     public void manyPersonsCanAttendAnEvent() {
-        Attendee attendee      = bill(1L);
-        Attendee otherAttendee = mike(122L);
+        Attendee attendee      = billAttendee(1L);
+        Attendee otherAttendee = mikeAttendee(122L);
         Attendee notAttendee   = someAttendee(828L);
         Event concert        = someConcert();
 
@@ -30,7 +30,7 @@ public class EventAttendeeTest {
 
     @Test
     public void aPersonCanAttendAnEvent() {
-        Attendee bill    = bill(1L);
+        Attendee bill    = billAttendee(1L);
         Event concert  = withNoUpdates(1L, EventSpecification.withNoAttendees(at(someTime(), "Concert title")));
 
         bill.attend(concert);

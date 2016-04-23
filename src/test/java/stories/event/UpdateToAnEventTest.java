@@ -5,7 +5,7 @@ import stories.person.Attendee;
 
 import static org.junit.Assert.assertTrue;
 import static stories.builder.ConcertBuilder.someConcert;
-import static stories.builder.AttendeeBuilder.bill;
+import static stories.builder.AttendeeBuilder.billAttendee;
 import static stories.builder.UpdateBuilder.someAttendeeUpdate;
 
 public class UpdateToAnEventTest {
@@ -13,7 +13,7 @@ public class UpdateToAnEventTest {
     @Test
     public void personCanUpdateToAnEvent() {
         Event concert = someConcert();
-        Attendee bill = bill(1L);
+        Attendee bill = billAttendee(1L);
         AttendeeUpdate billUpdate = someAttendeeUpdate();
 
         bill.attend(concert);

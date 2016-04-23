@@ -6,7 +6,7 @@ import stories.event.AttendeeUpdate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import static stories.builder.AttendeeBuilder.bill;
+import static stories.builder.AttendeeBuilder.billAttendee;
 
 public class UpdateBuilder {
     public static AttendeeUpdate someAttendeeUpdate() {
@@ -14,7 +14,7 @@ public class UpdateBuilder {
     }
 
     public static EventUpdate someEventUpdate() {
-        return EventUpdate.by(bill(1L), someAttendeeUpdate());
+        return EventUpdate.by(billAttendee(1L), someAttendeeUpdate());
     }
 
     public static LocalDateTime someTime() {
