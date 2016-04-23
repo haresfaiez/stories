@@ -1,18 +1,22 @@
 package stories.stream;
 
-import stories.person.Attendee;
+import stories.person.Person;
 
 import java.util.Collections;
 import java.util.Set;
 
 public class PersonStream {
-    protected Attendee director;
-    protected Set      updates;
+    protected Person director;
+    protected Set    updates;
 
-    protected PersonStream(Attendee director,
-                           Set      updates) {
+    protected PersonStream(Person director,
+                           Set updates) {
         this.director = director;
         this.updates  = updates;
+    }
+
+    protected Boolean isEmpty() {
+        return updates.isEmpty();
     }
 
     @Override
@@ -34,7 +38,7 @@ public class PersonStream {
         return super.toString();
     }
 
-    public static PersonStream empty(Attendee director) {
+    public static PersonStream empty(Person director) {
         return new PersonStream(director, Collections.emptySet());
     }
 }
