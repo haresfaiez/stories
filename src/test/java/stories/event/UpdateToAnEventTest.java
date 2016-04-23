@@ -10,6 +10,7 @@ import java.time.Month;
 
 import static org.junit.Assert.assertTrue;
 import static stories.event.Event.withNoUpdates;
+import static stories.event.EventSpecification.withNoAttendees;
 import static stories.event.EventStatement.at;
 
 public class UpdateToAnEventTest {
@@ -30,12 +31,24 @@ public class UpdateToAnEventTest {
         bill.attend(concert);
         billAttendee.update(concert, billUpdate());
 
-        EventUpdate billEventUpdate = EventUpdate.by(billAttendee, billUpdate());
+        EventUpdate billEventUpdate = EventUpdate.by(billAttendee, concert(), someTime(), billUpdate());
         assertTrue(concert.updates.contains(billEventUpdate));
     }
 
+    private Event concert() {
+        return Event.withNoUpdates(1L, someSpecification());
+    }
+
+    private EventSpecification someSpecification() {
+        return withNoAttendees(new EventStatement(someTime(), "Some Concert"));
+    }
+
+    private LocalDateTime someTime() {
+        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+    }
+
     private Event someConcert() {
-        return withNoUpdates(8L, EventSpecification.withNoAttendees(at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Concert title")));
+        return withNoUpdates(8L, withNoAttendees(at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Concert title")));
     }
 
     private AttendeeUpdate billUpdate() {

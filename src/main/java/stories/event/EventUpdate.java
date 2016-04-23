@@ -2,14 +2,22 @@ package stories.event;
 
 import stories.person.Attendee;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+
 class EventUpdate {
-    protected final Attendee editor;
+    protected final Attendee       editor;
+    protected final Event          event;
+    protected final LocalDateTime  time;
     protected final AttendeeUpdate update;
 
     private EventUpdate(Attendee editor,
-                        AttendeeUpdate update) {
+                        AttendeeUpdate update,
+                        LocalDateTime time) {
         this.editor = editor;
         this.update = update;
+        event = null;
+        this.time = time;
     }
 
     @Override
@@ -17,7 +25,13 @@ class EventUpdate {
         if (null == o)                   return Boolean.FALSE;
         if (!(o instanceof EventUpdate)) return Boolean.FALSE;
         EventUpdate other = (EventUpdate) o;
-        return other.hasEditor(editor) && other.hasUpdate(update);
+        return other.hasEditor(editor)
+                && other.hasUpdate(update)
+                && other.hasTime(time);
+    }
+
+    private boolean hasTime(LocalDateTime otherTime) {
+        return time.equals(otherTime);
     }
 
     @Override
@@ -39,7 +53,17 @@ class EventUpdate {
     }
 
     public static EventUpdate by(Attendee editor,
+                                 Event concert,
+                                 LocalDateTime time,
                                  AttendeeUpdate update) {
-        return new EventUpdate(editor, update);
+        return new EventUpdate(editor, update, time);
+    }
+
+    public static EventUpdate by(Attendee editor,
+                                 AttendeeUpdate update) {
+        return new EventUpdate(editor, update, someTime());
+    }
+    private static LocalDateTime someTime() {
+        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
     }
 }
