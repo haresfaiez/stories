@@ -30,14 +30,6 @@ class EventUpdate {
                 && other.isFor(event);
     }
 
-    private boolean isFor(Event otherEvent) {
-        return event.equals(otherEvent);
-    }
-
-    private boolean isAt(LocalDateTime otherTime) {
-        return time.equals(otherTime);
-    }
-
     @Override
     public int hashCode() {
         return editor.hashCode();
@@ -50,6 +42,14 @@ class EventUpdate {
                              event,
                              time,
                              update);
+    }
+
+    private boolean isFor(Event otherEvent) {
+        return event.equals(otherEvent);
+    }
+
+    private boolean isAt(LocalDateTime otherTime) {
+        return time.equals(otherTime);
     }
 
     private Boolean hasEditor(Attendee otherEditor) {
