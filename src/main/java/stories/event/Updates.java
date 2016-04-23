@@ -1,18 +1,16 @@
 package stories.event;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 
 class Updates {
-    private final Collection collection;
+    private final Set collection;
 
-    private Updates(Collection collection) {
+    private Updates(Set collection) {
         this.collection = collection;
     }
 
     protected Updates with(EventUpdate update) {
-        Collection resultCollection = new LinkedList(collection);
+        Set resultCollection = new HashSet(collection);
         resultCollection.add(update);
         return new Updates(resultCollection);
     }
@@ -22,6 +20,6 @@ class Updates {
     }
 
     public static Updates noOne() {
-        return new Updates(Collections.EMPTY_LIST);
+        return new Updates(Collections.emptySet());
     }
 }
