@@ -2,7 +2,7 @@ package stories.event;
 
 import stories.person.Attendee;
 
-public class EventSpecification {
+class EventSpecification {
     protected final EventStatement statement;
     protected final Attendees      attendees;
 

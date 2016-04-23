@@ -2,7 +2,7 @@ package stories.event;
 
 import java.time.LocalDateTime;
 
-public class EventStatement {
+class EventStatement {
     protected String        title;
     protected LocalDateTime time;
 

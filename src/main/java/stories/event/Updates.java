@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Updates {
+class Updates {
     private final Collection collection;
 
     private Updates(Collection collection) {

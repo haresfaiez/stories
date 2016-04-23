@@ -7,7 +7,6 @@ import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static stories.builder.UpdateBuilder.someAttendeeUpdate;
 
 public class AttendeeUpdateTest {
 
@@ -15,8 +14,8 @@ public class AttendeeUpdateTest {
     public void equality() {
         assertEquals   (AttendeeUpdate.at(someTime(), "Some message"),
                         AttendeeUpdate.at(someTime(), "Some message"));
-        assertNotEquals(someAttendeeUpdate(), null);
-        assertNotEquals(someAttendeeUpdate(), new Object());
+        assertNotEquals(AttendeeUpdate.at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Some message"), null);
+        assertNotEquals(AttendeeUpdate.at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Some message"), new Object());
     }
 
     private LocalDateTime someTime() {

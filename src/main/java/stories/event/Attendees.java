@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Attendees {
+class Attendees {
     private final Collection collection;
 
     protected Attendees(Collection collection) {

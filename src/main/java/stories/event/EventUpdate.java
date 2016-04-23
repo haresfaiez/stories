@@ -2,7 +2,7 @@ package stories.event;
 
 import stories.person.Attendee;
 
-public class EventUpdate {
+class EventUpdate {
     protected final Attendee editor;
     protected final AttendeeUpdate update;
 
