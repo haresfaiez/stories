@@ -6,7 +6,7 @@ import stories.event.Event;
 import java.time.LocalDateTime;
 
 public class Attendee {
-    private Person person;
+    public Person person;
 
     public Attendee(Person person) {
         this.person = person;
@@ -34,5 +34,9 @@ public class Attendee {
     @Override
     public String toString() {
         return String.format("%s", person);
+    }
+
+    public static Attendee from(Person person) {
+        return new Attendee(person);
     }
 }

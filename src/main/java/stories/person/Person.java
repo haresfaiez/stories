@@ -12,11 +12,7 @@ public class Person {
     }
 
     public void attend(Event target) {
-        target.attendee(asAttendee());
-    }
-
-    private Attendee asAttendee() {
-        return new Attendee(this);
+        target.attendee(this);
     }
 
     @Override
