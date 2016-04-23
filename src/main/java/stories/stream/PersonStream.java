@@ -9,7 +9,8 @@ public class PersonStream {
     protected Attendee director;
     protected Set      updates;
 
-    protected PersonStream(Attendee director, Set updates) {
+    protected PersonStream(Attendee director,
+                           Set      updates) {
         this.director = director;
         this.updates  = updates;
     }
@@ -19,7 +20,8 @@ public class PersonStream {
         if (null == o)                    return Boolean.FALSE;
         if (!(o instanceof PersonStream)) return Boolean.FALSE;
         PersonStream other = (PersonStream) o;
-        return other.updates.equals(updates) && other.director.equals(director);
+        return other.updates.equals(updates)
+                && other.director.equals(director);
     }
 
     @Override

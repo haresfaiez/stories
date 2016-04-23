@@ -10,14 +10,14 @@ class EventUpdate {
     protected LocalDateTime  time;
     protected AttendeeUpdate update;
 
-    protected EventUpdate(Attendee editor,
+    protected EventUpdate(Attendee       editor,
                           AttendeeUpdate update,
-                          LocalDateTime time,
-                          Event event) {
+                          LocalDateTime  time,
+                          Event          event) {
         this.editor = editor;
         this.update = update;
-        this.event = event;
-        this.time = time;
+        this.event  = event;
+        this.time   = time;
     }
 
     @Override
@@ -37,11 +37,10 @@ class EventUpdate {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s, %s",
-                             editor,
-                             event,
-                             time,
-                             update);
+        return String.format("%s, %s, %s, %s", editor,
+                                               event,
+                                               time,
+                                               update);
     }
 
     private boolean isFor(Event otherEvent) {

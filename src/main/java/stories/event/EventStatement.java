@@ -7,7 +7,7 @@ class EventStatement {
     protected LocalDateTime time;
 
     protected EventStatement(LocalDateTime time,
-                          String title) {
+                             String        title) {
         this.time  = time;
         this.title = title;
     }
@@ -18,7 +18,7 @@ class EventStatement {
     }
 
     public static EventStatement at(LocalDateTime time,
-                                    String title) {
+                                    String        title) {
         return new EventStatement(time, title);
     }
 }

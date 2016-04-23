@@ -12,9 +12,9 @@ public class Attendee {
         this.person = person;
     }
 
-    public void update(Event target,
+    public void update(Event          target,
                        AttendeeUpdate update,
-                       LocalDateTime time) {
+                       LocalDateTime  time) {
         target.updateBy(this, update, time);
     }
 
