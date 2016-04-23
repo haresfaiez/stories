@@ -7,12 +7,11 @@ import java.util.Set;
 
 public class PersonStream {
     protected Attendee director;
-    protected Set updates;
+    protected Set      updates;
 
     protected PersonStream(Attendee director, Set updates) {
-
         this.director = director;
-        this.updates = updates;
+        this.updates  = updates;
     }
 
     @Override
