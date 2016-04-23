@@ -1,42 +1,43 @@
 package stories.event;
 
 import org.junit.Test;
-import stories.person.Attendee;
 import stories.person.Person;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
+import static java.time.LocalDateTime.of;
 import static org.junit.Assert.assertTrue;
 import static stories.event.Event.withNoUpdates;
+import static stories.event.EventSpecification.withNoAttendees;
 import static stories.event.EventStatement.at;
+import static stories.person.Attendee.from;
 
 public class EventAttendeeTest {
 
     @Test
     public void manyPersonsCanAttendAnEvent() {
-        Person attendee = new Person(1L, "Bill");
-        Person otherAttendee = new Person(122L, "Mike");
-        Event concert = someEvent();
+        Person anAttendee      = personWithId(1L);
+        Person anOtherAttendee = personWithId(122L);
+        Event  aConcert        = someEvent();
 
-        attendee.attend(concert);
-        otherAttendee.attend(concert);
+        anAttendee.attend(aConcert);
+        anOtherAttendee.attend(aConcert);
 
-        assertTrue(concert.specification.attendees.contains(new Attendee(attendee)));
-        assertTrue(concert.specification.attendees.contains(new Attendee(otherAttendee)));
-    }
-
-    @Test
-    public void aPersonCanAttendAnEvent() {
-        Person bill = new Person(1L, "Bill");
-        Event concert = someEvent();
-
-        bill.attend(concert);
-
-        assertTrue(concert.specification.attendees.contains(new Attendee(bill)));
+        assertTrue(aConcert.specification.hasAttendee(from(anAttendee)));
+        assertTrue(aConcert.specification.hasAttendee(from(anOtherAttendee)));
     }
 
     private Event someEvent() {
-        return withNoUpdates(8L, EventSpecification.withNoAttendees(at(LocalDateTime.of(2015, Month.APRIL, 19, 20, 30), "Concert title")));
+        return withNoUpdates(8L,
+                             withNoAttendees(at(someDate(), "Event title")));
+    }
+
+    private LocalDateTime someDate() {
+        return of(2015, Month.APRIL, 19, 20, 30);
+    }
+
+    private Person personWithId(Long id) {
+        return new Person(id, "Name of that person");
     }
 }

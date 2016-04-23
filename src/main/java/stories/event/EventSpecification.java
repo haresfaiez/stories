@@ -16,6 +16,10 @@ class EventSpecification {
         return new EventSpecification(statement, attendees.with(newAttendee));
     }
 
+    protected Boolean hasAttendee(Attendee potentialAttendee) {
+        return attendees.contains(potentialAttendee);
+    }
+
     @Override
     public String toString() {
         return String.format("%s, %s", statement, attendees);
