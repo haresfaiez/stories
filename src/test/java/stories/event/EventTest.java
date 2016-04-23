@@ -14,23 +14,38 @@ import static stories.event.EventStatement.at;
 public class EventTest {
 
     @Test
-    public void equality() {
-        Event concert      = withNoUpdates(1L, withNoAttendees(someStatement()));
-        Event sameConcert  = withNoUpdates(1L, withNoAttendees(someStatement()));
-        Event otherConcert = withNoUpdates(2L, withNoAttendees(someStatement()));
+    public void equalityWithSameEvent() {
+        Event anEvent      = eventWithId(1L);
+        Event theSameEvent = eventWithId(1L);
 
-        assertEquals   (sameConcert,  concert);
-        assertNotEquals(otherConcert, concert);
-        assertNotEquals(concert,      null);
-        assertNotEquals(concert,      new Object());
+        assertEquals(theSameEvent, anEvent);
     }
 
     @Test
-    public void hasATitleAndATime() {
-        Event concert = withNoUpdates(1L, withNoAttendees(at(someTime(), "Concert title")));
+    public void equalityWithDifferentEvent() {
+        Event anEvent      = eventWithId(1L);
+        Event anOtherEvent = eventWithId(219L);
 
-        assertEquals("Concert title", concert.specification.statement.title);
-        assertEquals(someTime(),      concert.specification.statement.time);
+        assertNotEquals(anOtherEvent, anEvent);
+    }
+
+    @Test
+    public void equalityTowardNullAndObject() {
+        Event anEvent = eventWithId(1L);
+
+        assertNotEquals(anEvent, new Object());
+    }
+
+    @Test
+    public void statementHasATitleAndATime() {
+        EventStatement statement = at(someTime(), "Concert title");
+
+        assertEquals("Concert title", statement.title);
+        assertEquals(someTime(),      statement.time);
+    }
+
+    private Event eventWithId(Long id) {
+        return withNoUpdates(id, withNoAttendees(someStatement()));
     }
 
     private EventStatement someStatement() {
