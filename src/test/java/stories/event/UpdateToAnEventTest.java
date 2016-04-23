@@ -27,7 +27,7 @@ public class UpdateToAnEventTest {
     }
 
     @Test
-    public void personCanUpdateToAnEvent() {
+    public void attendeeCanUpdateToAnEvent() {
         billAsAttendee.update(aConcert, billUpdate(), billUpdateTime());
 
         EventUpdate expectedEventUpdate = new EventUpdate(billAsAttendee,
