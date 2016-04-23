@@ -10,17 +10,17 @@ public class Event {
     protected EventSpecification specification;
     protected Updates            updates;
 
-    private Event(Long id,
-                  Updates updates,
-                  EventSpecification specification) {
+    private Event(Long               id,
+                  EventSpecification specification,
+                  Updates            updates) {
         this.id            = id;
         this.specification = specification;
         this.updates       = updates;
     }
 
-    public void updateBy(Attendee editor,
+    public void updateBy(Attendee       editor,
                          AttendeeUpdate update,
-                         LocalDateTime time) {
+                         LocalDateTime  time) {
         updates = updates.with(new EventUpdate(editor, update, time, this));
     }
 
@@ -50,9 +50,9 @@ public class Event {
         return String.format("%s, %s", id, specification);
     }
 
-    public static Event withNoUpdates(Long id,
+    public static Event withNoUpdates(Long               id,
                                       EventSpecification specification) {
-        return new Event(id, Updates.noOne(), specification);
+        return new Event(id, specification, Updates.noOne());
     }
 
 }
