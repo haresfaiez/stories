@@ -1,27 +1,29 @@
 package stories.stream;
 
 import org.junit.Test;
-import stories.person.Attendee;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static stories.builder.AttendeeBuilder.mike;
-import static stories.builder.AttendeeBuilder.bill;
-import static stories.builder.UpdateBuilder.someAttendeeUpdate;
+import static org.junit.Assert.assertNotEquals;
+import static stories.builder.AttendeeBuilder.billAttendee;
 
 public class PersonStreamTest {
+    Set empty = Collections.emptySet();
 
     @Test
-    public void hasAnAttendeeAndAnEventUpdates() {
-        Set eventUpdates = new HashSet();
-        eventUpdates.add(new StreamUpdate(mike(2L), someAttendeeUpdate()));
+    public void equality() {
+        assertEquals(new PersonStream(billAttendee(1L), empty),
+                     new PersonStream(billAttendee(1L), empty));
+        assertNotEquals(new PersonStream(billAttendee(1L), empty), null);
+        assertNotEquals(new PersonStream(billAttendee(1L), empty), new Object());
+    }
 
-        Attendee bill = new Attendee(bill(1L));
-        PersonStream billStream = new PersonStream(bill, eventUpdates);
+    @Test
+    public void emptyStreamHasNoUpdates() {
+        PersonStream billStream = PersonStream.empty(billAttendee(1L));
 
-        assertEquals(bill, billStream.director);
-        assertEquals(eventUpdates, billStream.updates);
+        assertEquals(empty, billStream.updates);
     }
 }
