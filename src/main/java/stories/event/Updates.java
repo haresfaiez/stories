@@ -1,12 +1,13 @@
 package stories.event;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
 
-public class Updates {
+public class Updates implements Serializable {
     private final Set collection;
 
     private Updates(Set collection) {

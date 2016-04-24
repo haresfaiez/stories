@@ -11,6 +11,7 @@ ext {
 
 dependencies {
     compile group:'org.codehaus.groovy', name:'groovy-all', version: groovy_version
+    compile 'org.apache.spark:spark-core_2.10:1.6.1'
 
     testCompile group:'junit', name:'junit', version: junit_version
 }

@@ -4,9 +4,10 @@ import stories.person.Attendee;
 import stories.person.Person;
 import stories.stream.PersonStream;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Event {
+public class Event implements Serializable {
     protected Long               id;
     protected EventSpecification specification;
     protected Updates            updates;

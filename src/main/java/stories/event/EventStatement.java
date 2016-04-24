@@ -1,8 +1,9 @@
 package stories.event;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-class EventStatement {
+class EventStatement implements Serializable{
     protected final String        title;
     protected final LocalDateTime time;
 

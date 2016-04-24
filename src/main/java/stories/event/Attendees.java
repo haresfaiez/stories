@@ -2,13 +2,14 @@ package stories.event;
 
 import stories.person.Attendee;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
 
-class Attendees {
+class Attendees implements Serializable {
     private final Set collection;
 
     protected Attendees(Set collection) {
