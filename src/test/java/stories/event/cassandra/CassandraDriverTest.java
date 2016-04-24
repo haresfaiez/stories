@@ -3,17 +3,21 @@ package stories.event.cassandra;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import stories.event.*;
+import stories.event.Attendees;
+import stories.event.BuildEvent;
+import stories.event.Event;
+import stories.event.Updates;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static org.junit.Assert.assertTrue;
 
 
 public class CassandraDriverTest {
     final String fixturePath        = "cassandra/events.cql";
-    final Long anEventIdFromFixture = 1L;
+    final UUID anEventIdFromFixture = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
 
     CassandraDriver driver;
 

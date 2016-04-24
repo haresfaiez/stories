@@ -7,6 +7,7 @@ import stories.person.Person;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static org.junit.Assert.assertTrue;
 import static stories.event.Event.withNoUpdates;
@@ -20,7 +21,8 @@ public class UpdateToAnEventTest {
 
     @Before
     public void setUp() {
-        aConcert = withNoUpdates(8L, someSpecification());
+        aConcert = withNoUpdates(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
+                                 someSpecification());
         Person billAsPerson = new Person(1L, "Bill");
         billAsPerson.attend(aConcert);
         billAsAttendee = new Attendee(billAsPerson);

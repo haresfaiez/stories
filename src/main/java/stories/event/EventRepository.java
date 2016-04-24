@@ -2,6 +2,8 @@ package stories.event;
 
 import org.apache.spark.api.java.JavaRDD;
 
+import java.util.UUID;
+
 public class EventRepository {
     private JavaRDD<Event> input;
 
@@ -9,7 +11,7 @@ public class EventRepository {
         this.input = input;
     }
 
-    public Event eventWithId(Long target) {
+    public Event eventWithId(UUID target) {
         return input.filter(each -> target.equals(each.id)).first();
     }
 }

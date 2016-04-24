@@ -6,15 +6,16 @@ import stories.stream.PersonStream;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Event implements Serializable {
-    protected Long               id;
+    protected UUID               id;
     protected EventSpecification specification;
     protected Updates            updates;
 
-    protected Event(Long               id,
-                  EventSpecification specification,
-                  Updates            updates) {
+    protected Event(UUID               id,
+                    EventSpecification specification,
+                    Updates            updates) {
         this.id            = id;
         this.specification = specification;
         this.updates       = updates;
@@ -42,7 +43,7 @@ public class Event implements Serializable {
         return other.hasId(id);
     }
 
-    private Boolean hasId(Long otherId) {
+    private Boolean hasId(UUID otherId) {
         return id.equals(otherId);
     }
 
@@ -56,7 +57,7 @@ public class Event implements Serializable {
         return String.format("%s, %s", id, specification);
     }
 
-    public static Event withNoUpdates(Long               id,
+    public static Event withNoUpdates(UUID               id,
                                       EventSpecification specification) {
         return new Event(id, specification, Updates.none());
     }

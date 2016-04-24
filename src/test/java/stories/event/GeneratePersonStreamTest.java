@@ -8,6 +8,7 @@ import stories.stream.PersonStream;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static stories.event.AttendeeUpdate.from;
@@ -58,7 +59,7 @@ public class GeneratePersonStreamTest {
     }
 
     private Event anEvent() {
-        return withNoUpdates(1L,
+        return withNoUpdates(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
                              withNoAttendees(at(eventTime(), "Event title")));
     }
 

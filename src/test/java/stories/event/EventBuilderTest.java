@@ -7,6 +7,7 @@ import stories.person.Person;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static stories.event.EventUpdateBuilder.aFrozenEventUpdate;
@@ -58,7 +59,7 @@ public class EventBuilderTest {
         return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
     }
 
-    private Long theId() {
-        return 1L;
+    private UUID theId() {
+        return UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979");
     }
 }

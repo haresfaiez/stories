@@ -9,11 +9,12 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
 public class EventRepositoryTest {
-    Long            targetEventId = 1L;
+    UUID            targetEventId = UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979");
     EventRepository repository;
     List<Event>     events;
     Integer         targetEventIndex;
@@ -23,9 +24,8 @@ public class EventRepositoryTest {
         JavaSparkContext context = localContext();
         targetEventIndex = 0;
         events = Arrays.asList(eventWithId(targetEventId),
-                               eventWithId(2L),
-                               eventWithId(3L),
-                               eventWithId(4L));
+                               eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e222279")),
+                               eventWithId(UUID.fromString("22a8e0-0a3d-11e6-8cf0-2d237e222279")));
         JavaRDD<Event> eventsRDD = context.parallelize(events);
         repository = new EventRepository(eventsRDD);
     }
@@ -47,7 +47,7 @@ public class EventRepositoryTest {
         return events.get(targetEventIndex);
     }
 
-    private Event eventWithId(Long id) {
+    private Event eventWithId(UUID id) {
         return BuildEvent.identifiedBy(id)
                 .at(LocalDateTime.MAX)
                 .entitled("The title")

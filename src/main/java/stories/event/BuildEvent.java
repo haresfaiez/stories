@@ -1,11 +1,12 @@
 package stories.event;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class BuildEvent {
     private Event product;
 
-    private BuildEvent(Long identity) {
+    private BuildEvent(UUID identity) {
         product = new Event(identity,
                             EventSpecification.identityElement(),
                             Updates.none());
@@ -35,7 +36,7 @@ public class BuildEvent {
         return product;
     }
 
-    public static BuildEvent identifiedBy(Long identity) {
+    public static BuildEvent identifiedBy(UUID identity) {
         return new BuildEvent(identity);
     }
 }

@@ -2,6 +2,8 @@ package stories.event;
 
 import org.junit.Test;
 
+import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static stories.event.AttendeeUpdate.from;
@@ -29,8 +31,8 @@ public class EventUpdateTest {
 
     @Test
     public void equalityWithDifferentEvent() {
-        assertNotEquals(eventUpdateFor(eventWithId(1L)),
-                        eventUpdateFor(eventWithId(813L)));
+        assertNotEquals(eventUpdateFor(eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"))),
+                        eventUpdateFor(eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461911"))));
     }
 
     @Test

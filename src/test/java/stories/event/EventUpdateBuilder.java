@@ -5,6 +5,7 @@ import stories.person.Person;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static stories.event.AttendeeUpdate.from;
 import static stories.event.EventSpecification.withNoAttendees;
@@ -15,15 +16,15 @@ public class EventUpdateBuilder {
         return new EventUpdate(attendeeOfPersonWithId(1L),
                 from("Some message"),
                 someTime(),
-                eventWithId(1L));
+                eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
     protected static EventUpdate eventUpdateWith(AttendeeUpdate message) {
-        return new EventUpdate(attendeeOfPersonWithId(1L), message, someTime(), eventWithId(1L));
+        return new EventUpdate(attendeeOfPersonWithId(1L), message, someTime(), eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
     protected static EventUpdate eventUpdateAt(LocalDateTime time) {
-        return new EventUpdate(attendeeOfPersonWithId(1L), someMessage(), time, eventWithId(1L));
+        return new EventUpdate(attendeeOfPersonWithId(1L), someMessage(), time, eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
     protected static AttendeeUpdate someMessage() {
@@ -38,10 +39,10 @@ public class EventUpdateBuilder {
         return new EventUpdate(attendeeOfPersonWithId(1L),
                                from("Some message"),
                                someTime(),
-                               eventWithId(1L));
+                               eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
-    protected static Event eventWithId(Long id) {
+    protected static Event eventWithId(UUID id) {
         return Event.withNoUpdates(id, someSpecification());
     }
 

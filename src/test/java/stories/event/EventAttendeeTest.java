@@ -5,6 +5,7 @@ import stories.person.Person;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static java.time.LocalDateTime.of;
 import static org.junit.Assert.assertTrue;
@@ -29,7 +30,7 @@ public class EventAttendeeTest {
     }
 
     private Event someEvent() {
-        return withNoUpdates(8L,
+        return withNoUpdates(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"),
                              withNoAttendees(at(someDate(), "Event title")));
     }
 
