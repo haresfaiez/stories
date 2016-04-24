@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 
-class Attendees implements Serializable {
+public class Attendees implements Serializable {
     private final Set collection;
 
     protected Attendees(Set collection) {
