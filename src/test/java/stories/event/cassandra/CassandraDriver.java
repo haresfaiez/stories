@@ -2,13 +2,13 @@ package stories.event.cassandra;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import org.cassandraunit.CQLDataLoader;
 import org.cassandraunit.dataset.cql.ClassPathCQLDataSet;
 import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
+import stories.event.BuildEvent;
 import stories.event.Event;
-
-import java.util.UUID;
 
 public class CassandraDriver {
     Cluster cluster;
@@ -29,8 +29,11 @@ public class CassandraDriver {
 
     public Boolean hasInstalled(Event event) {
         ResultSet result = session.execute("select * from event");
-        UUID id = result.iterator().next().getUUID("id");
-        return id.equals(event.id);
+        Row eventRow = result.iterator().next();
+        Event found = BuildEvent.identifiedBy(eventRow.getUUID("id"))
+                                .entitled(eventRow.getString("title"))
+                                .product();
+        return found.equals(event);
     }
 
     public void tearDown() {

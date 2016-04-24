@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Event implements Serializable {
-    public UUID               id;
+    protected UUID               id;
     protected EventSpecification specification;
     protected Updates            updates;
 
