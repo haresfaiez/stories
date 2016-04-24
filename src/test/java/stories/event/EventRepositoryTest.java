@@ -13,39 +13,38 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class EventRepositoryTest {
-    Long theEventId;
+    Long            targetEventId = 1L;
     EventRepository repository;
+    List<Event>     events;
+    Integer         targetEventIndex;
 
     @Before
     public void setUp() throws Exception {
-        theEventId = 1L;
-        SparkConf sparkConfiguration = new SparkConf();
-        sparkConfiguration.setAppName("Java API demo");
-        sparkConfiguration.setMaster("local");
-
-        JavaSparkContext context = new JavaSparkContext(sparkConfiguration);
-        List<Event> eventsSet = Arrays.asList(
-                eventWithId(2L),
-                eventWithId(3L),
-                eventWithId(1L),
-                eventWithId(4L));
-        JavaRDD<Event> events = context.parallelize(eventsSet);
-        repository = new EventRepository(events);
+        JavaSparkContext context = localContext();
+        targetEventIndex = 0;
+        events = Arrays.asList(eventWithId(targetEventId),
+                               eventWithId(2L),
+                               eventWithId(3L),
+                               eventWithId(4L));
+        JavaRDD<Event> eventsRDD = context.parallelize(events);
+        repository = new EventRepository(eventsRDD);
     }
 
     @Test
     public void retrieveEventById() {
         assertEquals(theEvent(),
-                     repository.eventWithId(theEventId));
+                     repository.eventWithId(targetEventId));
+    }
+
+    private JavaSparkContext localContext() {
+        SparkConf sparkConfiguration = new SparkConf();
+        sparkConfiguration.setAppName("Event repository test");
+        sparkConfiguration.setMaster("local");
+        return new JavaSparkContext(sparkConfiguration);
     }
 
     private Event theEvent() {
-        return BuildEvent.identifiedBy(theEventId)
-                .at(LocalDateTime.MAX)
-                .entitled("The title")
-                .withAttendees(Attendees.none())
-                .withUpdates(Updates.none())
-                .product();
+        return events.get(targetEventIndex);
     }
 
     private Event eventWithId(Long id) {
