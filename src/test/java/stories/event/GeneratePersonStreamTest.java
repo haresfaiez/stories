@@ -25,7 +25,7 @@ public class GeneratePersonStreamTest {
 
     @Before
     public void setUp() {
-        emma = new Person(1L, "Emma");
+        emma = new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Emma");
         bill = anAttendee();
         event = anEvent();
     }
@@ -55,7 +55,7 @@ public class GeneratePersonStreamTest {
     }
 
     private Attendee anAttendee() {
-        return Attendee.from(new Person(3L, "Bill"));
+        return Attendee.from(new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461000"), "Bill"));
     }
 
     private Event anEvent() {

@@ -13,18 +13,18 @@ import static stories.event.EventSpecification.withNoAttendees;
 public class EventUpdateBuilder {
 
     protected static EventUpdate aFrozenEventUpdate() {
-        return new EventUpdate(attendeeOfPersonWithId(1L),
+        return new EventUpdate(attendeeOfPersonWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979")),
                 from("Some message"),
                 someTime(),
                 eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
     protected static EventUpdate eventUpdateWith(AttendeeUpdate message) {
-        return new EventUpdate(attendeeOfPersonWithId(1L), message, someTime(), eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
+        return new EventUpdate(attendeeOfPersonWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979")), message, someTime(), eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
     protected static EventUpdate eventUpdateAt(LocalDateTime time) {
-        return new EventUpdate(attendeeOfPersonWithId(1L), someMessage(), time, eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
+        return new EventUpdate(attendeeOfPersonWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979")), someMessage(), time, eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
     }
 
     protected static AttendeeUpdate someMessage() {
@@ -32,11 +32,11 @@ public class EventUpdateBuilder {
     }
 
     protected static EventUpdate eventUpdateFor(Event event) {
-        return new EventUpdate(attendeeOfPersonWithId(1L), someMessage(), someTime(), event);
+        return new EventUpdate(attendeeOfPersonWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979")), someMessage(), someTime(), event);
     }
 
     protected static EventUpdate someEventUpdate() {
-        return new EventUpdate(attendeeOfPersonWithId(1L),
+        return new EventUpdate(attendeeOfPersonWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979")),
                                from("Some message"),
                                someTime(),
                                eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970")));
@@ -54,7 +54,7 @@ public class EventUpdateBuilder {
         return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
     }
 
-    protected static Attendee attendeeOfPersonWithId(Long id) {
+    protected static Attendee attendeeOfPersonWithId(UUID id) {
         return new Attendee(new Person(id, "Bill"));
     }
 }

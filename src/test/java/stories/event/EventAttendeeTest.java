@@ -18,8 +18,8 @@ public class EventAttendeeTest {
 
     @Test
     public void manyPersonsCanAttendAnEvent() {
-        Person anAttendee      = personWithId(1L);
-        Person anOtherAttendee = personWithId(122L);
+        Person anAttendee      = personWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"));
+        Person anOtherAttendee = personWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d2070000009"));
         Event  aConcert        = someEvent();
 
         anAttendee.attend(aConcert);
@@ -38,7 +38,7 @@ public class EventAttendeeTest {
         return of(2015, Month.APRIL, 19, 20, 30);
     }
 
-    private Person personWithId(Long id) {
+    private Person personWithId(UUID id) {
         return new Person(id, "Name of that person");
     }
 }

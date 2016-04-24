@@ -7,6 +7,7 @@ import stories.person.Person;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -42,7 +43,7 @@ public class AttendeesTest {
     }
 
     private Person arbitraryPerson() {
-        return new Person(1L, "Some name");
+        return new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Some name");
     }
 
     private Set anEmptySet() {

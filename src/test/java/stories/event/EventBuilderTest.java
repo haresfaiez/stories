@@ -48,7 +48,7 @@ public class EventBuilderTest {
     }
 
     private Attendees theAttendees() {
-        return Attendees.singleton(Attendee.from(new Person(1L, "Mee")));
+        return Attendees.singleton(Attendee.from(new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Mee")));
     }
 
     private String theTitle() {

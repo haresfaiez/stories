@@ -2,11 +2,13 @@ package stories.person;
 
 import stories.event.Event;
 
+import java.util.UUID;
+
 public class Person {
-    private Long   id;
+    private UUID   id;
     private String name;
 
-    public Person(Long id, String name) {
+    public Person(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -23,7 +25,7 @@ public class Person {
         return other.hasId(id);
     }
 
-    protected Boolean hasId(Long otherId) {
+    protected Boolean hasId(UUID otherId) {
         return id.equals(otherId);
     }
 

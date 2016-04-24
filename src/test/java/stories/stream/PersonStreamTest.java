@@ -5,6 +5,8 @@ import org.junit.Test;
 import stories.event.Updates;
 import stories.person.Person;
 
+import java.util.UUID;
+
 import static org.junit.Assert.*;
 
 public class PersonStreamTest {
@@ -13,7 +15,7 @@ public class PersonStreamTest {
 
     @Before
     public void setUp() throws Exception {
-        aPerson = new Person(1L, "Bill");
+        aPerson = new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Bill");
     }
 
     @Test
