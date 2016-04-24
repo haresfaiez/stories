@@ -27,7 +27,7 @@ public class EventBuilderTest {
                                      .withAttendees(theAttendees())
                                      .withUpdates(theUpdates());
 
-        Event actual = build.get();
+        Event actual = build.product();
 
         assertEquals(expected, actual);
         assertEquals(expected.updates, actual.updates);

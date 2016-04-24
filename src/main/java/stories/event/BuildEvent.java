@@ -31,7 +31,7 @@ class BuildEvent {
         return this;
     }
 
-    protected Event get() {
+    protected Event product() {
         return product;
     }
 
