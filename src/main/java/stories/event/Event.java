@@ -11,7 +11,7 @@ public class Event {
     protected EventSpecification specification;
     protected Updates            updates;
 
-    private Event(Long               id,
+    protected Event(Long               id,
                   EventSpecification specification,
                   Updates            updates) {
         this.id            = id;
