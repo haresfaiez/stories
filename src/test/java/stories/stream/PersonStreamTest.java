@@ -2,17 +2,13 @@ package stories.stream;
 
 import org.junit.Before;
 import org.junit.Test;
+import stories.event.Updates;
 import stories.person.Person;
 
-import java.util.Collections;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class PersonStreamTest {
-    Set empty = Collections.emptySet();
+    Updates empty = Updates.noOne();
     Person aPerson;
 
     @Before
@@ -22,8 +18,8 @@ public class PersonStreamTest {
 
     @Test
     public void equalityWithSamePersonAndUpdates() {
-        assertEquals(new PersonStream(aPerson, empty),
-                     new PersonStream(aPerson, empty));
+        assertEquals(PersonStream.of(aPerson, empty),
+                     PersonStream.of(aPerson, empty));
     }
 
     @Test
@@ -40,6 +36,6 @@ public class PersonStreamTest {
     }
 
     private PersonStream somePersonStream() {
-        return new PersonStream(aPerson, empty);
+        return PersonStream.of(aPerson, empty);
     }
 }

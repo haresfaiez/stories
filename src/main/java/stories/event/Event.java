@@ -2,6 +2,7 @@ package stories.event;
 
 import stories.person.Attendee;
 import stories.person.Person;
+import stories.stream.PersonStream;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +27,10 @@ public class Event {
 
     public void attendee(Person attendee) {
         specification = specification.withAttendee(Attendee.from(attendee));
+    }
+
+    public PersonStream streamOf(Person director) {
+        return PersonStream.of(director, updates);
     }
 
     @Override
@@ -54,5 +59,4 @@ public class Event {
                                       EventSpecification specification) {
         return new Event(id, specification, Updates.noOne());
     }
-
 }

@@ -1,10 +1,10 @@
 package stories.event;
 
+import org.junit.Before;
 import org.junit.Test;
 import stories.person.Attendee;
 import stories.person.Person;
 import stories.stream.PersonStream;
-import stories.stream.StreamRepository;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -14,39 +14,59 @@ import static stories.event.AttendeeUpdate.from;
 import static stories.event.Event.withNoUpdates;
 import static stories.event.EventSpecification.withNoAttendees;
 import static stories.event.EventStatement.at;
+import static stories.event.Updates.singleton;
 
 public class GeneratePersonStreamTest {
 
+    private Person emma;
+    private Event event;
+    private Attendee bill;
+
+    @Before
+    public void setUp() {
+        emma = new Person(1L, "Emma");
+        bill = anAttendee();
+        event = anEvent();
+    }
+
     @Test
-    public void streamOfAPersonForAnEvent() {
-        Person emma = new Person(1L, "Emma");
-        StreamRepository repository = new StreamRepository();
+    public void personStreamForAnEventWithOneUpdate() {
+        event.updateBy(bill, from("Best evening"), billUpdateTime());
 
-        PersonStream actualStream = repository.streamOf(emma);
+        PersonStream actual = event.streamOf(emma);
 
-        assertEquals(PersonStream.empty(emma), actualStream);
+        PersonStream expected = PersonStream.of(emma, singleton(billEventUpdate()));
+        assertEquals(expected, actual);
     }
 
-    protected EventUpdate someEventUpdate() {
-        return new EventUpdate(attendeeOfPersonWithId(1L),
-                from("Some message"),
-                someTime(),
-                eventWithId(1L));
+    @Test
+    public void personStreamForAnEventWithoutUpdates() {
+        PersonStream actual = event.streamOf(emma);
+
+        assertEquals(PersonStream.empty(emma), actual);
     }
 
-    protected static Attendee attendeeOfPersonWithId(Long id) {
-        return new Attendee(new Person(id, "Bill"));
+    private EventUpdate billEventUpdate() {
+        return new EventUpdate(bill,
+                         from("Best evening"),
+                         billUpdateTime(),
+                         event);
     }
 
-    private Event eventWithId(Long id) {
-        return withNoUpdates(id, withNoAttendees(someStatement()));
+    private Attendee anAttendee() {
+        return Attendee.from(new Person(3L, "Bill"));
     }
 
-    private EventStatement someStatement() {
-        return at(someTime(), "Concert title");
+    private Event anEvent() {
+        return withNoUpdates(1L,
+                             withNoAttendees(at(eventTime(), "Event title")));
     }
 
-    private LocalDateTime someTime() {
+    private LocalDateTime eventTime() {
+        return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
+    }
+
+    private LocalDateTime billUpdateTime() {
         return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
     }
 }

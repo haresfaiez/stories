@@ -1,16 +1,14 @@
 package stories.stream;
 
+import stories.event.Updates;
 import stories.person.Person;
 
-import java.util.Collections;
-import java.util.Set;
-
 public class PersonStream {
-    protected Person director;
-    protected Set    updates;
+    private Person  director;
+    private Updates updates;
 
-    public PersonStream(Person director,
-                           Set updates) {
+    private PersonStream(Person  director,
+                         Updates updates) {
         this.director = director;
         this.updates  = updates;
     }
@@ -39,6 +37,11 @@ public class PersonStream {
     }
 
     public static PersonStream empty(Person director) {
-        return new PersonStream(director, Collections.emptySet());
+        return of(director, Updates.noOne());
+    }
+
+    public static PersonStream of(Person director,
+                                  Updates updates) {
+        return new PersonStream(director, updates);
     }
 }
