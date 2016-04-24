@@ -3,8 +3,8 @@ package stories.event;
 import java.time.LocalDateTime;
 
 class EventStatement {
-    protected String        title;
-    protected LocalDateTime time;
+    protected final String        title;
+    protected final LocalDateTime time;
 
     protected EventStatement(LocalDateTime time,
                              String        title) {
