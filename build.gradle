@@ -7,11 +7,12 @@ apply from  : 'functionaltest.gradle'
 ext {
     junit_version = '4.12'
     groovy_version = '2.4.6'
+    spark_version = '1.6.1'
 }
 
 dependencies {
     compile group:'org.codehaus.groovy', name:'groovy-all', version: groovy_version
-    compile 'org.apache.spark:spark-core_2.10:1.6.1'
+    compile group:'org.apache.spark', name:'spark-core_2.10', version: spark_version
 
     testCompile group:'junit', name:'junit', version: junit_version
 }
