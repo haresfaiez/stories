@@ -29,6 +29,14 @@ class EventStatement {
         return time.equals(otherTime);
     }
 
+    protected EventStatement withTime(LocalDateTime time) {
+        return new EventStatement(time, title);
+    }
+
+    protected EventStatement withTitle(String title) {
+        return new EventStatement(time, title);
+    }
+
     @Override
     public int hashCode() {
         return title.hashCode();
@@ -42,5 +50,9 @@ class EventStatement {
     public static EventStatement at(LocalDateTime time,
                                     String        title) {
         return new EventStatement(time, title);
+    }
+
+    protected static EventStatement _identityElement() {
+        return at(LocalDateTime.MIN, "");
     }
 }

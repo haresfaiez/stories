@@ -11,7 +11,7 @@ import static stories.event.EventSpecification.withNoAttendees;
 
 public class EventUpdateBuilder {
 
-    protected static EventUpdate aSameEventUpdate() {
+    protected static EventUpdate aFrozenEventUpdate() {
         return new EventUpdate(attendeeOfPersonWithId(1L),
                 from("Some message"),
                 someTime(),

@@ -11,8 +11,8 @@ public class EventUpdateTest {
 
     @Test
     public void equalityWithSameIdentity() {
-        assertEquals(aSameEventUpdate(),
-                     aSameEventUpdate());
+        assertEquals(aFrozenEventUpdate(),
+                     aFrozenEventUpdate());
     }
 
     @Test

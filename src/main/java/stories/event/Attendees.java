@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static java.util.Arrays.asList;
+
 class Attendees {
     private final Set collection;
 
@@ -47,5 +49,9 @@ class Attendees {
 
     public static Attendees none() {
         return new Attendees(Collections.emptySet());
+    }
+
+    protected static Attendees singleton(Attendee attendee) {
+        return new Attendees(new HashSet(asList(attendee)));
     }
 }

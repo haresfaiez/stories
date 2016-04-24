@@ -2,6 +2,8 @@ package stories.event;
 
 import stories.person.Attendee;
 
+import java.time.LocalDateTime;
+
 class EventSpecification {
     protected final EventStatement statement;
     protected final Attendees      attendees;
@@ -37,6 +39,18 @@ class EventSpecification {
         return attendees.equals(otherAttendees);
     }
 
+    protected EventSpecification withTime(LocalDateTime time) {
+        return new EventSpecification(statement.withTime(time), attendees);
+    }
+
+    protected EventSpecification withTitle(String title) {
+        return new EventSpecification(statement.withTitle(title), attendees);
+    }
+
+    protected EventSpecification withAttendees(Attendees attendees) {
+        return new EventSpecification(statement, attendees);
+    }
+
     @Override
     public int hashCode() {
         return statement.hashCode();
@@ -49,5 +63,9 @@ class EventSpecification {
 
     public static EventSpecification withNoAttendees(EventStatement statement) {
         return new EventSpecification(statement, Attendees.none());
+    }
+
+    protected static EventSpecification identityElement() {
+        return withNoAttendees(EventStatement._identityElement());
     }
 }
