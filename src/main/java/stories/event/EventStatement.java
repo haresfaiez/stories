@@ -14,7 +14,7 @@ class EventStatement {
 
     @Override
     public boolean equals(Object o) {
-        if (null == o)                     return Boolean.FALSE;
+        if (null == o)                      return Boolean.FALSE;
         if (!(o instanceof EventStatement)) return Boolean.FALSE;
         EventStatement other = (EventStatement) o;
         return other.isAt(time)

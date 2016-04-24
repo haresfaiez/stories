@@ -21,6 +21,28 @@ class EventSpecification {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (null == o)                     return Boolean.FALSE;
+        if (!(o instanceof EventSpecification)) return Boolean.FALSE;
+        EventSpecification other = (EventSpecification) o;
+        return other.isStatedAs(statement)
+                && other.isAttendedBy(attendees);
+    }
+
+    private Boolean isStatedAs(EventStatement otherStatement) {
+        return statement.equals(otherStatement);
+    }
+
+    private Boolean isAttendedBy(Attendees otherAttendees) {
+        return attendees.equals(otherAttendees);
+    }
+
+    @Override
+    public int hashCode() {
+        return statement.hashCode();
+    }
+
+    @Override
     public String toString() {
         return String.format("%s, %s", statement, attendees);
     }
