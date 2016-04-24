@@ -21,7 +21,7 @@ public class UpdatesEqualityTest {
 
     @Test
     public void towardNullAndObject() {
-        assertNotEquals(Updates.noOne(), null);
-        assertNotEquals(Updates.noOne(), new Object());
+        assertNotEquals(Updates.none(), null);
+        assertNotEquals(Updates.none(), new Object());
     }
 }

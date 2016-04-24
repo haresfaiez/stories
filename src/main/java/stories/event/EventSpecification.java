@@ -6,8 +6,8 @@ class EventSpecification {
     protected final EventStatement statement;
     protected final Attendees      attendees;
 
-    private EventSpecification(EventStatement statement,
-                               Attendees      attendees) {
+    protected EventSpecification(EventStatement statement,
+                                 Attendees attendees) {
         this.statement = statement;
         this.attendees = attendees;
     }

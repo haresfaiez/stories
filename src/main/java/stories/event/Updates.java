@@ -49,7 +49,7 @@ public class Updates {
         return collection.toString();
     }
 
-    public static Updates noOne() {
+    public static Updates none() {
         return from(Collections.emptySet());
     }
 

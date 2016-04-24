@@ -8,7 +8,7 @@ import stories.person.Person;
 import static org.junit.Assert.*;
 
 public class PersonStreamTest {
-    Updates empty = Updates.noOne();
+    Updates empty = Updates.none();
     Person aPerson;
 
     @Before

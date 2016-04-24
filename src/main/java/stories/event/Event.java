@@ -57,6 +57,6 @@ public class Event {
 
     public static Event withNoUpdates(Long               id,
                                       EventSpecification specification) {
-        return new Event(id, specification, Updates.noOne());
+        return new Event(id, specification, Updates.none());
     }
 }

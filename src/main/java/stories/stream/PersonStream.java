@@ -37,7 +37,7 @@ public class PersonStream {
     }
 
     public static PersonStream empty(Person director) {
-        return of(director, Updates.noOne());
+        return of(director, Updates.none());
     }
 
     public static PersonStream of(Person director,
