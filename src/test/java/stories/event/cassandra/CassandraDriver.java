@@ -30,10 +30,11 @@ public class CassandraDriver {
     public Boolean hasInstalled(Event event) {
         ResultSet result = session.execute("select * from event");
         UUID id = result.iterator().next().getUUID("id");
-        return id.equals(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979"));
+        return id.equals(event.id);
     }
 
     public void tearDown() {
+        session.execute(String.format("DROP TABLE %s", "Event"));
         session.close();
     }
 
