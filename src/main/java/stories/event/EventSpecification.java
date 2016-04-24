@@ -26,6 +26,6 @@ class EventSpecification {
     }
 
     public static EventSpecification withNoAttendees(EventStatement statement) {
-        return new EventSpecification(statement, Attendees.noOne());
+        return new EventSpecification(statement, Attendees.none());
     }
 }

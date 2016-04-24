@@ -57,7 +57,7 @@ public class Updates {
         return new Updates(collection);
     }
 
-    static Updates singleton(EventUpdate update) {
+    protected static Updates singleton(EventUpdate update) {
         return from(new HashSet<>(asList(update)));
     }
 }

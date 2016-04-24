@@ -45,7 +45,7 @@ class Attendees {
         return collection.toString();
     }
 
-    public static Attendees noOne() {
+    public static Attendees none() {
         return new Attendees(Collections.emptySet());
     }
 }

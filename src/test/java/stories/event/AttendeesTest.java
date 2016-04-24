@@ -15,7 +15,7 @@ public class AttendeesTest {
 
     @Test
     public void noOneAttendeeEqualsEmptyCollection() {
-        assertEquals(new Attendees(anEmptySet()), Attendees.noOne());
+        assertEquals(new Attendees(anEmptySet()), Attendees.none());
     }
 
     @Test
