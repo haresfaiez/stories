@@ -25,7 +25,7 @@ class EventUpdate {
         if (null == o)                   return Boolean.FALSE;
         if (!(o instanceof EventUpdate)) return Boolean.FALSE;
         EventUpdate other = (EventUpdate) o;
-        return other.hasEditor(editor)
+        return other.editedBy(editor)
                 && other.isAt(time)
                 && other.isFor(event);
     }
@@ -51,7 +51,7 @@ class EventUpdate {
         return time.equals(otherTime);
     }
 
-    private Boolean hasEditor(Attendee otherEditor) {
+    private Boolean editedBy(Attendee otherEditor) {
         return editor.equals(otherEditor);
     }
 }
