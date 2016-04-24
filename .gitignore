@@ -68,4 +68,5 @@ Session.vim
 .netrwhist
 *~
 
+/build
 # Created .ignore support plugin (hsz.mobi)
