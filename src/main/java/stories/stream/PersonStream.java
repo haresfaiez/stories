@@ -9,7 +9,7 @@ public class PersonStream {
     protected Person director;
     protected Set    updates;
 
-    protected PersonStream(Person director,
+    public PersonStream(Person director,
                            Set updates) {
         this.director = director;
         this.updates  = updates;
