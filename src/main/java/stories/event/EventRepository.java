@@ -1,6 +1,7 @@
 package stories.event;
 
 import com.datastax.spark.connector.japi.CassandraRow;
+import com.datastax.spark.connector.japi.SparkContextJavaFunctions;
 import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -11,15 +12,19 @@ import java.util.UUID;
 import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
 
 public class EventRepository {
-    private JavaSparkContext context;
+    public static final String KEYSPACE = "stories";
+    public static final String TABLE = "event";
 
-    public EventRepository(JavaSparkContext context) {
-        this.context = context;
+    private JavaSparkContext spark;
+
+    public EventRepository(JavaSparkContext spark) {
+        this.spark = spark;
     }
 
     public Event eventWithId(UUID target) {
-        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(context).cassandraTable("stories", "event");
-        JavaRDD<Event> events = response.map(eventFromCassandraRow());
+        SparkContextJavaFunctions utils = javaFunctions(spark);
+        CassandraTableScanJavaRDD<CassandraRow> eventRows = utils.cassandraTable(KEYSPACE, TABLE);
+        JavaRDD<Event> events = eventRows.map(eventFromCassandraRow());
         return eventWithIdFrom(events, target);
     }
 

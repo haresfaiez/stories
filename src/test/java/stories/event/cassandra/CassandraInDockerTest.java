@@ -30,21 +30,21 @@ public class CassandraInDockerTest {
     String cassandraHost = "172.17.0.1";
     String sparkMaster = "local";
 
-    JavaSparkContext sc;
+    JavaSparkContext spark;
 
     @Before
     public void setUp() {
-        SparkConf conf = new SparkConf();
-        conf.setAppName("Java API demo");
-        conf.setMaster(sparkMaster);
-        conf.set("spark.cassandra.connection.host", cassandraHost);
-        conf.set("spark.driver.allowMultipleContexts", "true");
-        sc = new JavaSparkContext(conf);
+        SparkConf configuration = new SparkConf();
+        configuration.setAppName("Cassandra in docker test");
+        configuration.setMaster(sparkMaster);
+        configuration.set("spark.cassandra.connection.host", cassandraHost);
+        configuration.set("spark.driver.allowMultipleContexts", "true");
+        spark = new JavaSparkContext(configuration);
     }
 
     @Test
     public void useRepositoryFilter() {
-        EventRepository repository = new EventRepository(sc);
+        EventRepository repository = new EventRepository(spark);
         Event actual = repository.eventWithId(expectedUUID);
         assertEquals(actual, expectedEvent);
     }
@@ -52,7 +52,7 @@ public class CassandraInDockerTest {
     @Test
     @Ignore
     public void cassandraRowToEventMapper() {
-        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(sc).cassandraTable("stories", "event");
+        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(spark).cassandraTable("stories", "event");
         assertEquals(1, response.count());
         JavaRDD<Event> events = response.map(EventRepository.eventFromCassandraRow());
         assertEquals(1, response.count());
@@ -62,7 +62,7 @@ public class CassandraInDockerTest {
     @Test
     @Ignore
     public void mapCassandraRowToEvent() {
-        CassandraTableScanJavaRDD<CassandraRow> rdd = javaFunctions(sc)
+        CassandraTableScanJavaRDD<CassandraRow> rdd = javaFunctions(spark)
                 .cassandraTable("stories", "event");
         assertEquals(rdd.count(), 1);
         CassandraRow first = rdd.first();
@@ -72,7 +72,7 @@ public class CassandraInDockerTest {
     @Test
     @Ignore
     public void convertToJavaRDD() {
-        CassandraConnector connector = CassandraConnector.apply(sc.getConf());
+        CassandraConnector connector = CassandraConnector.apply(spark.getConf());
         Session session = connector.openSession();
         ResultSet result = session.execute("SELECT * FROM Stories.Event");
         Row first = result.iterator().next();
@@ -91,7 +91,7 @@ public class CassandraInDockerTest {
 
     @After
     public void tearDown() {
-        sc.stop();
+        spark.stop();
     }
 
 }
