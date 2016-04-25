@@ -8,10 +8,14 @@ import com.datastax.spark.connector.cql.CassandraConnector;
 import com.datastax.spark.connector.japi.CassandraRow;
 import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import stories.event.BuildEvent;
+import stories.event.Event;
 
 import java.util.UUID;
 
@@ -23,7 +27,7 @@ public class CassandraInDockerTest {
     String sparkMaster = "local";
     private SparkConf conf;
     private JavaSparkContext sc;
-    private String expectedId = "32b0a8e0-0a3d-11e6-8cf0-2d237e461979";
+    private UUID expectedUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
 
     @Before
     public void setUp() {
@@ -35,14 +39,26 @@ public class CassandraInDockerTest {
     }
 
     @Test
-    public void mapCassandraRowToEventInstance() {
+    public void cassandraRowToEventMapper() {
+        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(sc).cassandraTable("stories", "event");
+        assertEquals(1, response.count());
+        JavaRDD<Event> events = response.map(eventFromCassandraRow());
+        assertEquals(1, response.count());
+        assertEquals(events.first(), BuildEvent.identifiedBy(expectedUUID).product());
+    }
+
+    protected static Function<CassandraRow, Event> eventFromCassandraRow() {
+        return row -> BuildEvent.identifiedBy(row.getUUID("id")).product();
+    }
+
+    @Test
+    public void mapCassandraRowToEvent() {
         CassandraTableScanJavaRDD<CassandraRow> rdd = javaFunctions(sc)
                 .cassandraTable("stories", "event");
         assertEquals(rdd.count(), 1);
         CassandraRow first = rdd.first();
-        assertEquals(first.getUUID("id"), UUID.fromString(expectedId));
+        assertEquals(first.getUUID("id"), expectedUUID);
     }
-
 
     @Test
     public void convertToJavaRDD() {
@@ -50,7 +66,7 @@ public class CassandraInDockerTest {
         Session session = connector.openSession();
         ResultSet result = session.execute("SELECT * FROM Stories.Event");
         Row first = result.iterator().next();
-        assertEquals(first.getUUID("id"), UUID.fromString(expectedId));
+        assertEquals(first.getUUID("id"), expectedUUID);
     }
 
     @Test
@@ -59,7 +75,7 @@ public class CassandraInDockerTest {
         Session session = cluster.connect("Stories");
         ResultSet result = session.execute("SELECT * FROM Event");
         Row first = result.iterator().next();
-        assertEquals(first.getUUID("id"), UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979"));
+        assertEquals(first.getUUID("id"), expectedUUID);
     }
 
     @After
