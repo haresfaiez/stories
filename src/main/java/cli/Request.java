@@ -22,7 +22,6 @@ public class Request {
 
     public String response() {
         new JCommander(this, arguments);
-        eventDetails.of(UUID.fromString(identity));
-        return "";
+        return eventDetails.of(UUID.fromString(identity)).toString();
     }
 }
