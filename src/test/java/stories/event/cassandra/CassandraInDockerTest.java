@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import stories.event.BuildEvent;
 import stories.event.Event;
+import stories.event.EventRepository;
 
 import java.util.UUID;
 
@@ -23,11 +24,14 @@ import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
 import static org.junit.Assert.assertEquals;
 
 public class CassandraInDockerTest {
+    UUID expectedUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
+    Event expectedEvent = BuildEvent.identifiedBy(expectedUUID).product();
+
     String cassandraHost = "172.17.0.1";
     String sparkMaster = "local";
-    private SparkConf conf;
-    private JavaSparkContext sc;
-    private UUID expectedUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
+
+    SparkConf conf;
+    JavaSparkContext sc;
 
     @Before
     public void setUp() {
@@ -39,12 +43,21 @@ public class CassandraInDockerTest {
     }
 
     @Test
+    public void useRepositoryFilter() {
+        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(sc).cassandraTable("stories", "event");
+        JavaRDD<Event> events = response.map(eventFromCassandraRow());
+        EventRepository repository = new EventRepository(events);
+        Event actual = repository.eventWithId(expectedUUID);
+        assertEquals(actual, expectedEvent);
+    }
+
+    @Test
     public void cassandraRowToEventMapper() {
         CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(sc).cassandraTable("stories", "event");
         assertEquals(1, response.count());
         JavaRDD<Event> events = response.map(eventFromCassandraRow());
         assertEquals(1, response.count());
-        assertEquals(events.first(), BuildEvent.identifiedBy(expectedUUID).product());
+        assertEquals(events.first(), expectedEvent);
     }
 
     protected static Function<CassandraRow, Event> eventFromCassandraRow() {
