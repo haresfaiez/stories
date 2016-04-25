@@ -39,6 +39,7 @@ public class CassandraInDockerTest {
         conf.setAppName("Java API demo");
         conf.setMaster(sparkMaster);
         conf.set("spark.cassandra.connection.host", cassandraHost);
+        conf.set("spark.driver.allowMultipleContexts", "true");
         sc = new JavaSparkContext(conf);
     }
 

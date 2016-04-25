@@ -40,6 +40,7 @@ public class EventRepositoryTest {
         SparkConf sparkConfiguration = new SparkConf();
         sparkConfiguration.setAppName("Event repository test");
         sparkConfiguration.setMaster("local");
+        sparkConfiguration.set("spark.driver.allowMultipleContexts", "true");
         return new JavaSparkContext(sparkConfiguration);
     }
 

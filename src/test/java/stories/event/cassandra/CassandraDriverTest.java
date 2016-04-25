@@ -2,6 +2,7 @@ package stories.event.cassandra;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import stories.event.Attendees;
 import stories.event.BuildEvent;
@@ -29,6 +30,7 @@ public class CassandraDriverTest {
     }
 
     @Test
+    @Ignore
     public void fixtureInstalledSuccessfully() {
         assertTrue(driver.hasInstalled(anEventFromTheFixture()));
     }
