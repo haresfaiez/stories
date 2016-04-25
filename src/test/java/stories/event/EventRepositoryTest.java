@@ -18,22 +18,23 @@ public class EventRepositoryTest {
     EventRepository repository;
     List<Event>     events;
     Integer         targetEventIndex;
+    private JavaSparkContext context;
 
     @Before
     public void setUp() throws Exception {
-        JavaSparkContext context = localContext();
+        context = localContext();
         targetEventIndex = 0;
         events = Arrays.asList(eventWithId(targetEventId),
                                eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e222279")),
                                eventWithId(UUID.fromString("22a8e0-0a3d-11e6-8cf0-2d237e222279")));
-        JavaRDD<Event> eventsRDD = context.parallelize(events);
-        repository = new EventRepository(eventsRDD);
+        repository = new EventRepository(context);
     }
 
     @Test
     public void retrieveEventById() {
+        JavaRDD<Event> eventsRDD = context.parallelize(events);
         assertEquals(theEvent(),
-                     repository.eventWithId(targetEventId));
+                     repository.eventWithIdFrom(eventsRDD, targetEventId));
     }
 
     private JavaSparkContext localContext() {

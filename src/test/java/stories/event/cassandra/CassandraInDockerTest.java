@@ -10,9 +10,9 @@ import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import stories.event.BuildEvent;
 import stories.event.Event;
@@ -30,12 +30,11 @@ public class CassandraInDockerTest {
     String cassandraHost = "172.17.0.1";
     String sparkMaster = "local";
 
-    SparkConf conf;
     JavaSparkContext sc;
 
     @Before
     public void setUp() {
-        conf = new SparkConf();
+        SparkConf conf = new SparkConf();
         conf.setAppName("Java API demo");
         conf.setMaster(sparkMaster);
         conf.set("spark.cassandra.connection.host", cassandraHost);
@@ -45,27 +44,23 @@ public class CassandraInDockerTest {
 
     @Test
     public void useRepositoryFilter() {
-        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(sc).cassandraTable("stories", "event");
-        JavaRDD<Event> events = response.map(eventFromCassandraRow());
-        EventRepository repository = new EventRepository(events);
+        EventRepository repository = new EventRepository(sc);
         Event actual = repository.eventWithId(expectedUUID);
         assertEquals(actual, expectedEvent);
     }
 
     @Test
+    @Ignore
     public void cassandraRowToEventMapper() {
         CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(sc).cassandraTable("stories", "event");
         assertEquals(1, response.count());
-        JavaRDD<Event> events = response.map(eventFromCassandraRow());
+        JavaRDD<Event> events = response.map(EventRepository.eventFromCassandraRow());
         assertEquals(1, response.count());
         assertEquals(events.first(), expectedEvent);
     }
 
-    protected static Function<CassandraRow, Event> eventFromCassandraRow() {
-        return row -> BuildEvent.identifiedBy(row.getUUID("id")).product();
-    }
-
     @Test
+    @Ignore
     public void mapCassandraRowToEvent() {
         CassandraTableScanJavaRDD<CassandraRow> rdd = javaFunctions(sc)
                 .cassandraTable("stories", "event");
@@ -75,6 +70,7 @@ public class CassandraInDockerTest {
     }
 
     @Test
+    @Ignore
     public void convertToJavaRDD() {
         CassandraConnector connector = CassandraConnector.apply(sc.getConf());
         Session session = connector.openSession();
@@ -84,6 +80,7 @@ public class CassandraInDockerTest {
     }
 
     @Test
+    @Ignore
     public void findEventById() {
         Cluster cluster = Cluster.builder().addContactPoint(cassandraHost).build();
         Session session = cluster.connect("Stories");
