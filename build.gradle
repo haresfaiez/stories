@@ -5,24 +5,38 @@ apply plugin: 'idea'
 apply from  : 'functionaltest.gradle'
 
 ext {
-    junit_version         = '4.12'
-    groovy_version        = '2.4.6'
-    spark_version         = '1.6.1'
-    datastax_version      = '3.0.0'
-    cassandraUnit_version = '3.0.0.1'
+    junit_version                   = '4.12'
+    groovy_version                  = '2.4.6'
+    spark_version                   = '1.6.1'
+    datastax_version                = '3.0.0'
+    cassandraUnit_version           = '3.0.0.1'
+    sparkCassandraConnector_version = '1.6.0-M2'
+    sparkSql_version                = '1.6.1'
 }
 
 dependencies {
-    compile group:'org.codehaus.groovy', name:'groovy-all', version: groovy_version
-    compile group:'org.apache.spark', name:'spark-core_2.10', version: spark_version
-    compile group:'com.datastax.cassandra', name:'cassandra-driver-core', version: datastax_version
-    compile 'com.datastax.spark:spark-cassandra-connector_2.10:1.6.0-M2'
-    compile 'org.apache.spark:spark-sql_2.10:1.6.1'
+    compile group:'org.codehaus.groovy',
+            name:'groovy-all',
+            version: groovy_version
+    compile group:'org.apache.spark',
+            name:'spark-core_2.10',
+            version: spark_version
+    compile group:'com.datastax.cassandra',
+            name:'cassandra-driver-core',
+            version: datastax_version
+    compile group:'com.datastax.spark',
+            name:'spark-cassandra-connector_2.10',
+            version: sparkCassandraConnector_version
+    compile group:'org.apache.spark',
+            name:'spark-sql_2.10',
+            version: sparkSql_version
 
-
-
-    testCompile group:'org.cassandraunit', name:'cassandra-unit', version: cassandraUnit_version
-    testCompile group:'junit', name:'junit', version: junit_version
+    testCompile group:'org.cassandraunit',
+                name:'cassandra-unit',
+                version: cassandraUnit_version
+    testCompile group:'junit',
+                name:'junit',
+                version: junit_version
 }
 
 repositories {
