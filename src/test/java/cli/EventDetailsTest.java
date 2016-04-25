@@ -28,6 +28,7 @@ public class EventDetailsTest {
     @Test
     public void requestAsksForTargetEvent() {
         EventDetails eventDetails = mock(EventDetails.class);
+        when(eventDetails.of(targetUUID)).thenReturn(expectedEvent);
         String[] arguments = { "-request", "event",
                                "-identity", "32b0a8e0-0a3d-11e6-8cf0-2d237e461979"};
         Request request = new Request(eventDetails, arguments);

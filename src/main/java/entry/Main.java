@@ -8,7 +8,7 @@ import stories.event.EventRepository;
 
 public class Main {
     public static void main(String[] arguments) {
-        String cassandraHost = "127.17.0.1";
+        String cassandraHost = "172.17.0.1";
 
         SparkConf sparkConfiguration = new SparkConf();
         sparkConfiguration.setAppName("Stories");

@@ -7,52 +7,50 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
-
 public class Attendees implements Serializable {
-    private final Set collection;
+    private final Set<Attendee> members;
 
-    protected Attendees(Set collection) {
-        this.collection = collection;
+    protected Attendees(Set<Attendee> members) {
+        this.members = members;
     }
 
-    public Attendees with(Attendee newAttendee) {
-        Set resultSet = new HashSet(collection);
-        resultSet.add(newAttendee);
-        return new Attendees(resultSet);
+    public Attendees with(Attendee newMember) {
+        Set<Attendee> resultMembers = new HashSet<>(members);
+        resultMembers.add(newMember);
+        return new Attendees(resultMembers);
     }
 
-    public Boolean contains(Attendee potentialAttendee) {
-        return collection.contains(potentialAttendee);
+    public Boolean contains(Attendee potentialMember) {
+        return members.contains(potentialMember);
     }
 
     @Override
     public boolean equals(Object o) {
         if (null == o)                 return Boolean.FALSE;
         if (!(o instanceof Attendees)) return Boolean.FALSE;
-        Attendees other = (Attendees) o;
-        return other.hasAttendees(collection);
+        Attendees others = (Attendees) o;
+        return others.are(members);
     }
 
-    private Boolean hasAttendees(Set otherAttendees) {
-        return collection.equals(otherAttendees);
+    private Boolean are(Set otherMembers) {
+        return members.equals(otherMembers);
     }
 
     @Override
     public int hashCode() {
-        return collection.hashCode();
+        return members.hashCode();
     }
 
     @Override
     public String toString() {
-        return collection.toString();
+        return members.toString();
     }
 
     public static Attendees none() {
         return new Attendees(Collections.emptySet());
     }
 
-    protected static Attendees singleton(Attendee attendee) {
-        return new Attendees(new HashSet(asList(attendee)));
+    public static Attendees singleton(Attendee member) {
+        return none().with(member);
     }
 }
