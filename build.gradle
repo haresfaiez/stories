@@ -12,6 +12,8 @@ ext {
     cassandraUnit_version           = '3.0.0.1'
     sparkCassandraConnector_version = '1.6.0-M2'
     sparkSql_version                = '1.6.1'
+    jcommander_version              = '1.48'
+    mockito_version                 = '1.10.19'
 }
 
 dependencies {
@@ -30,7 +32,9 @@ dependencies {
     compile group:'org.apache.spark',
             name:'spark-sql_2.10',
             version: sparkSql_version
-    compile "com.beust:jcommander:1.48"
+    compile group:'com.beust',
+            name:'jcommander',
+            version: jcommander_version
 
     testCompile group:'org.cassandraunit',
                 name:'cassandra-unit',
@@ -38,7 +42,9 @@ dependencies {
     testCompile group:'junit',
                 name:'junit',
                 version: junit_version
-    testCompile 'org.mockito:mockito-all:1.10.19'
+    testCompile group:'org.mockito',
+                name:'mockito-all',
+                version: mockito_version
 }
 
 repositories {
