@@ -9,7 +9,6 @@ public class EventDetails {
     private CassandraEventRepository repository;
 
     public EventDetails(CassandraEventRepository repository) {
-
         this.repository = repository;
     }
 

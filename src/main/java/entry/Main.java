@@ -10,7 +10,9 @@ import static stories.event.CassandraEventRepository.from;
 
 public class Main {
     public static void main(String[] arguments) {
-        String cassandraHost = "172.17.0.1";
+        final String cassandraHost = "172.17.0.1";
+        final String keyspace      = "stories";
+        final String table         = "event";
 
         SparkConf sparkConfiguration = new SparkConf();
         sparkConfiguration.setAppName("Stories");
@@ -18,11 +20,12 @@ public class Main {
         sparkConfiguration.set("spark.cassandra.connection.host", cassandraHost);
         sparkConfiguration.set("spark.driver.allowMultipleContexts", "true");
 
-        JavaSparkContext spark = new JavaSparkContext(sparkConfiguration);
-        CassandraEventRepository repository = from(spark, "stories", "event");
-        EventDetails eventDetails = new EventDetails(repository);
+        JavaSparkContext         context      = new JavaSparkContext(sparkConfiguration);
+        CassandraEventRepository repository   = from(context, keyspace, table);
+        EventDetails             eventDetails = new EventDetails(repository);
+
         Request request = new Request(eventDetails, arguments);
-        String result = request.response();
-        System.out.println(result);
+
+        System.out.println(request.response());
     }
 }

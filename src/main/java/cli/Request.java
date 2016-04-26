@@ -17,7 +17,7 @@ public class Request {
 
     public Request(EventDetails eventDetails, String[] arguments) {
         this.eventDetails = eventDetails;
-        this.arguments = arguments;
+        this.arguments    = arguments;
     }
 
     public String response() {
