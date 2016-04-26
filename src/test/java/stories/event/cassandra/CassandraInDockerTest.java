@@ -5,12 +5,8 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.spark.connector.cql.CassandraConnector;
-import com.datastax.spark.connector.japi.CassandraRow;
-import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -21,7 +17,6 @@ import stories.event.Event;
 
 import java.util.UUID;
 
-import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
 import static org.junit.Assert.assertEquals;
 
 public class CassandraInDockerTest {
@@ -47,8 +42,7 @@ public class CassandraInDockerTest {
     public void useRepositoryFilter() {
         final String keyspace = "stories";
         final String table    = "event";
-        CassandraEventRepository repository =
-                CassandraEventRepository.from(spark, keyspace, table);
+        CassandraEventRepository repository = CassandraEventRepository.from(spark, keyspace, table);
 
         Event actual = repository.eventWithId(expectedUUID);
 
@@ -57,45 +51,22 @@ public class CassandraInDockerTest {
 
     @Test
     @Ignore
-    public void cassandraRowToEventMapper() {
-        CassandraTableScanJavaRDD<CassandraRow> response =
-                javaFunctions(spark).cassandraTable("stories", "event");
-        assertEquals(1, response.count());
-        JavaRDD<Event> events = response.map((Function<CassandraRow,Event>) row -> BuildEvent.identified(row.getUUID("id"))
-                .entitled(row.getString("title"))
-                .product());
-        assertEquals(1, response.count());
-        assertEquals(events.first(), expectedEvent);
-    }
-
-    @Test
-    @Ignore
-    public void mapCassandraRowToEvent() {
-        CassandraTableScanJavaRDD<CassandraRow> rdd =
-                javaFunctions(spark).cassandraTable("stories", "event");
-        assertEquals(rdd.count(), 1);
-        CassandraRow first = rdd.first();
-        assertEquals(first.getUUID("id"), expectedUUID);
-    }
-
-    @Test
-    @Ignore
-    public void convertToJavaRDD() {
+    public void useCQLToFindAnEventById() {
         CassandraConnector connector = CassandraConnector.apply(spark.getConf());
         Session session = connector.openSession();
-        ResultSet result = session.execute("SELECT * FROM Stories.Event");
+        String query = String.format("SELECT * FROM Stories.Event WHERE id=%s", expectedUUID);
+        ResultSet result = session.execute(query);
         Row first = result.iterator().next();
-        assertEquals(first.getUUID("id"), expectedUUID);
+        assertEquals(expectedUUID, first.getUUID("id"));
     }
 
     @Test
     @Ignore
-    public void findEventById() {
-        Cluster cluster = Cluster.builder().addContactPoint(cassandraHost).build();
-        Session session = cluster.connect("Stories");
+    public void useCQLToRetrieveAllEvents() {
+        Cluster  cluster = Cluster.builder().addContactPoint(cassandraHost).build();
+        Session  session = cluster.connect("Stories");
         ResultSet result = session.execute("SELECT * FROM Event");
-        Row first = result.iterator().next();
-        assertEquals(first.getUUID("id"), expectedUUID);
+        assertEquals(5, result.all().size());
     }
 
     @After
