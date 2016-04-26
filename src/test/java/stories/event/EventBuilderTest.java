@@ -13,8 +13,8 @@ import static org.junit.Assert.assertEquals;
 import static stories.event.EventUpdateBuilder.aFrozenEventUpdate;
 
 public class EventBuilderTest {
-
     Event expected;
+
     @Before
     public void setUp(){
         expected = expectedProduct();
@@ -22,11 +22,11 @@ public class EventBuilderTest {
 
     @Test
     public void buildEventApi() {
-        BuildEvent build = BuildEvent.identified(theId())
-                                     .at(theTime())
-                                     .entitled(theTitle())
-                                     .attendedBy(theAttendees())
-                                     .withUpdates(theUpdates());
+        BuildEvent build = BuildEvent.identified(id())
+                                     .at(time())
+                                     .entitled(title())
+                                     .attendedBy(attendees())
+                                     .withUpdates(updates());
 
         Event actual = build.product();
 
@@ -36,30 +36,29 @@ public class EventBuilderTest {
     }
 
     private Event expectedProduct() {
-        return new Event(theId(),
-                         new EventSpecification(new EventStatement(theTime(),
-                                                                   theTitle()),
-                                                theAttendees()),
-                         theUpdates());
+        return new Event(id(),
+                         new EventSpecification(new EventStatement(time(), title()),
+                                                attendees()),
+                                                updates());
     }
 
-    private Updates theUpdates() {
+    private Updates updates() {
         return Updates.singleton(aFrozenEventUpdate());
     }
 
-    private Attendees theAttendees() {
+    private Attendees attendees() {
         return Attendees.singleton(Attendee.from(new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Mee")));
     }
 
-    private String theTitle() {
+    private String title() {
         return "Event title";
     }
 
-    private LocalDateTime theTime() {
+    private LocalDateTime time() {
         return LocalDateTime.of(2015, Month.APRIL, 19, 20, 30);
     }
 
-    private UUID theId() {
+    private UUID id() {
         return UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979");
     }
 }

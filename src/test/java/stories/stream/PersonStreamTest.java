@@ -26,18 +26,14 @@ public class PersonStreamTest {
 
     @Test
     public void equalityTowardNullAndObject() {
-        assertNotEquals(somePersonStream(), null);
-        assertNotEquals(somePersonStream(), new Object());
+        assertNotEquals(PersonStream.of(aPerson, empty), null);
+        assertNotEquals(PersonStream.of(aPerson, empty), new Object());
     }
 
     @Test
-    public void emptyStreamHasNoUpdates() {
+    public void emptyStreamContainsNoUpdates() {
         PersonStream billStream = PersonStream.empty(aPerson);
 
         assertTrue(billStream.isEmpty());
-    }
-
-    private PersonStream somePersonStream() {
-        return PersonStream.of(aPerson, empty);
     }
 }

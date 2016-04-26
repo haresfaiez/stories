@@ -21,8 +21,7 @@ public class UpdateToAnEventTest {
 
     @Before
     public void setUp() {
-        aConcert = identified(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
-                                 someSpecification());
+        aConcert = identified(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"), someSpecification());
         Person billAsPerson = new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Bill");
         billAsPerson.attend(aConcert);
         billAsAttendee = new Attendee(billAsPerson);

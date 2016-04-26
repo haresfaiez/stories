@@ -24,11 +24,11 @@ import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
 import static org.junit.Assert.assertEquals;
 
 public class CassandraInDockerTest {
+    final String cassandraHost = "172.17.0.1";
+    final String sparkMaster   = "local";
+
     UUID expectedUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
     Event expectedEvent = BuildEvent.identified(expectedUUID).product();
-
-    String cassandraHost = "172.17.0.1";
-    String sparkMaster = "local";
 
     JavaSparkContext spark;
 
@@ -44,16 +44,21 @@ public class CassandraInDockerTest {
 
     @Test
     public void useRepositoryFilter() {
-        CassandraEventRepository repository = CassandraEventRepository.from
-                (spark, "stories", "event");
+        final String keyspace = "stories";
+        final String table    = "event";
+        CassandraEventRepository repository =
+                CassandraEventRepository.from(spark, keyspace, table);
+
         Event actual = repository.eventWithId(expectedUUID);
+
         assertEquals(actual, expectedEvent);
     }
 
     @Test
     @Ignore
     public void cassandraRowToEventMapper() {
-        CassandraTableScanJavaRDD<CassandraRow> response = javaFunctions(spark).cassandraTable("stories", "event");
+        CassandraTableScanJavaRDD<CassandraRow> response =
+                javaFunctions(spark).cassandraTable("stories", "event");
         assertEquals(1, response.count());
         JavaRDD<Event> events = response.map(CassandraEventRepository.eventFromRow());
         assertEquals(1, response.count());
@@ -63,8 +68,8 @@ public class CassandraInDockerTest {
     @Test
     @Ignore
     public void mapCassandraRowToEvent() {
-        CassandraTableScanJavaRDD<CassandraRow> rdd = javaFunctions(spark)
-                .cassandraTable("stories", "event");
+        CassandraTableScanJavaRDD<CassandraRow> rdd =
+                javaFunctions(spark).cassandraTable("stories", "event");
         assertEquals(rdd.count(), 1);
         CassandraRow first = rdd.first();
         assertEquals(first.getUUID("id"), expectedUUID);

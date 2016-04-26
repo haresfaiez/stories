@@ -12,11 +12,11 @@ public class UpdatesEqualityTest {
 
     @Test
     public void withEqualCollections() {
-        Set aSet       = new HashSet();
-        Set theSameSet = new HashSet();
+        Set<EventUpdate> aSet       = new HashSet<>();
+        Set<EventUpdate> theSameSet = new HashSet<>();
 
         assertEquals(Updates.from(aSet),
-                Updates.from(theSameSet));
+                     Updates.from(theSameSet));
     }
 
     @Test
