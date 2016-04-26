@@ -24,7 +24,8 @@ public class CassandraEventRepository {
 
     protected Event eventFrom(JavaRDD<Event> input,
                               UUID           target) {
-        return input.filter(each -> target.equals(each.id)).first();
+        Event targetEvent = BuildEvent.identified(target).product();
+        return input.filter(targetEvent::equals).first();
     }
 
     private JavaRDD<Event> eventsRDD() {
