@@ -13,9 +13,10 @@ public class Request {
     public String identity;
 
     private EventDetails eventDetails;
-    private String[] arguments;
+    private String[]     arguments;
 
-    public Request(EventDetails eventDetails, String[] arguments) {
+    public Request(EventDetails eventDetails,
+                   String[]     arguments) {
         this.eventDetails = eventDetails;
         this.arguments    = arguments;
     }
