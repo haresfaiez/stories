@@ -1,4 +1,4 @@
-package stories.event;
+package persistence;
 
 import com.datastax.spark.connector.japi.CassandraRow;
 import com.datastax.spark.connector.japi.SparkContextJavaFunctions;
@@ -6,6 +6,8 @@ import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
+import stories.event.BuildEvent;
+import stories.event.Event;
 
 import java.util.UUID;
 
@@ -22,8 +24,8 @@ public class CassandraEventRepository {
         return eventFrom(eventsRDD(), target);
     }
 
-    protected Event eventFrom(JavaRDD<Event> input,
-                              UUID           target) {
+    public Event eventFrom(JavaRDD<Event> input,
+                              UUID        target) {
         Event targetEvent = BuildEvent.identified(target).product();
         return input.filter(targetEvent::equals).first();
     }

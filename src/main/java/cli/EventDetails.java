@@ -1,6 +1,6 @@
 package cli;
 
-import stories.event.CassandraEventRepository;
+import persistence.CassandraEventRepository;
 import stories.event.Event;
 
 import java.util.UUID;

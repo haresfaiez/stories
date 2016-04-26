@@ -5,6 +5,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.junit.Before;
 import org.junit.Test;
+import persistence.CassandraEventRepository;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

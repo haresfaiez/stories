@@ -16,7 +16,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import stories.event.BuildEvent;
 import stories.event.Event;
-import stories.event.CassandraEventRepository;
+import persistence.CassandraEventRepository;
 
 import java.util.UUID;
 
