@@ -27,7 +27,7 @@ public class CassandraEventRepositoryTest {
         events = Arrays.asList(eventWithId(targetEventId),
                                eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e222279")),
                                eventWithId(UUID.fromString("22a8e0-0a3d-11e6-8cf0-2d237e222279")));
-        repository = CassandraEventRepository.in(context, "stories", "event");
+        repository = CassandraEventRepository.from(context, "stories", "event");
     }
 
     @Test

@@ -36,9 +36,9 @@ public class CassandraEventRepository {
         return row -> BuildEvent.identified(row.getUUID("id")).product();
     }
 
-    public static CassandraEventRepository in(JavaSparkContext spark,
-                                              String           keyspace,
-                                              String           table) {
+    public static CassandraEventRepository from(JavaSparkContext spark,
+                                                String           keyspace,
+                                                String           table) {
         SparkContextJavaFunctions util = javaFunctions(spark);
         return new CassandraEventRepository(util.cassandraTable(keyspace,  table));
     }

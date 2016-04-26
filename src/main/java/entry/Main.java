@@ -6,6 +6,8 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import stories.event.CassandraEventRepository;
 
+import static stories.event.CassandraEventRepository.from;
+
 public class Main {
     public static void main(String[] arguments) {
         String cassandraHost = "172.17.0.1";
@@ -17,8 +19,7 @@ public class Main {
         sparkConfiguration.set("spark.driver.allowMultipleContexts", "true");
 
         JavaSparkContext spark = new JavaSparkContext(sparkConfiguration);
-        CassandraEventRepository repository = CassandraEventRepository.in
-                (spark, "stories", "event");
+        CassandraEventRepository repository = from(spark, "stories", "event");
         EventDetails eventDetails = new EventDetails(repository);
         Request request = new Request(eventDetails, arguments);
         String result = request.response();

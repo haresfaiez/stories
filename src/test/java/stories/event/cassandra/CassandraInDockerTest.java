@@ -44,7 +44,7 @@ public class CassandraInDockerTest {
 
     @Test
     public void useRepositoryFilter() {
-        CassandraEventRepository repository = CassandraEventRepository.in
+        CassandraEventRepository repository = CassandraEventRepository.from
                 (spark, "stories", "event");
         Event actual = repository.eventWithId(expectedUUID);
         assertEquals(actual, expectedEvent);
