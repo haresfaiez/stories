@@ -5,13 +5,15 @@ import com.datastax.spark.connector.japi.SparkContextJavaFunctions;
 import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
 import stories.event.BuildEvent;
 import stories.event.Event;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
+import static java.util.TimeZone.getDefault;
 
 public class CassandraEventRepository {
     private CassandraTableScanJavaRDD<CassandraRow> table;
@@ -25,18 +27,22 @@ public class CassandraEventRepository {
     }
 
     public Event eventFrom(JavaRDD<Event> input,
-                              UUID        target) {
+                           UUID           target) {
         Event targetEvent = BuildEvent.identified(target).product();
         return input.filter(targetEvent::equals).first();
     }
 
     private JavaRDD<Event> eventsRDD() {
-        return table.map(eventFromRow());
+        return table.map(row -> BuildEvent
+                         .identified(row.getUUID("id"))
+                         .entitled(row.getString("title"))
+                         .at(LocalDateTime.ofInstant(
+                                 Instant.ofEpochSecond(row.getDate("time").getTime()),
+                                 getDefault().toZoneId())
+                            )
+                         .product());
     }
 
-    public static Function<CassandraRow, Event> eventFromRow() {
-        return row -> BuildEvent.identified(row.getUUID("id")).product();
-    }
 
     public static CassandraEventRepository from(JavaSparkContext spark,
                                                 String           keyspace,

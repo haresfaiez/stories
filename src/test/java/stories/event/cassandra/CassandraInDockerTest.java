@@ -10,13 +10,14 @@ import com.datastax.spark.connector.japi.rdd.CassandraTableScanJavaRDD;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import persistence.CassandraEventRepository;
 import stories.event.BuildEvent;
 import stories.event.Event;
-import persistence.CassandraEventRepository;
 
 import java.util.UUID;
 
@@ -51,7 +52,7 @@ public class CassandraInDockerTest {
 
         Event actual = repository.eventWithId(expectedUUID);
 
-        assertEquals(actual, expectedEvent);
+        assertEquals(expectedEvent, actual);
     }
 
     @Test
@@ -60,7 +61,9 @@ public class CassandraInDockerTest {
         CassandraTableScanJavaRDD<CassandraRow> response =
                 javaFunctions(spark).cassandraTable("stories", "event");
         assertEquals(1, response.count());
-        JavaRDD<Event> events = response.map(CassandraEventRepository.eventFromRow());
+        JavaRDD<Event> events = response.map((Function<CassandraRow,Event>) row -> BuildEvent.identified(row.getUUID("id"))
+                .entitled(row.getString("title"))
+                .product());
         assertEquals(1, response.count());
         assertEquals(events.first(), expectedEvent);
     }
