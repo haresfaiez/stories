@@ -8,11 +8,11 @@ import org.apache.spark.api.java.JavaSparkContext;
 import stories.event.BuildEvent;
 import stories.event.Event;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
+import static java.time.Instant.ofEpochSecond;
+import static java.time.LocalDateTime.ofInstant;
 import static java.util.TimeZone.getDefault;
 
 public class CassandraEventRepository {
@@ -36,13 +36,10 @@ public class CassandraEventRepository {
         return table.map(row -> BuildEvent
                          .identified(row.getUUID("id"))
                          .entitled(row.getString("title"))
-                         .at(LocalDateTime.ofInstant(
-                                 Instant.ofEpochSecond(row.getDate("time").getTime()),
-                                 getDefault().toZoneId())
-                            )
+                         .at(ofInstant(ofEpochSecond(row.getDate("time").getTime()),
+                                       getDefault().toZoneId()))
                          .product());
     }
-
 
     public static CassandraEventRepository from(JavaSparkContext spark,
                                                 String           keyspace,
