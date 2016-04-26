@@ -22,10 +22,10 @@ public class EventBuilderTest {
 
     @Test
     public void buildEventApi() {
-        BuildEvent build = BuildEvent.identifiedBy(theId())
+        BuildEvent build = BuildEvent.identified(theId())
                                      .at(theTime())
                                      .entitled(theTitle())
-                                     .withAttendees(theAttendees())
+                                     .attendedBy(theAttendees())
                                      .withUpdates(theUpdates());
 
         Event actual = build.product();

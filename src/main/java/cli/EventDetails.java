@@ -1,14 +1,14 @@
 package cli;
 
 import stories.event.Event;
-import stories.event.EventRepository;
+import stories.event.CassandraEventRepository;
 
 import java.util.UUID;
 
 public class EventDetails {
-    private EventRepository repository;
+    private CassandraEventRepository repository;
 
-    public EventDetails(EventRepository repository) {
+    public EventDetails(CassandraEventRepository repository) {
         this.repository = repository;
     }
 

@@ -5,27 +5,25 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
-
 public class Updates implements Serializable {
-    private final Set collection;
+    private final Set<EventUpdate> elements;
 
-    private Updates(Set collection) {
-        this.collection = collection;
+    private Updates(Set<EventUpdate> elements) {
+        this.elements = elements;
     }
 
-    protected Updates with(EventUpdate update) {
-        Set resultCollection = new HashSet(collection);
-        resultCollection.add(update);
-        return from(resultCollection);
+    protected Updates with(EventUpdate newUpdate) {
+        Set<EventUpdate> resultElements = new HashSet<>(elements);
+        resultElements.add(newUpdate);
+        return from(resultElements);
     }
 
-    protected Boolean contains(EventUpdate update) {
-        return collection.contains(update);
+    protected Boolean includes(EventUpdate potential) {
+        return elements.contains(potential);
     }
 
     public Boolean isEmpty() {
-        return collection.isEmpty();
+        return elements.isEmpty();
     }
 
     @Override
@@ -33,32 +31,34 @@ public class Updates implements Serializable {
         if (null == o)               return Boolean.FALSE;
         if (!(o instanceof Updates)) return Boolean.FALSE;
         Updates other = (Updates) o;
-        return other.hasCollection(collection);
+        return other.are(elements);
     }
 
-    private Boolean hasCollection(Set otherCollection) {
-        return collection.equals(otherCollection);
+    private Boolean are(Set other) {
+        return elements.equals(other);
     }
 
     @Override
     public int hashCode() {
-        return collection.hashCode();
+        return elements.hashCode();
     }
 
     @Override
     public String toString() {
-        return collection.toString();
+        return elements.toString();
     }
 
     public static Updates none() {
         return from(Collections.emptySet());
     }
 
-    protected static Updates from(Set collection) {
+    protected static Updates from(Set<EventUpdate> collection) {
         return new Updates(collection);
     }
 
-    protected static Updates singleton(EventUpdate update) {
-        return from(new HashSet<>(asList(update)));
+    protected static Updates singleton(EventUpdate element) {
+        HashSet<EventUpdate> elements = new HashSet<>();
+        elements.add(element);
+        return from(elements);
     }
 }

@@ -8,8 +8,9 @@ public class Person {
     private UUID   id;
     private String name;
 
-    public Person(UUID id, String name) {
-        this.id = id;
+    public Person(UUID id,
+                  String name) {
+        this.id   = id;
         this.name = name;
     }
 
@@ -22,11 +23,11 @@ public class Person {
         if (null == o)                return Boolean.FALSE;
         if (!(o instanceof Person))   return Boolean.FALSE;
         Person other = (Person) o;
-        return other.hasId(id);
+        return other.isIdentified(id);
     }
 
-    protected Boolean hasId(UUID otherId) {
-        return id.equals(otherId);
+    protected Boolean isIdentified(UUID other) {
+        return id.equals(other);
     }
 
     @Override

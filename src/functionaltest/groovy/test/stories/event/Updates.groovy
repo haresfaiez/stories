@@ -4,7 +4,7 @@ import stories.event.Event
 import stories.person.Attendee
 import stories.person.Person
 import stories.stream.PersonStream
-import stories.event.AttendeeUpdate
+import stories.event.Note
 
 import java.time.LocalDateTime
 import java.time.Month
@@ -20,14 +20,14 @@ Given(~/^there is a concert tonight$/) { ->
     def bill = new Attendee(new Person(1L, "Bill"))
     bill.attend concert
     beforeEmmaGetsIn = thisNight.plusMinutes 20
-    billUpdate = new AttendeeUpdate(beforeEmmaGetsIn, "This is great !")
-    concert.updateBy(bill, billUpdate)
+    billUpdate = new Note(beforeEmmaGetsIn, "This is great !")
+    concert.update(bill, billUpdate)
 
     def mike = new Attendee(new Person(2L, "Mike"))
     mike.attend concert
     beforeEmmaGetsIn = thisNight.plusMinutes 25
-    mikeUpdate = new AttendeeUpdate(beforeEmmaGetsIn, "So much fun !")
-    concert.updateBy(mike, mikeUpdate)
+    mikeUpdate = new Note(beforeEmmaGetsIn, "So much fun !")
+    concert.update(mike, mikeUpdate)
 }
 
 When(~/^Emma attends it$/) { ->

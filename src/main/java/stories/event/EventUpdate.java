@@ -6,18 +6,18 @@ import java.time.LocalDateTime;
 
 class EventUpdate {
     protected Attendee       editor;
-    protected Event          event;
+    protected Event          target;
     protected LocalDateTime  time;
-    protected AttendeeUpdate update;
+    protected Note           update;
 
     protected EventUpdate(Attendee       editor,
-                          AttendeeUpdate update,
+                          Note           note,
                           LocalDateTime  time,
-                          Event          event) {
-        this.editor = editor;
-        this.update = update;
-        this.event  = event;
-        this.time   = time;
+                          Event          target) {
+        this.editor  = editor;
+        this.update  = note;
+        this.time    = time;
+        this.target  = target;
     }
 
     @Override
@@ -25,9 +25,21 @@ class EventUpdate {
         if (null == o)                   return Boolean.FALSE;
         if (!(o instanceof EventUpdate)) return Boolean.FALSE;
         EventUpdate other = (EventUpdate) o;
-        return other.isEditedBy(editor)
+        return other.isBy(editor)
                 && other.isAt(time)
-                && other.isIn(event);
+                && other.isIn(target);
+    }
+
+    private boolean isIn(Event other) {
+        return target.equals(other);
+    }
+
+    private boolean isAt(LocalDateTime other) {
+        return time.equals(other);
+    }
+
+    private Boolean isBy(Attendee other) {
+        return editor.equals(other);
     }
 
     @Override
@@ -38,20 +50,8 @@ class EventUpdate {
     @Override
     public String toString() {
         return String.format("%s, %s, %s, %s", editor,
-                                               event,
+                                               target,
                                                time,
                                                update);
-    }
-
-    private boolean isIn(Event otherEvent) {
-        return event.equals(otherEvent);
-    }
-
-    private boolean isAt(LocalDateTime otherTime) {
-        return time.equals(otherTime);
-    }
-
-    private Boolean isEditedBy(Attendee otherEditor) {
-        return editor.equals(otherEditor);
     }
 }

@@ -10,7 +10,7 @@ class EventSpecification implements Serializable {
     protected final Attendees      attendees;
 
     protected EventSpecification(EventStatement statement,
-                                 Attendees attendees) {
+                                 Attendees      attendees) {
         this.statement = statement;
         this.attendees = attendees;
     }
@@ -19,36 +19,36 @@ class EventSpecification implements Serializable {
         return new EventSpecification(statement, attendees.with(newAttendee));
     }
 
-    protected Boolean hasAttendee(Attendee potentialAttendee) {
-        return attendees.contains(potentialAttendee);
+    protected Boolean isAttendedBy(Attendee potential) {
+        return attendees.include(potential);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (null == o)                     return Boolean.FALSE;
+        if (null == o)                          return Boolean.FALSE;
         if (!(o instanceof EventSpecification)) return Boolean.FALSE;
         EventSpecification other = (EventSpecification) o;
-        return other.isStatedAs(statement)
+        return other.isStated(statement)
                 && other.isAttendedBy(attendees);
     }
 
-    private Boolean isStatedAs(EventStatement otherStatement) {
-        return statement.equals(otherStatement);
+    private Boolean isStated(EventStatement other) {
+        return statement.equals(other);
     }
 
-    private Boolean isAttendedBy(Attendees otherAttendees) {
-        return attendees.equals(otherAttendees);
+    private Boolean isAttendedBy(Attendees other) {
+        return attendees.equals(other);
     }
 
-    protected EventSpecification withTime(LocalDateTime time) {
+    protected EventSpecification at(LocalDateTime time) {
         return new EventSpecification(statement.withTime(time), attendees);
     }
 
-    protected EventSpecification withTitle(String title) {
+    protected EventSpecification entitled(String title) {
         return new EventSpecification(statement.withTitle(title), attendees);
     }
 
-    protected EventSpecification withAttendees(Attendees attendees) {
+    protected EventSpecification attendedBy(Attendees attendees) {
         return new EventSpecification(statement, attendees);
     }
 
@@ -62,11 +62,11 @@ class EventSpecification implements Serializable {
         return String.format("%s, %s", statement, attendees);
     }
 
-    public static EventSpecification withNoAttendees(EventStatement statement) {
+    public static EventSpecification statedBy(EventStatement statement) {
         return new EventSpecification(statement, Attendees.none());
     }
 
-    protected static EventSpecification identityElement() {
-        return withNoAttendees(EventStatement._identityElement());
+    protected static EventSpecification identity() {
+        return statedBy(EventStatement.identity());
     }
 }

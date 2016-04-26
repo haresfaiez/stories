@@ -21,9 +21,9 @@ public class Event implements Serializable {
         this.updates       = updates;
     }
 
-    public void updateBy(Attendee       editor,
-                         AttendeeUpdate update,
-                         LocalDateTime  time) {
+    public void update(Attendee       editor,
+                       Note           update,
+                       LocalDateTime  time) {
         updates = updates.with(new EventUpdate(editor, update, time, this));
     }
 
@@ -40,11 +40,11 @@ public class Event implements Serializable {
         if (null == o)             return Boolean.FALSE;
         if (!(o instanceof Event)) return Boolean.FALSE;
         Event other = (Event) o;
-        return other.hasId(id);
+        return other.isIdentified(id);
     }
 
-    private Boolean hasId(UUID otherId) {
-        return id.equals(otherId);
+    private Boolean isIdentified(UUID other) {
+        return id.equals(other);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class Event implements Serializable {
         return String.format("%s, %s", id, specification);
     }
 
-    public static Event withNoUpdates(UUID               id,
-                                      EventSpecification specification) {
+    public static Event identified(UUID               id,
+                                   EventSpecification specification) {
         return new Event(id, specification, Updates.none());
     }
 }

@@ -1,6 +1,6 @@
 package stories.person;
 
-import stories.event.AttendeeUpdate;
+import stories.event.Note;
 import stories.event.Event;
 
 import java.time.LocalDateTime;
@@ -13,9 +13,9 @@ public class Attendee {
     }
 
     public void update(Event          target,
-                       AttendeeUpdate update,
+                       Note           update,
                        LocalDateTime  time) {
-        target.updateBy(this, update, time);
+        target.update(this, update, time);
     }
 
     @Override
@@ -23,7 +23,11 @@ public class Attendee {
         if (null == o)                return Boolean.FALSE;
         if (!(o instanceof Attendee)) return Boolean.FALSE;
         Attendee other = (Attendee) o;
-        return other.person.equals(person);
+        return other.is(person);
+    }
+
+    private Boolean is(Person other) {
+        return person.equals(other);
     }
 
     @Override

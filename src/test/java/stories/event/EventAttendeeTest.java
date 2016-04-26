@@ -9,8 +9,8 @@ import java.util.UUID;
 
 import static java.time.LocalDateTime.of;
 import static org.junit.Assert.assertTrue;
-import static stories.event.Event.withNoUpdates;
-import static stories.event.EventSpecification.withNoAttendees;
+import static stories.event.Event.identified;
+import static stories.event.EventSpecification.statedBy;
 import static stories.event.EventStatement.at;
 import static stories.person.Attendee.from;
 
@@ -25,13 +25,13 @@ public class EventAttendeeTest {
         anAttendee.attend(aConcert);
         anOtherAttendee.attend(aConcert);
 
-        assertTrue(aConcert.specification.hasAttendee(from(anAttendee)));
-        assertTrue(aConcert.specification.hasAttendee(from(anOtherAttendee)));
+        assertTrue(aConcert.specification.isAttendedBy(from(anAttendee)));
+        assertTrue(aConcert.specification.isAttendedBy(from(anOtherAttendee)));
     }
 
     private Event someEvent() {
-        return withNoUpdates(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"),
-                             withNoAttendees(at(someDate(), "Event title")));
+        return identified(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"),
+                             statedBy(at(someDate(), "Event title")));
     }
 
     private LocalDateTime someDate() {

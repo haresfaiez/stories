@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static stories.event.AttendeeUpdate.from;
+import static stories.event.Note.from;
 import static stories.event.EventUpdateBuilder.*;
 
 public class EventUpdateTest {

@@ -20,8 +20,8 @@ public class Attendees implements Serializable {
         return new Attendees(resultMembers);
     }
 
-    public Boolean contains(Attendee potentialMember) {
-        return members.contains(potentialMember);
+    public Boolean include(Attendee potential) {
+        return members.contains(potential);
     }
 
     @Override

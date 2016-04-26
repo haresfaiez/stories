@@ -22,8 +22,16 @@ public class PersonStream {
         if (null == o)                    return Boolean.FALSE;
         if (!(o instanceof PersonStream)) return Boolean.FALSE;
         PersonStream other = (PersonStream) o;
-        return other.updates.equals(updates)
-                && other.director.equals(director);
+        return other.hasUpdates(updates)
+                && other.isDirectedBy(director);
+    }
+
+    private boolean isDirectedBy(Person other) {
+        return director.equals(other);
+    }
+
+    private boolean hasUpdates(Updates other) {
+        return updates.equals(other);
     }
 
     @Override
@@ -40,7 +48,7 @@ public class PersonStream {
         return of(director, Updates.none());
     }
 
-    public static PersonStream of(Person director,
+    public static PersonStream of(Person  director,
                                   Updates updates) {
         return new PersonStream(director, updates);
     }

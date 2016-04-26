@@ -10,8 +10,8 @@ import java.time.Month;
 import java.util.UUID;
 
 import static org.junit.Assert.assertTrue;
-import static stories.event.Event.withNoUpdates;
-import static stories.event.EventSpecification.withNoAttendees;
+import static stories.event.Event.identified;
+import static stories.event.EventSpecification.statedBy;
 import static stories.event.EventStatement.at;
 
 public class UpdateToAnEventTest {
@@ -21,7 +21,7 @@ public class UpdateToAnEventTest {
 
     @Before
     public void setUp() {
-        aConcert = withNoUpdates(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
+        aConcert = identified(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
                                  someSpecification());
         Person billAsPerson = new Person(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979"), "Bill");
         billAsPerson.attend(aConcert);
@@ -36,15 +36,15 @@ public class UpdateToAnEventTest {
                                                           billUpdate(),
                                                           billUpdateTime(),
                                                           aConcert);
-        assertTrue(aConcert.updates.contains(expectedEventUpdate));
+        assertTrue(aConcert.updates.includes(expectedEventUpdate));
     }
 
-    private AttendeeUpdate billUpdate() {
-        return AttendeeUpdate.from("Bill message");
+    private Note billUpdate() {
+        return Note.from("Bill message");
     }
 
     private EventSpecification someSpecification() {
-        return withNoAttendees(at(eventTime(), "Concert title"));
+        return statedBy(at(eventTime(), "Concert title"));
     }
 
     private LocalDateTime billUpdateTime() {

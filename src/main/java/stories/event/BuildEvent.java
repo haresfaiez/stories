@@ -8,22 +8,22 @@ public class BuildEvent {
 
     private BuildEvent(UUID identity) {
         product = new Event(identity,
-                            EventSpecification.identityElement(),
+                            EventSpecification.identity(),
                             Updates.none());
     }
 
     public BuildEvent entitled(String title) {
-        product.specification = product.specification.withTitle(title);
+        product.specification = product.specification.entitled(title);
         return this;
     }
 
-    public BuildEvent at(LocalDateTime newTime) {
-        product.specification = product.specification.withTime(newTime);
+    public BuildEvent at(LocalDateTime time) {
+        product.specification = product.specification.at(time);
         return this;
     }
 
-    public BuildEvent withAttendees(Attendees attendees) {
-        product.specification = product.specification.withAttendees(attendees);
+    public BuildEvent attendedBy(Attendees attendees) {
+        product.specification = product.specification.attendedBy(attendees);
         return this;
     }
 
@@ -36,7 +36,7 @@ public class BuildEvent {
         return product;
     }
 
-    public static BuildEvent identifiedBy(UUID identity) {
+    public static BuildEvent identified(UUID identity) {
         return new BuildEvent(identity);
     }
 }

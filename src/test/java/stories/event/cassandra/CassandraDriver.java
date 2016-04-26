@@ -30,7 +30,7 @@ public class CassandraDriver {
     public Boolean hasInstalled(Event event) {
         ResultSet result = session.execute("select * from event");
         Row eventRow = result.iterator().next();
-        Event found = BuildEvent.identifiedBy(eventRow.getUUID("id"))
+        Event found = BuildEvent.identified(eventRow.getUUID("id"))
                                 .entitled(eventRow.getString("title"))
                                 .product();
         return found.equals(event);

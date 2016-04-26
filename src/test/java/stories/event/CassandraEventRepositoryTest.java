@@ -13,9 +13,9 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
-public class EventRepositoryTest {
+public class CassandraEventRepositoryTest {
     UUID            targetEventId = UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461979");
-    EventRepository repository;
+    CassandraEventRepository repository;
     List<Event>     events;
     Integer         targetEventIndex;
     private JavaSparkContext context;
@@ -27,14 +27,14 @@ public class EventRepositoryTest {
         events = Arrays.asList(eventWithId(targetEventId),
                                eventWithId(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e222279")),
                                eventWithId(UUID.fromString("22a8e0-0a3d-11e6-8cf0-2d237e222279")));
-        repository = new EventRepository(context);
+        repository = CassandraEventRepository.in(context, "stories", "event");
     }
 
     @Test
     public void retrieveEventById() {
         JavaRDD<Event> eventsRDD = context.parallelize(events);
         assertEquals(theEvent(),
-                     repository.eventWithIdFrom(eventsRDD, targetEventId));
+                     repository.eventFrom(eventsRDD, targetEventId));
     }
 
     private JavaSparkContext localContext() {
@@ -50,10 +50,10 @@ public class EventRepositoryTest {
     }
 
     private Event eventWithId(UUID id) {
-        return BuildEvent.identifiedBy(id)
+        return BuildEvent.identified(id)
                 .at(LocalDateTime.MAX)
                 .entitled("The title")
-                .withAttendees(Attendees.none())
+                .attendedBy(Attendees.none())
                 .withUpdates(Updates.none())
                 .product();
     }

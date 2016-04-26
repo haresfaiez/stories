@@ -8,8 +8,8 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static stories.event.Event.withNoUpdates;
-import static stories.event.EventSpecification.withNoAttendees;
+import static stories.event.Event.identified;
+import static stories.event.EventSpecification.statedBy;
 import static stories.event.EventStatement.at;
 
 public class EventTest {
@@ -50,7 +50,7 @@ public class EventTest {
     }
 
     private Event eventWithId(UUID id) {
-        return withNoUpdates(id, withNoAttendees(someStatement()));
+        return identified(id, statedBy(someStatement()));
     }
 
     private EventStatement someStatement() {

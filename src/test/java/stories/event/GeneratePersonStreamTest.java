@@ -11,9 +11,9 @@ import java.time.Month;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
-import static stories.event.AttendeeUpdate.from;
-import static stories.event.Event.withNoUpdates;
-import static stories.event.EventSpecification.withNoAttendees;
+import static stories.event.Note.from;
+import static stories.event.Event.identified;
+import static stories.event.EventSpecification.statedBy;
 import static stories.event.EventStatement.at;
 import static stories.event.Updates.singleton;
 
@@ -32,7 +32,7 @@ public class GeneratePersonStreamTest {
 
     @Test
     public void personStreamForAnEventWithOneUpdate() {
-        event.updateBy(bill, from("Best evening"), billUpdateTime());
+        event.update(bill, from("Best evening"), billUpdateTime());
 
         PersonStream actual = event.streamOf(emma);
 
@@ -59,8 +59,8 @@ public class GeneratePersonStreamTest {
     }
 
     private Event anEvent() {
-        return withNoUpdates(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
-                             withNoAttendees(at(eventTime(), "Event title")));
+        return identified(UUID.fromString("b0a8e0-0a3d-11e6-8cf0-2d237e461970"),
+                             statedBy(at(eventTime(), "Event title")));
     }
 
     private LocalDateTime eventTime() {

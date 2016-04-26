@@ -3,7 +3,7 @@ package cli;
 import org.junit.Test;
 import stories.event.BuildEvent;
 import stories.event.Event;
-import stories.event.EventRepository;
+import stories.event.CassandraEventRepository;
 
 import java.util.UUID;
 
@@ -13,11 +13,11 @@ import static org.mockito.Mockito.*;
 
 public class EventDetailsTest {
     UUID targetUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
-    Event expectedEvent = BuildEvent.identifiedBy(targetUUID).product();
+    Event expectedEvent = BuildEvent.identified(targetUUID).product();
 
     @Test
     public void retrieveEventFromRepository() {
-        EventRepository repository = mock(EventRepository.class);
+        CassandraEventRepository repository = mock(CassandraEventRepository.class);
         when(repository.eventWithId(targetUUID)).thenReturn(expectedEvent);
         EventDetails eventDetails = new EventDetails(repository);
 

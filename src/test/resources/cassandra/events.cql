@@ -30,5 +30,5 @@ INSERT INTO event (id,
 	            {
 	                {attendee_id:32b0a8e0-0a3d-11e6-8cf0-2d237e461979, time: 1368438171000, message:'Good'},
 	                {attendee_id:32b0a8e0-0a3d-11e6-8cf0-2d237e461979, time: 1368438171011, message:'Happy!!'},
-	                {attendee_id:32b0a8e0-0a3d-11e6-8cf0-2d237e461979, time: 1368438171091, message:'Great event'}
+	                {attendee_id:32b0a8e0-0a3d-11e6-8cf0-2d237e461979, time: 1368438171091, message:'Great'}
 	            });

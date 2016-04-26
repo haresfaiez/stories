@@ -53,7 +53,7 @@ class EventStatement implements Serializable{
         return new EventStatement(time, title);
     }
 
-    protected static EventStatement _identityElement() {
+    protected static EventStatement identity() {
         return at(LocalDateTime.MIN, "");
     }
 }

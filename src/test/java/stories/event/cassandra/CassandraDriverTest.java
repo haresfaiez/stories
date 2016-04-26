@@ -41,10 +41,10 @@ public class CassandraDriverTest {
     }
 
     private Event anEventFromTheFixture() {
-        return BuildEvent.identifiedBy(anEventIdFromFixture)
+        return BuildEvent.identified(anEventIdFromFixture)
                          .at(LocalDateTime.of(2016, Month.APRIL, 24, 20, 30))
                          .entitled("An event from the fixture")
-                         .withAttendees(Attendees.none())
+                         .attendedBy(Attendees.none())
                          .withUpdates(Updates.none())
                          .product();
     }

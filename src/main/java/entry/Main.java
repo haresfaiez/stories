@@ -4,7 +4,7 @@ import cli.EventDetails;
 import cli.Request;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
-import stories.event.EventRepository;
+import stories.event.CassandraEventRepository;
 
 public class Main {
     public static void main(String[] arguments) {
@@ -17,7 +17,8 @@ public class Main {
         sparkConfiguration.set("spark.driver.allowMultipleContexts", "true");
 
         JavaSparkContext spark = new JavaSparkContext(sparkConfiguration);
-        EventRepository repository = new EventRepository(spark);
+        CassandraEventRepository repository = CassandraEventRepository.in
+                (spark, "stories", "event");
         EventDetails eventDetails = new EventDetails(repository);
         Request request = new Request(eventDetails, arguments);
         String result = request.response();
