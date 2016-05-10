@@ -27,5 +27,7 @@ public class Main {
         Request request = new Request(eventDetails, arguments);
 
         System.out.println(request.response());
+        System.out.println("---------------------");
+        System.out.println(repository.allEvents());
     }
 }

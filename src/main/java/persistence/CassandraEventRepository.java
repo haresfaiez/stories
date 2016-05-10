@@ -8,6 +8,8 @@ import org.apache.spark.api.java.JavaSparkContext;
 import stories.event.BuildEvent;
 import stories.event.Event;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
@@ -20,6 +22,10 @@ public class CassandraEventRepository {
 
     private CassandraEventRepository(CassandraTableScanJavaRDD<CassandraRow> table) {
         this.table = table;
+    }
+
+    public Set<Event> allEvents() {
+        return new HashSet<>(eventsRDD().collect());
     }
 
     public Event eventWithId(UUID target) {

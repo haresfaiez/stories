@@ -15,7 +15,7 @@ import persistence.CassandraEventRepository;
 import stories.event.BuildEvent;
 import stories.event.Event;
 
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ public class CassandraInDockerTest {
     final String cassandraHost = "172.17.0.1";
     final String sparkMaster   = "local";
 
-    UUID expectedUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
+    UUID expectedUUID   = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
     Event expectedEvent = BuildEvent.identified(expectedUUID).product();
 
     JavaSparkContext spark;
@@ -38,7 +38,20 @@ public class CassandraInDockerTest {
         spark = new JavaSparkContext(configuration);
     }
 
+
     @Test
+    public void findAllEvents() {
+        final String keyspace = "stories";
+        final String table    = "event";
+        CassandraEventRepository repository = CassandraEventRepository.from(spark, keyspace, table);
+
+        Set<Event> actual = repository.allEvents();
+
+        assertEquals(expectedAllEvents(), actual);
+    }
+
+    @Test
+    @Ignore
     public void useRepositoryFilter() {
         final String keyspace = "stories";
         final String table    = "event";
@@ -74,4 +87,12 @@ public class CassandraInDockerTest {
         spark.stop();
     }
 
+    private Set<Event> expectedAllEvents() {
+        return new HashSet<>(Arrays.asList(
+                BuildEvent.identified(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461976")).product(),
+                BuildEvent.identified(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461975")).product(),
+                BuildEvent.identified(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461978")).product(),
+                BuildEvent.identified(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461977")).product(),
+                BuildEvent.identified(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979")).product()));
+    }
 }
