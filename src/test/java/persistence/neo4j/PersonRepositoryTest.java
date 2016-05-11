@@ -4,18 +4,18 @@ import junit.framework.Assert;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import persistence.Neo4jAuthentication;
+import persistence.Neo4jContext;
 import stories.person.Person;
 
 import java.util.UUID;
 
 public class PersonRepositoryTest {
-    Neo4jAuthentication authentication;
+    Neo4jContext authentication;
     PersonRepository repository;
 
     @Before
     public void setUp() throws Exception {
-        authentication = Neo4jAuthentication.on(Configuration.HOST,
+        authentication = Neo4jContext.on(Configuration.HOST,
                 Configuration.PORT,
                 Configuration.USERNAME,
                 Configuration.PASSWORD);

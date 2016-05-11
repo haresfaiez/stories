@@ -4,11 +4,11 @@ import org.javalite.http.Get;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Test;
-import persistence.Neo4jAuthentication;
+import persistence.Neo4jContext;
 
 import static org.junit.Assert.assertEquals;
 
-public class Neo4jAuthenticationTest {
+public class Neo4JContextTest {
     public static final String USERNAME = "neo4j";
     public static final String PASSWORD = "faiez";
 
@@ -16,8 +16,8 @@ public class Neo4jAuthenticationTest {
 
     @Test
     public void authentication() throws Exception {
-        Neo4jAuthentication authentication
-                = Neo4jAuthentication.on(Configuration.HOST,
+        Neo4jContext authentication
+                = Neo4jContext.on(Configuration.HOST,
                                          Configuration.PORT,
                                          Configuration.USERNAME,
                                          Configuration.PASSWORD);

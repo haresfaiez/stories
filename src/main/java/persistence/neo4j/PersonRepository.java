@@ -6,19 +6,19 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import persistence.Neo4jAuthentication;
+import persistence.Neo4jContext;
 import stories.person.Person;
 
 import java.util.UUID;
 
 public class PersonRepository {
-    private Neo4jAuthentication authentication;
+    private Neo4jContext authentication;
 
-    public PersonRepository(Neo4jAuthentication authentication) {
+    public PersonRepository(Neo4jContext authentication) {
         this.authentication = authentication;
     }
 
-    public static PersonRepository using(Neo4jAuthentication authentication) {
+    public static PersonRepository using(Neo4jContext authentication) {
         return new PersonRepository(authentication);
     }
 

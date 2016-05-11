@@ -5,7 +5,7 @@ import org.javalite.http.Post;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import persistence.Neo4jAuthentication;
+import persistence.Neo4jContext;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,10 +15,10 @@ public class CypherOverHttpTest {
                             Configuration.HOST,
                             Configuration.PORT);
 
-    Neo4jAuthentication authentication;
+    Neo4jContext authentication;
     @Before
     public void setUp() throws Exception {
-        authentication = Neo4jAuthentication.on(Configuration.HOST,
+        authentication = Neo4jContext.on(Configuration.HOST,
                                                 Configuration.PORT,
                                                 Configuration.USERNAME,
                                                 Configuration.PASSWORD);
