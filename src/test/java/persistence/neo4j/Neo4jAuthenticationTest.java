@@ -1,4 +1,4 @@
-package stories.event.neo4j;
+package persistence.neo4j;
 
 import org.javalite.http.Get;
 import org.json.simple.JSONObject;
@@ -16,7 +16,11 @@ public class Neo4jAuthenticationTest {
 
     @Test
     public void authentication() throws Exception {
-        Neo4jAuthentication authentication = Neo4jAuthentication.on(Configuration.HOST, Configuration.PORT);
+        Neo4jAuthentication authentication
+                = Neo4jAuthentication.on(Configuration.HOST,
+                                         Configuration.PORT,
+                                         Configuration.USERNAME,
+                                         Configuration.PASSWORD);
 
         Get response = authentication.authenticationResponse(USERNAME, PASSWORD);
 

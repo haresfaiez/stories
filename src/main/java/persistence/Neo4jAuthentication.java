@@ -10,10 +10,14 @@ public class Neo4jAuthentication {
 
     private String host;
     private Integer port;
+    private String username;
+    private String password;
 
-    private Neo4jAuthentication(String host, Integer port) {
+    private Neo4jAuthentication(String host, Integer port, String username, String password) {
         this.host = host;
         this.port = port;
+        this.username = username;
+        this.password = password;
     }
 
     public Get authenticationResponse(String username, String password) {
@@ -24,14 +28,29 @@ public class Neo4jAuthentication {
 
     public String authorization(String username, String password) {
         return Base64.getEncoder()
-                                     .encodeToString(String.format("%s:%s", username, password).getBytes());
+                     .encodeToString(String.format("%s:%s", username, password).getBytes());
+    }
+
+    public String authorization() {
+        return Base64.getEncoder()
+                .encodeToString(String.format("%s:%s", username, password).getBytes());
     }
 
     private Get getHttp(String uri) {
         return Http.get(uri);
     }
 
-    public static Neo4jAuthentication on(String host, Integer port) {
-        return new Neo4jAuthentication(host, port);
+    public static Neo4jAuthentication on(String host, Integer port, String username, String password) {
+        return new Neo4jAuthentication(host, port,  username, password);
     }
+
+    public String commitURI() {
+        return String.format("http://%s:%s/db/data/transaction/commit", host, port);
+    }
+
+    public String requestURI() {
+        return String.format("http://%s:%s/db/data/cypher", host, port);
+    }
+
+
 }

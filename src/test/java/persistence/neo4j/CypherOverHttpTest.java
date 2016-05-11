@@ -1,4 +1,4 @@
-package stories.event.neo4j;
+package persistence.neo4j;
 
 import org.javalite.http.Http;
 import org.javalite.http.Post;
@@ -10,7 +10,6 @@ import persistence.Neo4jAuthentication;
 import static org.junit.Assert.assertEquals;
 
 public class CypherOverHttpTest {
-    public static final String SUCCESS_RESPONSE = "OK";
     public static final String COMMIT_END_POINT
             = String.format("http://%s:%s/db/data/transaction/commit",
                             Configuration.HOST,
@@ -19,7 +18,10 @@ public class CypherOverHttpTest {
     Neo4jAuthentication authentication;
     @Before
     public void setUp() throws Exception {
-        authentication = Neo4jAuthentication.on(Configuration.HOST, Configuration.PORT);
+        authentication = Neo4jAuthentication.on(Configuration.HOST,
+                                                Configuration.PORT,
+                                                Configuration.USERNAME,
+                                                Configuration.PASSWORD);
     }
 
     @Test
