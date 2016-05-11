@@ -35,6 +35,8 @@ dependencies {
     compile group:'com.beust',
             name:'jcommander',
             version: jcommander_version
+    compile 'org.javalite:javalite-common:1.4.11'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
 
     testCompile group:'org.cassandraunit',
                 name:'cassandra-unit',
