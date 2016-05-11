@@ -1,12 +1,13 @@
 package stories.person;
 
+import org.json.simple.JSONObject;
 import stories.event.Event;
 
 import java.util.UUID;
 
 public class Person {
-    private UUID   id;
-    private String name;
+    public UUID   id;
+    public String name;
 
     public Person(UUID id,
                   String name) {
@@ -38,5 +39,11 @@ public class Person {
     @Override
     public String toString() {
         return String.format("%s, %s", id, name);
+    }
+
+    public static Person from(JSONObject json) {
+        UUID id = UUID.fromString(json.get("id").toString());
+        String name = json.get("name").toString();
+        return new Person(id, name);
     }
 }
