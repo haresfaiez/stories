@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import stories.person.Person;
 
-import java.util.UUID;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 public class PersonRepositoryTest {
     Neo4jContext authentication;
@@ -22,16 +24,20 @@ public class PersonRepositoryTest {
     }
 
     @Test
+    public void retrieveFollowedPersons() {
+        Set<Person> actual = repository.personsFollowedBy(PesonFixture.bill());
+        Set<Person> expected = PesonFixture.followedByBill();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void retrievePersonById() throws ParseException {
-        Person expected = existing();
-        Person actual   = repository.personWithId(expected.id);
+        Person expected = PesonFixture.bill();
+        Person actual = repository.personWithId(expected.id);
 
         Assert.assertEquals(expected, actual);
         Assert.assertEquals("Bill", actual.name);
     }
 
-    private Person existing() {
-        return new Person(UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979"),
-                                          "Bill");
-    }
 }
