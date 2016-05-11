@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PersonRepository {
-    private Neo4jContext authentication;
+    private Neo4jContext context;
 
     public PersonRepository(Neo4jContext authentication) {
-        this.authentication = authentication;
+        this.context = authentication;
     }
 
     public Person personWithId(UUID target) {
@@ -30,10 +30,10 @@ public class PersonRepository {
     }
 
     private String responseTo(String query) {
-        return Http.post(authentication.requestURI(), query)
+        return Http.post(context.requestURI(), query)
                    .header("Accept", "application/json; charset=UTF-8")
                    .header("Content-Type", "application/json")
-                   .header("Authorization", authentication.authorization())
+                   .header("Authorization", context.authorization())
                    .text();
     }
 
