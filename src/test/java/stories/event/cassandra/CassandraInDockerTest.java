@@ -40,6 +40,7 @@ public class CassandraInDockerTest {
 
 
     @Test
+    @Ignore
     public void findAllEvents() {
         final String keyspace = "stories";
         final String table    = "event";

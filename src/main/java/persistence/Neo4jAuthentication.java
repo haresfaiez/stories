@@ -17,11 +17,14 @@ public class Neo4jAuthentication {
     }
 
     public Get authenticationResponse(String username, String password) {
-        String AUTHORIZATION = Base64.getEncoder()
-                                     .encodeToString(String.format("%s:%s", username, password).getBytes());
         return getHttp(format(AUTHENTICATION_URI, host, port))
                    .header("Accept",        "application/json; charset=UTF-8")
-                   .header("Authorization", AUTHORIZATION);
+                   .header("Authorization", authorization(username, password));
+    }
+
+    public String authorization(String username, String password) {
+        return Base64.getEncoder()
+                                     .encodeToString(String.format("%s:%s", username, password).getBytes());
     }
 
     private Get getHttp(String uri) {
