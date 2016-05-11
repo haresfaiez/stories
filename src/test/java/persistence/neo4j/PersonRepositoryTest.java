@@ -25,15 +25,15 @@ public class PersonRepositoryTest {
 
     @Test
     public void retrieveFollowedPersons() {
-        Set<Person> actual = repository.personsFollowedBy(PesonFixture.bill());
-        Set<Person> expected = PesonFixture.followedByBill();
+        Set<Person> actual = repository.personsFollowedBy(PersonFixture.bill());
+        Set<Person> expected = PersonFixture.followedByBill();
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void retrievePersonById() throws ParseException {
-        Person expected = PesonFixture.bill();
+        Person expected = PersonFixture.bill();
         Person actual = repository.personWithId(expected.id);
 
         Assert.assertEquals(expected, actual);
