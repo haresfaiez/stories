@@ -4,7 +4,6 @@ import org.javalite.http.Get;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Test;
-import persistence.Neo4jContext;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,4 +1,4 @@
-package persistence;
+package persistence.neo4j;
 
 import org.javalite.common.Base64;
 import org.javalite.http.Get;

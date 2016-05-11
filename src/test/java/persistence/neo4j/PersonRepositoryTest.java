@@ -4,7 +4,6 @@ import junit.framework.Assert;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import persistence.Neo4jContext;
 import stories.person.Person;
 
 import java.util.UUID;

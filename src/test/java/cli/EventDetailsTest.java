@@ -3,7 +3,7 @@ package cli;
 import org.junit.Test;
 import stories.event.BuildEvent;
 import stories.event.Event;
-import persistence.CassandraEventRepository;
+import persistence.cassandra.CassandraEventRepository;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package stories.event.cassandra;
+package persistence.cassandra;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
@@ -11,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import persistence.CassandraEventRepository;
 import stories.event.BuildEvent;
 import stories.event.Event;
 

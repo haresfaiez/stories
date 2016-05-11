@@ -1,4 +1,4 @@
-package persistence;
+package persistence.cassandra;
 
 import com.datastax.spark.connector.japi.CassandraRow;
 import com.datastax.spark.connector.japi.SparkContextJavaFunctions;

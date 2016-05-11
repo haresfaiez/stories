@@ -1,4 +1,4 @@
-package stories.event.cassandra;
+package persistence.cassandra;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;

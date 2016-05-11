@@ -6,7 +6,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import persistence.CassandraEventRepository;
+import persistence.cassandra.CassandraEventRepository;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

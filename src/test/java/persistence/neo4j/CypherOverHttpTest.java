@@ -5,7 +5,6 @@ import org.javalite.http.Post;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import persistence.Neo4jContext;
 
 import static org.junit.Assert.assertEquals;
 

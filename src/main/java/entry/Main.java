@@ -4,9 +4,9 @@ import cli.EventDetails;
 import cli.Request;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
-import persistence.CassandraEventRepository;
+import persistence.cassandra.CassandraEventRepository;
 
-import static persistence.CassandraEventRepository.from;
+import static persistence.cassandra.CassandraEventRepository.from;
 
 public class Main {
     public static void main(String[] arguments) {

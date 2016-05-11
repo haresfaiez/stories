@@ -1,4 +1,4 @@
-package stories.event.cassandra;
+package persistence.cassandra;
 
 import org.junit.After;
 import org.junit.Before;
