@@ -2,7 +2,9 @@ package cli;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import stories.person.Person;
 
+import java.util.Set;
 import java.util.UUID;
 
 public class Request {
@@ -12,8 +14,8 @@ public class Request {
     @Parameter(names = "-identity", description = "Identity of requested entity")
     public String identity;
 
-    private Service service;
-    private String[]     arguments;
+    private Service  service;
+    private String[] arguments;
 
     public Request(Service service,
                    String[]     arguments) {
@@ -23,8 +25,23 @@ public class Request {
 
     public String response() {
         new JCommander(this, arguments);
+
         if (request.equals("person"))
-            return service.person(UUID.fromString(identity)).toString();
+            return person();
+
+        if(request.equals("event"))
+            return event();
+
+        throw new RuntimeException("request not supported");
+    }
+
+    private String event() {
         return service.of(UUID.fromString(identity)).toString();
+    }
+
+    private String person() {
+        Person target = service.person(UUID.fromString(identity));
+        Set<Person> followed = service.followedBy(target);
+        return new PersonView(target, followed).output();
     }
 }

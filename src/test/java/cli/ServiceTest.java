@@ -53,11 +53,14 @@ public class ServiceTest {
     @Test
     public void askForPerson() {
         Service service = mock(Service.class);
-        when(service.person(targetUUID)).thenReturn(expectedPerson);
+        when(service.person(targetUUID)).thenReturn(bill());
+        when(service.followedBy(bill())).thenReturn(followedByBill());
         String[] arguments = { "-request", "person",
                 "-identity", "32b0a8e0-0a3d-11e6-8cf0-2d237e461979"};
         Request request = new Request(service, arguments);
-        assertEquals(expectedPerson.toString(), request.response());
+
+        assertEquals(new PersonView(bill(), followedByBill()).output(),
+                     request.response());
         verify(service).person(targetUUID);
     }
 
