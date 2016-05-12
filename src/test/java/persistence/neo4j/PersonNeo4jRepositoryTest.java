@@ -10,9 +10,9 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-public class PersonRepositoryTest {
+public class PersonNeo4jRepositoryTest {
     Neo4jContext authentication;
-    PersonRepository repository;
+    PersonNeo4jRepository repository;
 
     @Before
     public void setUp() throws Exception {
@@ -20,7 +20,7 @@ public class PersonRepositoryTest {
                 Configuration.PORT,
                 Configuration.USERNAME,
                 Configuration.PASSWORD);
-        repository = PersonRepository.using(authentication);
+        repository = PersonNeo4jRepository.using(authentication);
     }
 
     @Test

@@ -11,10 +11,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PersonRepository {
+public class PersonNeo4jRepository {
     private Neo4jContext context;
 
-    public PersonRepository(Neo4jContext authentication) {
+    public PersonNeo4jRepository(Neo4jContext authentication) {
         this.context = authentication;
     }
 
@@ -62,7 +62,7 @@ public class PersonRepository {
         }
     }
 
-    public static PersonRepository using(Neo4jContext authentication) {
-        return new PersonRepository(authentication);
+    public static PersonNeo4jRepository using(Neo4jContext authentication) {
+        return new PersonNeo4jRepository(authentication);
     }
 }

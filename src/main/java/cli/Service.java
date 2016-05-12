@@ -1,23 +1,28 @@
 package cli;
 
 import persistence.cassandra.CassandraEventRepository;
+import persistence.neo4j.PersonNeo4jRepository;
 import stories.event.Event;
 import stories.person.Person;
 
 import java.util.UUID;
 
 public class Service {
-    private CassandraEventRepository repository;
+    private CassandraEventRepository eventRepository;
+    private PersonNeo4jRepository personRepository;
 
-    public Service(CassandraEventRepository repository) {
-        this.repository = repository;
+    public Service(CassandraEventRepository eventRepository,
+                   PersonNeo4jRepository personRepository) {
+
+        this.eventRepository = eventRepository;
+        this.personRepository = personRepository;
     }
 
     public Event of(UUID target) {
-        return repository.eventWithId(target);
+        return eventRepository.eventWithId(target);
     }
 
     public Person person(UUID target) {
-        return new Person(target, "");
+        return personRepository.personWithId(target);
     }
 }

@@ -1,6 +1,7 @@
 package cli;
 
 import org.junit.Test;
+import persistence.neo4j.PersonNeo4jRepository;
 import stories.event.BuildEvent;
 import stories.event.Event;
 import persistence.cassandra.CassandraEventRepository;
@@ -15,21 +16,31 @@ import static org.mockito.Mockito.*;
 public class ServiceTest {
     UUID targetUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
     Event expectedEvent = BuildEvent.identified(targetUUID).product();
+    Person expectedPerson = new Person(targetUUID, "_");
 
     @Test
     public void retrieveEventFromRepository() {
         CassandraEventRepository repository = mock(CassandraEventRepository.class);
         when(repository.eventWithId(targetUUID)).thenReturn(expectedEvent);
-        Service service = new Service(repository);
+        Service service = new Service(repository, null);
 
         assertEquals(expectedEvent, service.of(targetUUID));
         verify(repository).eventWithId(targetUUID);
     }
 
     @Test
+    public void retrievePersonFromRepository() {
+        PersonNeo4jRepository repository = mock(PersonNeo4jRepository.class);
+        when(repository.personWithId(targetUUID)).thenReturn(expectedPerson);
+        Service service = new Service(mock(CassandraEventRepository.class), repository);
+
+        assertEquals(expectedPerson, service.person(targetUUID));
+        verify(repository).personWithId(targetUUID);
+    }
+
+    @Test
     public void askForPerson() {
         Service service = mock(Service.class);
-        Person expectedPerson = new Person(targetUUID, "_");
         when(service.person(targetUUID)).thenReturn(expectedPerson);
         String[] arguments = { "-request", "person",
                 "-identity", "32b0a8e0-0a3d-11e6-8cf0-2d237e461979"};

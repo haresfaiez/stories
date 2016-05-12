@@ -22,7 +22,7 @@ public class Main {
 
         JavaSparkContext         context      = new JavaSparkContext(sparkConfiguration);
         CassandraEventRepository repository   = from(context, keyspace, table);
-        Service service = new Service(repository);
+        Service service = new Service(repository, null);
 
         Request request = new Request(service, arguments);
 
