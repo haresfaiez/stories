@@ -1,16 +1,18 @@
 package cli;
 
 import org.junit.Test;
+import persistence.cassandra.CassandraEventRepository;
 import persistence.neo4j.PersonNeo4jRepository;
 import stories.event.BuildEvent;
 import stories.event.Event;
-import persistence.cassandra.CassandraEventRepository;
 import stories.person.Person;
 
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+import static persistence.neo4j.PersonFixture.bill;
+import static persistence.neo4j.PersonFixture.followedByBill;
 
 
 public class ServiceTest {
@@ -36,6 +38,16 @@ public class ServiceTest {
 
         assertEquals(expectedPerson, service.person(targetUUID));
         verify(repository).personWithId(targetUUID);
+    }
+
+    @Test
+    public void retrieveFollowedPersonsFromRepository() {
+        PersonNeo4jRepository repository = mock(PersonNeo4jRepository.class);
+        when(repository.personsFollowedBy(bill())).thenReturn(followedByBill());
+        Service service = new Service(mock(CassandraEventRepository.class), repository);
+
+        assertEquals(followedByBill(), service.followedBy(bill()));
+        verify(repository).personsFollowedBy(bill());
     }
 
     @Test

@@ -5,6 +5,7 @@ import persistence.neo4j.PersonNeo4jRepository;
 import stories.event.Event;
 import stories.person.Person;
 
+import java.util.Set;
 import java.util.UUID;
 
 public class Service {
@@ -24,5 +25,9 @@ public class Service {
 
     public Person person(UUID target) {
         return personRepository.personWithId(target);
+    }
+
+    public Set<Person> followedBy(Person origin) {
+        return personRepository.personsFollowedBy(origin);
     }
 }
