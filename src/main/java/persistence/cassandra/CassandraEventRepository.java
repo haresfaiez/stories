@@ -44,6 +44,8 @@ public class CassandraEventRepository {
                          .entitled(row.getString("title"))
                          .at(ofInstant(ofEpochSecond(row.getDate("time").getTime()),
                                        getDefault().toZoneId()))
+                         .attendedBy(row.getSet("attendees"))
+                         .withUpdates(row.getSet("updates"))
                          .product());
     }
 

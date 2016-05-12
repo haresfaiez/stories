@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class Event implements Serializable {
     protected UUID               id;
-    protected EventSpecification specification;
+    public EventSpecification specification;
     protected Updates            updates;
 
     protected Event(UUID               id,

@@ -2,6 +2,7 @@ package cli;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import stories.event.Event;
 import stories.person.Person;
 
 import java.util.Set;
@@ -17,10 +18,10 @@ public class Request {
     private Service  service;
     private String[] arguments;
 
-    public Request(Service service,
-                   String[]     arguments) {
-        this.service = service;
-        this.arguments    = arguments;
+    public Request(Service  service,
+                   String[] arguments) {
+        this.service   = service;
+        this.arguments = arguments;
     }
 
     public String response() {
@@ -36,7 +37,8 @@ public class Request {
     }
 
     private String event() {
-        return service.of(UUID.fromString(identity)).toString();
+        Event target = service.event(UUID.fromString(identity));
+        return target.toString();
     }
 
     private String person() {

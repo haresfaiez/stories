@@ -19,7 +19,7 @@ public class Service {
         this.personRepository = personRepository;
     }
 
-    public Event of(UUID target) {
+    public Event event(UUID target) {
         return eventRepository.eventWithId(target);
     }
 

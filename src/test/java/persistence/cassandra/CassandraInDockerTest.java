@@ -19,7 +19,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 public class CassandraInDockerTest {
-    final String cassandraHost = "172.17.0.1";
+    final String cassandraHost = "172.17.0.3";
     final String sparkMaster   = "local";
 
     UUID expectedUUID   = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
@@ -51,7 +51,6 @@ public class CassandraInDockerTest {
     }
 
     @Test
-    @Ignore
     public void useRepositoryFilter() {
         final String keyspace = "stories";
         final String table    = "event";
@@ -60,6 +59,7 @@ public class CassandraInDockerTest {
         Event actual = repository.eventWithId(expectedUUID);
 
         assertEquals(expectedEvent, actual);
+        assertEquals(expectedEvent.specification.attendees, actual.specification.attendees);
     }
 
     @Test

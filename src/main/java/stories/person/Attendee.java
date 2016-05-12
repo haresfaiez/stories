@@ -3,9 +3,10 @@ package stories.person;
 import stories.event.Note;
 import stories.event.Event;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Attendee {
+public class Attendee implements Serializable{
     public Person person;
 
     public Attendee(Person person) {

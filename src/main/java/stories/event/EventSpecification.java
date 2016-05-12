@@ -5,9 +5,9 @@ import stories.person.Attendee;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-class EventSpecification implements Serializable {
+public class EventSpecification implements Serializable {
     protected final EventStatement statement;
-    protected final Attendees      attendees;
+    public final Attendees      attendees;
 
     protected EventSpecification(EventStatement statement,
                                  Attendees      attendees) {

@@ -1,7 +1,12 @@
 package stories.event;
 
+import stories.person.Attendee;
+import stories.person.Person;
+
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class BuildEvent {
     private Event product;
@@ -38,5 +43,19 @@ public class BuildEvent {
 
     public static BuildEvent identified(UUID identity) {
         return new BuildEvent(identity);
+    }
+
+    public BuildEvent attendedBy(Set<Object> attendees) {
+        attendedBy(new Attendees(attendees.stream()
+                            .map(String::valueOf)
+                            .map(UUID::fromString)
+                            .map(uuid -> new Person(uuid, ""))
+                            .map(Attendee::from)
+                            .collect(Collectors.toSet())));
+        return this;
+    }
+
+    public BuildEvent withUpdates(Set<Object> updates) {
+        return this;
     }
 }

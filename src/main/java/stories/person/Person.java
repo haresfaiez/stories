@@ -3,9 +3,10 @@ package stories.person;
 import org.json.simple.JSONObject;
 import stories.event.Event;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Person {
+public class Person implements Serializable {
     public UUID   id;
     public String name;
 

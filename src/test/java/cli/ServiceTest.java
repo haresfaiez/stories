@@ -26,7 +26,7 @@ public class ServiceTest {
         when(repository.eventWithId(targetUUID)).thenReturn(expectedEvent);
         Service service = new Service(repository, null);
 
-        assertEquals(expectedEvent, service.of(targetUUID));
+        assertEquals(expectedEvent, service.event(targetUUID));
         verify(repository).eventWithId(targetUUID);
     }
 
@@ -67,11 +67,11 @@ public class ServiceTest {
     @Test
     public void askForEvent() {
         Service service = mock(Service.class);
-        when(service.of(targetUUID)).thenReturn(expectedEvent);
+        when(service.event(targetUUID)).thenReturn(expectedEvent);
         String[] arguments = { "-request", "event",
                                "-identity", "32b0a8e0-0a3d-11e6-8cf0-2d237e461979"};
         Request request = new Request(service, arguments);
         assertEquals(expectedEvent.toString(), request.response());
-        verify(service).of(targetUUID);
+        verify(service).event(targetUUID);
     }
 }
