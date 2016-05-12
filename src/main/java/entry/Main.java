@@ -1,6 +1,6 @@
 package entry;
 
-import cli.EventDetails;
+import cli.Service;
 import cli.Request;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -22,9 +22,9 @@ public class Main {
 
         JavaSparkContext         context      = new JavaSparkContext(sparkConfiguration);
         CassandraEventRepository repository   = from(context, keyspace, table);
-        EventDetails             eventDetails = new EventDetails(repository);
+        Service service = new Service(repository);
 
-        Request request = new Request(eventDetails, arguments);
+        Request request = new Request(service, arguments);
 
         System.out.println(request.response());
         System.out.println("---------------------");

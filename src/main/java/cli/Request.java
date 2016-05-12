@@ -12,17 +12,19 @@ public class Request {
     @Parameter(names = "-identity", description = "Identity of requested entity")
     public String identity;
 
-    private EventDetails eventDetails;
+    private Service service;
     private String[]     arguments;
 
-    public Request(EventDetails eventDetails,
+    public Request(Service service,
                    String[]     arguments) {
-        this.eventDetails = eventDetails;
+        this.service = service;
         this.arguments    = arguments;
     }
 
     public String response() {
         new JCommander(this, arguments);
-        return eventDetails.of(UUID.fromString(identity)).toString();
+        if (request.equals("person"))
+            return service.person(UUID.fromString(identity)).toString();
+        return service.of(UUID.fromString(identity)).toString();
     }
 }
