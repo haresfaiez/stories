@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Attendees implements Serializable {
-    private final Set<Attendee> members;
+    public final Set<Attendee> members;
 
     protected Attendees(Set<Attendee> members) {
         this.members = members;

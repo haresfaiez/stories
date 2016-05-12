@@ -36,7 +36,8 @@ public class PersonView {
         StringBuilder result = new StringBuilder();
         result.append(personHeader(origin.id, origin.name));
         result.append(NEW_LINE);
-        result.append(personBody());
+        if (! followed.isEmpty())
+            result.append(personBody());
         return result.toString();
     }
 }

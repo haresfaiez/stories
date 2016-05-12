@@ -3,10 +3,13 @@ package cli;
 import org.junit.Test;
 import persistence.cassandra.CassandraEventRepository;
 import persistence.neo4j.PersonNeo4jRepository;
+import stories.event.Attendees;
 import stories.event.BuildEvent;
 import stories.event.Event;
+import stories.person.Attendee;
 import stories.person.Person;
 
+import java.util.Collections;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -17,7 +20,9 @@ import static persistence.neo4j.PersonFixture.followedByBill;
 
 public class ServiceTest {
     UUID targetUUID = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
-    Event expectedEvent = BuildEvent.identified(targetUUID).product();
+    Event expectedEvent = BuildEvent.identified(targetUUID).attendedBy
+            (Attendees.singleton(Attendee.from(bill())))
+            .product();
     Person expectedPerson = new Person(targetUUID, "_");
 
     @Test
@@ -71,7 +76,19 @@ public class ServiceTest {
         String[] arguments = { "-request", "event",
                                "-identity", "32b0a8e0-0a3d-11e6-8cf0-2d237e461979"};
         Request request = new Request(service, arguments);
-        assertEquals(expectedEvent.toString(), request.response());
+
+        assertEquals(eventView(expectedEvent), request.response());
         verify(service).event(targetUUID);
+    }
+
+    private String eventView(Event subject) {
+        StringBuilder expected = new StringBuilder();
+        expected.append(subject);
+        expected.append("\n");
+        expected.append("Attendees:");
+        expected.append("\n");
+        for (Attendee eachAttendee : subject.specification.attendees.members)
+            expected.append(new PersonView(eachAttendee.person, Collections.emptySet()).output());
+        return expected.toString();
     }
 }
