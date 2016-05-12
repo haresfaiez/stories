@@ -11,19 +11,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import stories.event.Attendees;
 import stories.event.BuildEvent;
 import stories.event.Event;
+import stories.person.Attendee;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static persistence.neo4j.PersonFixture.bill;
 
 public class CassandraInDockerTest {
     final String cassandraHost = "172.17.0.3";
     final String sparkMaster   = "local";
 
     UUID expectedUUID   = UUID.fromString("32b0a8e0-0a3d-11e6-8cf0-2d237e461979");
-    Event expectedEvent = BuildEvent.identified(expectedUUID).product();
+    Event expectedEvent = BuildEvent.identified(expectedUUID)
+                                    .attendedBy(Attendees.singleton(Attendee.from(bill())))
+                                    .product();
 
     JavaSparkContext spark;
 
