@@ -1,4 +1,4 @@
-package test.stories.event.update
+package stories.event
 
 this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
@@ -9,10 +9,11 @@ Given(~/^Emma is participant of "([^"]*)"$/) { String event ->
 }
 
 When(~/^Emma updates the event with "([^"]*)"$/) { String update ->
-    event.update(emma, update)
+    message = update
+    destination.update(emma, update)
 }
 
 Then(~/^the event stream should include that update$/) { ->
-    updateOfEmma = new Update(emma, update, destination)
-    event.stream().constains(updateOfEmma)
+    updateOfEmma = Update.from(emma, message)
+    destination.stream().contains(updateOfEmma)
 }
