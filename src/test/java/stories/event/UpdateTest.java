@@ -9,15 +9,13 @@ public class UpdateTest {
 
     @Test
     public void participantUpdate() {
-        Event event      = Event.entitled("Some title");
+        Event event      = anEvent();
         Participant emma = of(event);
         String message   = "Some update";
 
-        Update expected  = Update.from(emma, message);
-
         event.update(emma, message);
 
-        assertTrue(event.stream().contains(expected));
+        assertTrue(event.stream().contains(Update.from(emma, message)));
     }
 
     @Test
@@ -28,11 +26,15 @@ public class UpdateTest {
         assertEquals(expected, actual);
     }
 
-    private Participant of(Event event) {
-        return Participant.named("Emma", event);
+    private Participant of(Event destination) {
+        return Participant.named("Emma", destination);
     }
 
     private Participant aParticipant() {
-        return of(Event.entitled("An event"));
+        return of(anEvent());
+    }
+
+    private Event anEvent() {
+        return Event.entitled("Some title");
     }
 }

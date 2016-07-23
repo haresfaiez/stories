@@ -1,6 +1,6 @@
 package stories.event;
 
-public class Participant {
+class Participant {
     private String person;
     private Event  destination;
 

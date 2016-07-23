@@ -1,26 +1,30 @@
 package stories.event;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 
 public class Event {
     private String title;
-    private Update result;
+    private List   stream;
 
-    public Event(String title) {
-        this.title = title;
+    public Event(String title
+               , List   stream) {
+        this.title  = title;
+        this.stream = stream;
     }
 
     public List stream() {
-        return asList(result);
+        return unmodifiableList(stream);
+    }
+
+    public void update(Participant emma
+                     , String      message) {
+        stream.add(Update.from(emma, message));
     }
 
     public static Event entitled(String title) {
-        return new Event(title);
-    }
-
-    public void update(Participant emma, String message) {
-        result = Update.from(emma, message);
+        return new Event(title, new ArrayList<>());
     }
 }

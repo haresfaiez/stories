@@ -1,7 +1,6 @@
 package stories.event;
 
-public class Update {
-
+class Update {
 
     private Participant author;
     private String      message;
