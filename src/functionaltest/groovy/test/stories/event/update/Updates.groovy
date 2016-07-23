@@ -1,4 +1,4 @@
-package test.stories.event
+package test.stories.event.update
 
 import stories.event.Event
 import stories.person.Attendee
