@@ -14,8 +14,8 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static persistence.neo4j.PersonFixture.bill;
-import static persistence.neo4j.PersonFixture.followedByBill;
+import static persistence.PersonFixture.bill;
+import static persistence.PersonFixture.followedByBill;
 
 
 public class ServiceTest {

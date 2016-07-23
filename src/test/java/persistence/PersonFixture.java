@@ -1,4 +1,4 @@
-package persistence.neo4j;
+package persistence;
 
 import stories.person.Person;
 
