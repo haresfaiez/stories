@@ -1,6 +1,5 @@
 package stories.event;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,23 +7,32 @@ import static org.junit.Assert.assertTrue;
 
 public class UpdateTest {
 
-    private Event theEvent             = new Event();
-    private String theMessage          = "A message";
-    private Participant theParticipant = new Participant();
-
     @Test
-    @Ignore
     public void participantUpdate() {
         Event event      = Event.entitled("Some title");
-        Participant emma = Participant.named("Emma");
-        Update update    = Update.from(emma, "Some update", event);
-        assertTrue(event.stream().contains(update));
+        Participant emma = of(event);
+        String message   = "Some update";
+
+        Update expected  = Update.from(emma, message);
+
+        event.update(emma, message);
+
+        assertTrue(event.stream().contains(expected));
     }
 
     @Test
     public void equality() {
-        Update expected = Update.from(theParticipant, theMessage, theEvent);
-        Update actual   = Update.from(theParticipant, theMessage, theEvent);
+        Participant author = aParticipant();
+        Update expected    = Update.from(author, "A message");
+        Update actual      = Update.from(author, "A message");
         assertEquals(expected, actual);
+    }
+
+    private Participant of(Event event) {
+        return Participant.named("Emma", event);
+    }
+
+    private Participant aParticipant() {
+        return of(Event.entitled("An event"));
     }
 }

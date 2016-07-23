@@ -1,7 +1,17 @@
 package stories.event;
 
 public class Participant {
-    public static Participant named(String emma) {
-        throw new RuntimeException("Not implemented yet");
+    private String person;
+    private Event  destination;
+
+    public Participant(String person
+                     , Event  destination) {
+        this.person = person;
+        this.destination = destination;
+    }
+
+    public static Participant named(String person
+                                  , Event  destination) {
+        return new Participant(person, destination);
     }
 }
