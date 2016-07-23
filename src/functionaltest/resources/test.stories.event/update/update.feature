@@ -3,6 +3,6 @@ Feature:
 
   Scenario:
   Emma updates the event
-    Given Emma participates to "Big Party"
+    Given Emma is participant of "Big Party"
     When  Emma updates the event with "Oh! Good party!"
-    Then  all visitors of the event should get that update
+    Then  the event stream should include that update
