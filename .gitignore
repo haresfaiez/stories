@@ -71,3 +71,6 @@ Session.vim
 
 /build
 # Created .ignore support plugin (hsz.mobi)
+
+#Linux output
+nohup.out
