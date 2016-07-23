@@ -18,6 +18,10 @@ public class PersonNeo4jRepository {
         this.context = authentication;
     }
 
+    public static PersonNeo4jRepository main() {
+        return using(Neo4jContext.on("0.0.0.0", 7474, "neo4j", "faiez"));
+    }
+
     public Person personWithId(UUID target) {
         return Person.from(personsFrom(responseTo(retrievePersonQuery(target))).get(0));
     }

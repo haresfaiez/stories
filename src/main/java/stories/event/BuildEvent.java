@@ -1,6 +1,5 @@
 package stories.event;
 
-import persistence.neo4j.Neo4jContext;
 import persistence.neo4j.PersonNeo4jRepository;
 import stories.person.Attendee;
 
@@ -47,8 +46,7 @@ public class BuildEvent {
     }
 
     public BuildEvent attendedBy(Set<Object> attendees) {
-        PersonNeo4jRepository personRepository
-                = PersonNeo4jRepository.using(Neo4jContext.on("0.0.0.0", 7474, "neo4j", "faiez"));
+        PersonNeo4jRepository personRepository = PersonNeo4jRepository.main();
         attendedBy(new Attendees(attendees.stream()
                             .map(String::valueOf)
                             .map(UUID::fromString)
