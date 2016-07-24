@@ -20,9 +20,10 @@ public class UpdateTest {
 
     @Test
     public void equality() {
-        Participant author = aParticipant();
-        Update expected    = Update.from(author, "A message");
-        Update actual      = Update.from(author, "A message");
+        Participant emma  = aParticipant();
+        String herMessage = aMessage();
+        Update expected   = Update.from(emma, herMessage);
+        Update actual     = Update.from(emma, herMessage);
         assertEquals(expected, actual);
     }
 
