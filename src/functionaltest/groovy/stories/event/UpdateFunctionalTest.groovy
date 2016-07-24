@@ -15,8 +15,6 @@ Given(~/^Emma is participant of that event$/) { ->
     emma = Participant.named("Emma", destination)
 }
 
-
-
 When(~/^Emma updates the event with "([^"]*)" at "([^"]*)"$/) {
     String update, String time ->
         message        = update
