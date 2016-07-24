@@ -1,5 +1,7 @@
 package stories.event
 
+import org.joda.time.DateTime
+
 this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
@@ -10,11 +12,12 @@ Given(~/^Emma is participant of "([^"]*)"$/) { String event ->
 
 When(~/^Emma updates the event with "([^"]*)" at "([^"]*)"$/) {
     String update, String time ->
-    message = update
-    destination.update(emma, update, now)
+        message        = update
+        updateTime     = new DateTime(2016, 01, 01, 21, 00)
+        destination.update(emma, update, updateTime)
 }
 
 Then(~/^the event stream should include that update$/) { ->
-    updateOfEmma = Update.from(emma, message, aTime())
+    updateOfEmma = Update.from(emma, message, updateTime)
     destination.stream().contains(updateOfEmma)
 }
