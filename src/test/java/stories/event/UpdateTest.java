@@ -9,13 +9,13 @@ public class UpdateTest {
 
     @Test
     public void participantUpdate() {
-        Event event      = anEvent();
-        Participant emma = of(event);
-        String message   = "Some update";
+        Event bigParty     = anEvent();
+        Participant emma   = of(bigParty);
+        String niceEvening = aMessage();
 
-        event.update(emma, message);
+        bigParty.update(emma, niceEvening);
 
-        assertTrue(event.stream().contains(Update.from(emma, message)));
+        assertTrue(bigParty.stream().contains(Update.from(emma, niceEvening)));
     }
 
     @Test
@@ -36,5 +36,9 @@ public class UpdateTest {
 
     private Event anEvent() {
         return Event.entitled("Some title");
+    }
+
+    private String aMessage() {
+        return "Some update";
     }
 }
