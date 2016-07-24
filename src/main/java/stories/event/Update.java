@@ -1,21 +1,27 @@
 package stories.event;
 
+import org.joda.time.DateTime;
+
 class Update {
 
     private Participant author;
     private String      message;
+    private DateTime    time;
 
     public Update(Participant author
-                , String      message) {
-        this.author = author;
+                , String      message
+                , DateTime    time) {
+        this.author  = author;
         this.message = message;
+        this.time    = time;
     }
 
     @Override
     public boolean equals(Object o) {
         Update other = (Update) o;
         return author.equals(other.author)
-                && message.equals(other.message);
+                && message.equals(other.message)
+                && time.equals(other.time);
     }
 
     @Override
@@ -24,7 +30,8 @@ class Update {
     }
 
     public static Update from(Participant author
-                            , String      message) {
-        return new Update(author, message);
+                            , String      message
+                            , DateTime    time) {
+        return new Update(author, message, time);
     }
 }

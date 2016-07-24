@@ -1,5 +1,6 @@
 package stories.event;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,18 +13,24 @@ public class UpdateTest {
         Event bigParty     = anEvent();
         Participant emma   = of(bigParty);
         String niceEvening = aMessage();
+        DateTime now       = aTime();
 
-        bigParty.update(emma, niceEvening);
+        bigParty.update(emma, niceEvening, now);
 
-        assertTrue(bigParty.stream().contains(Update.from(emma, niceEvening)));
+        assertTrue(bigParty.stream().contains(Update.from(emma, niceEvening, aTime())));
+    }
+
+    private DateTime aTime() {
+        return new DateTime(2016, 7, 1, 21, 0);
     }
 
     @Test
     public void equality() {
         Participant emma  = aParticipant();
         String herMessage = aMessage();
-        Update expected   = Update.from(emma, herMessage);
-        Update actual     = Update.from(emma, herMessage);
+        DateTime time     = aTime();
+        Update expected   = Update.from(emma, herMessage, aTime());
+        Update actual     = Update.from(emma, herMessage, aTime());
         assertEquals(expected, actual);
     }
 

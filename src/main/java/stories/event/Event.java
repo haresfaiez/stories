@@ -1,5 +1,7 @@
 package stories.event;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +22,9 @@ public class Event {
     }
 
     public void update(Participant emma
-                     , String      message) {
-        stream.add(Update.from(emma, message));
+                     , String      message
+                     , DateTime    time) {
+        stream.add(Update.from(emma, message, time));
     }
 
     public static Event entitled(String title) {
