@@ -18,19 +18,22 @@ Given(~/^the event$/) { DataTable eventRaw ->
     destination     = Event.entitled(title, thisEvening, location)
 }
 
-
 Given(~/^Emma is participant of that event$/) { ->
-    emma = Participant.named("Emma", destination)
+    emma = new Participant("Emma", destination)
 }
 
-When(~/^Emma updates the event with "([^"]*)" at "([^"]*)"$/) {
-    String update, String time ->
-        message    = update
-        updateTime = new DateTime(2016, 01, 01, 21, 00)
-        destination.update(emma, update, updateTime)
+When(~/^Emma updates the event with$/) { DataTable updateRaw ->
+
+    def update = updateRaw.asMaps(String.class, String.class).get(0)
+
+    updateMessage = update.get('Message')
+    updateTime    = new DateTime(update.get('Time'))
+
+    destination.update(emma, updateMessage, updateTime)
 }
 
 Then(~/^the event stream should include that update$/) { ->
-    updateOfEmma = new Update(emma, message, updateTime)
-    destination.stream().contains(updateOfEmma)
+    updateOfEmma = new Update(emma, updateMessage, updateTime)
+
+    assert destination.stream().contains(updateOfEmma)
 }

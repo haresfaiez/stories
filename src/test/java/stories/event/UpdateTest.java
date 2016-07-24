@@ -42,7 +42,7 @@ public class UpdateTest {
     }
 
     private Participant of(Event destination) {
-        return Participant.named(emma(), destination);
+        return new Participant(emma(), destination);
     }
 
     private Participant aParticipant() {

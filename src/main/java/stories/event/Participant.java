@@ -21,9 +21,4 @@ class Participant {
     public int hashCode() {
         return person.hashCode();
     }
-
-    public static Participant named(String person
-                                  , Event  destination) {
-        return new Participant(person, destination);
-    }
 }

@@ -9,5 +9,7 @@ Feature:
   Scenario:
   Emma updates the event
     And   Emma is participant of that event
-    When  Emma updates the event with "Oh! Good party!" at "21:00"
+    When  Emma updates the event with
+      | Message         | Time             |
+      | Oh! Good party! | 2016-01-01T21:00 |
     Then  the event stream should include that update
