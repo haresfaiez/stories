@@ -34,8 +34,8 @@ public class UpdateTest {
     }
 
     private Update from(Participant author
-            , String      message
-            , DateTime    time) {
+                      , String      message
+                      , DateTime    time) {
         return new Update(author, message, time);
     }
 
