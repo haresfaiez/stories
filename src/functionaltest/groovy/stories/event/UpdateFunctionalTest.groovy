@@ -5,10 +5,17 @@ import org.joda.time.DateTime
 this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
-Given(~/^Emma is participant of "([^"]*)"$/) { String event ->
-    destination = Event.entitled(bigParty, thisEvening, event)
-    emma        = Participant.named("Emma", destination)
+Given(~/^"([^"]*)" is an event at "([^"]*)" in "([^"]*)"$/) {
+    String event, String time, String location ->
+        thisEvening = new DateTime(2016, 01, 01, 21, 00)
+        destination = Event.entitled(event, thisEvening, location)
 }
+
+Given(~/^Emma is participant of that event$/) { ->
+    emma = Participant.named("Emma", destination)
+}
+
+
 
 When(~/^Emma updates the event with "([^"]*)" at "([^"]*)"$/) {
     String update, String time ->
