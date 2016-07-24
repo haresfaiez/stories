@@ -33,7 +33,7 @@ When(~/^Emma updates the event with$/) { DataTable updateRaw ->
 }
 
 Then(~/^the event stream should include that update$/) { ->
-    updateOfEmma = new Update(emma, updateMessage, updateTime)
+    def updateOfEmma = new Update(emma, updateMessage, updateTime)
 
     assert destination.stream().contains(updateOfEmma)
 }
