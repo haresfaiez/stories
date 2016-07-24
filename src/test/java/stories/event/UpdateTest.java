@@ -6,6 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static stories.event.DateTimeFactory.aTime;
+import static stories.event.EventFactory.anEvent;
+import static stories.event.PersonFactory.emma;
 
 public class UpdateTest {
 
@@ -40,15 +42,11 @@ public class UpdateTest {
     }
 
     private Participant of(Event destination) {
-        return Participant.named("Emma", destination);
+        return Participant.named(emma(), destination);
     }
 
     private Participant aParticipant() {
         return of(anEvent());
-    }
-
-    private Event anEvent() {
-        return Event.entitled("Some title", aTime(), "Some location");
     }
 
     private String aMessage() {
