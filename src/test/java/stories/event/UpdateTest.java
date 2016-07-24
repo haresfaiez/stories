@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static stories.event.DateTimeFactory.aTime;
 
 public class UpdateTest {
 
@@ -38,10 +39,6 @@ public class UpdateTest {
         return new Update(author, message, time);
     }
 
-    private DateTime aTime() {
-        return new DateTime(2016, 7, 1, 21, 0);
-    }
-
     private Participant of(Event destination) {
         return Participant.named("Emma", destination);
     }
@@ -51,7 +48,7 @@ public class UpdateTest {
     }
 
     private Event anEvent() {
-        return Event.entitled("Some title");
+        return Event.entitled("Some title", aTime(), "Some location");
     }
 
     private String aMessage() {

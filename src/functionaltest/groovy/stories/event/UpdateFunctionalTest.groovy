@@ -6,7 +6,7 @@ this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
 Given(~/^Emma is participant of "([^"]*)"$/) { String event ->
-    destination = Event.entitled(event)
+    destination = Event.entitled(bigParty, thisEvening, event)
     emma        = Participant.named("Emma", destination)
 }
 
