@@ -17,21 +17,29 @@ public class UpdateTest {
 
         bigParty.update(emma, niceEvening, now);
 
-        assertTrue(bigParty.stream().contains(Update.from(emma, niceEvening, aTime())));
-    }
-
-    private DateTime aTime() {
-        return new DateTime(2016, 7, 1, 21, 0);
+        assertTrue(bigParty.stream().contains(from(emma, niceEvening, now)));
     }
 
     @Test
     public void equality() {
         Participant emma  = aParticipant();
         String herMessage = aMessage();
-        DateTime time     = aTime();
-        Update expected   = Update.from(emma, herMessage, aTime());
-        Update actual     = Update.from(emma, herMessage, aTime());
+        DateTime at       = aTime();
+
+        Update expected   = Update.from(emma, herMessage, at);
+        Update actual     = Update.from(emma, herMessage, at);
+
         assertEquals(expected, actual);
+    }
+
+    private Update from(Participant author
+            , String      message
+            , DateTime    time) {
+        return Update.from(author, message, time);
+    }
+
+    private DateTime aTime() {
+        return new DateTime(2016, 7, 1, 21, 0);
     }
 
     private Participant of(Event destination) {
