@@ -29,9 +29,4 @@ class Update {
         return message.hashCode();
     }
 
-    public static Update from(Participant author
-                            , String      message
-                            , DateTime    time) {
-        return new Update(author, message, time);
-    }
 }

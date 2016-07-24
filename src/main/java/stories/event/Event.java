@@ -24,7 +24,7 @@ public class Event {
     public void update(Participant emma
                      , String      message
                      , DateTime    time) {
-        stream.add(Update.from(emma, message, time));
+        stream.add(new Update(emma, message, time));
     }
 
     public static Event entitled(String title) {

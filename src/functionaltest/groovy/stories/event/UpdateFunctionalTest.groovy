@@ -18,6 +18,6 @@ When(~/^Emma updates the event with "([^"]*)" at "([^"]*)"$/) {
 }
 
 Then(~/^the event stream should include that update$/) { ->
-    updateOfEmma = Update.from(emma, message, updateTime)
+    updateOfEmma = new Update(emma, message, updateTime)
     destination.stream().contains(updateOfEmma)
 }

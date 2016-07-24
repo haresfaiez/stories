@@ -26,8 +26,8 @@ public class UpdateTest {
         String herMessage = aMessage();
         DateTime at       = aTime();
 
-        Update expected   = Update.from(emma, herMessage, at);
-        Update actual     = Update.from(emma, herMessage, at);
+        Update expected   = new Update(emma, herMessage, at);
+        Update actual     = new Update(emma, herMessage, at);
 
         assertEquals(expected, actual);
     }
@@ -35,7 +35,7 @@ public class UpdateTest {
     private Update from(Participant author
             , String      message
             , DateTime    time) {
-        return Update.from(author, message, time);
+        return new Update(author, message, time);
     }
 
     private DateTime aTime() {
