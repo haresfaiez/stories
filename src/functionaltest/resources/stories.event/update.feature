@@ -2,7 +2,9 @@ Feature:
   Emma wants to share her update with the visitors of "Big Party"
 
   Background:
-    Given "Big Party" is an event at "20:00" in "Tunis"
+    Given the event
+      | Title     | Time             | Location |
+      | Big Party | 2016-01-01T20:00 | Tunis    |
 
   Scenario:
   Emma updates the event

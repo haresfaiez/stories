@@ -1,15 +1,23 @@
 package stories.event
 
+import cucumber.api.DataTable
 import org.joda.time.DateTime
 
 this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
-Given(~/^"([^"]*)" is an event at "([^"]*)" in "([^"]*)"$/) {
-    String event, String time, String location ->
-        thisEvening = new DateTime(2016, 01, 01, 21, 00)
-        destination = Event.entitled(event, thisEvening, location)
+
+Given(~/^the event$/) { DataTable eventRaw ->
+
+    def event = eventRaw.asMaps(String.class, String.class).get(0)
+
+    String title    = event.get('Title')
+    thisEvening     = new DateTime(event.get('Time'))
+    String location = event.get('Location')
+
+    destination     = Event.entitled(title, thisEvening, location)
 }
+
 
 Given(~/^Emma is participant of that event$/) { ->
     emma = Participant.named("Emma", destination)
@@ -17,8 +25,8 @@ Given(~/^Emma is participant of that event$/) { ->
 
 When(~/^Emma updates the event with "([^"]*)" at "([^"]*)"$/) {
     String update, String time ->
-        message        = update
-        updateTime     = new DateTime(2016, 01, 01, 21, 00)
+        message    = update
+        updateTime = new DateTime(2016, 01, 01, 21, 00)
         destination.update(emma, update, updateTime)
 }
 
