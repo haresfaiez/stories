@@ -10,11 +10,11 @@ public class EventTest {
 
     @Test
     public void equality() {
-        DateTime thisEvening = aTime();
-        String tunis         = "Tunis";
+        String tunis     = "Tunis";
+        DateTime theTime = aTime();
 
-        Event expected = Event.entitled("Big party",       thisEvening, tunis);
-        Event actual   = Event.entitled("Other big party", thisEvening, tunis);
+        Event expected = Event.entitled("Big party",       theTime, tunis);
+        Event actual   = Event.entitled("Other big party", theTime, tunis);
 
         assertEquals(expected, actual);
     }

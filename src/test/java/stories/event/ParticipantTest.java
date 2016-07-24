@@ -10,11 +10,11 @@ public class ParticipantTest {
 
     @Test
     public void equality() {
-        String emma = emma();
-        Event event = anEvent();
+        String emma          = emma();
+        Event herDestination = anEvent();
 
-        Participant actual = new Participant(emma, event);
-        Participant expected = new Participant(emma, event);
+        Participant actual   = new Participant(emma, herDestination);
+        Participant expected = new Participant(emma, herDestination);
 
         assertEquals(expected, actual);
     }
