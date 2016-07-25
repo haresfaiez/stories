@@ -13,14 +13,12 @@ public class UpdateTest {
 
     @Test
     public void participantUpdate() {
-        Event bigParty     = anEvent();
-        Participant emma   = of(bigParty);
-        String niceEvening = aMessage();
-        DateTime now       = aTime();
+        Event bigParty      = anEvent();
+        Update updateOfEmma = to(bigParty);
 
-        bigParty.update(emma, niceEvening, now);
+        bigParty.update(updateOfEmma);
 
-        assertTrue(bigParty.stream().contains(from(emma, niceEvening, now)));
+        assertTrue(bigParty.stream().contains(updateOfEmma));
     }
 
     @Test
@@ -33,6 +31,14 @@ public class UpdateTest {
         Update actual     = new Update(emma, herMessage, at);
 
         assertEquals(expected, actual);
+    }
+
+    private Update to(Event bigParty) {
+        Participant emma   = of(bigParty);
+        String niceEvening = aMessage();
+        DateTime now       = aTime();
+
+        return from(emma, niceEvening, now);
     }
 
     private Update from(Participant author

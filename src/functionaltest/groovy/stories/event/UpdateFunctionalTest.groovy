@@ -29,11 +29,11 @@ When(~/^Emma updates the event with$/) { DataTable updateRaw ->
     updateMessage = update.get('Message')
     updateTime    = new DateTime(update.get('Time'))
 
-    destination.update(emma, updateMessage, updateTime)
+    updateOfEmma = new Update(emma, updateMessage, updateTime)
+    destination.update(updateOfEmma)
 }
 
 Then(~/^the event stream should include that update$/) { ->
-    def updateOfEmma = new Update(emma, updateMessage, updateTime)
 
     assert destination.stream().contains(updateOfEmma)
 }

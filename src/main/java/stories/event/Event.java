@@ -27,10 +27,8 @@ public class Event {
         return unmodifiableList(stream);
     }
 
-    public void update(Participant emma
-                     , String      message
-                     , DateTime    time) {
-        stream.add(new Update(emma, message, time));
+    public void update(Update input) {
+        stream.add(input);
     }
 
     @Override
