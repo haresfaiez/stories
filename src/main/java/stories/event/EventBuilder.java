@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventBuilder {
+class EventBuilder {
 
     public static final DateTime NULL_TIME   = DateTime.parse("0000-01-01");
     public static final String NULL_TITLE    = "";
