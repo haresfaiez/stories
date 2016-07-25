@@ -8,13 +8,15 @@ import static stories.event.DateTimeFactory.aTime;
 
 public class EventTest {
 
+    EventBuilder builder = new EventBuilder();
+
     @Test
     public void equality() {
         String tunis     = "Tunis";
         DateTime theTime = aTime();
 
-        Event expected = Event.entitled("Big party",       theTime, tunis);
-        Event actual   = Event.entitled("Other big party", theTime, tunis);
+        Event expected = builder.at(theTime).in(tunis).event();
+        Event actual   = builder.at(theTime).in(tunis).event();
 
         assertEquals(expected, actual);
     }

@@ -2,7 +2,6 @@ package stories.event;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.unmodifiableList;
@@ -43,9 +42,4 @@ public class Event {
         return time.hashCode();
     }
 
-    public static Event entitled(String   title
-                               , DateTime time
-                               , String   location) {
-        return new Event(title, time, location, new ArrayList<>());
-    }
 }
