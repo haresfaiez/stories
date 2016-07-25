@@ -33,7 +33,7 @@ class EventBuilder {
     }
 
     protected EventBuilder withUpdates(List updates) {
-        product.stream.addAll(updates);
+        product.stream = updates;
         return this;
     }
 

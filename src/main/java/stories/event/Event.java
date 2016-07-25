@@ -27,7 +27,7 @@ public class Event {
         return unmodifiableList(stream);
     }
 
-    public void update(Update input) {
+    protected void update(Update input) {
         stream.add(input);
     }
 
