@@ -12,11 +12,15 @@ public class EventRepositoryTest {
     @Test
     public void loadEvent() {
         DateTime time = aTime();
-        EventRepository repository = new EventRepository();
+        EventRepository repository = new EventRepository(builder());
 
         Event actual   = repository.event(time, "BigParty");
         Event expected = from(time, "BigParty");
 
         assertEquals(expected, actual);
+    }
+
+    private EventBuilder builder() {
+        return new EventBuilder();
     }
 }
