@@ -2,7 +2,7 @@ package stories.event;
 
 import org.joda.time.DateTime;
 
-class EventRepository {
+public class EventRepository {
 
     public Event event(DateTime targetTime
                      , String   targetLocation) {
