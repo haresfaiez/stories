@@ -8,10 +8,10 @@ import java.util.List;
 import static java.util.Collections.unmodifiableList;
 
 public class Event {
-    private String   title;
-    private DateTime time;
-    private String   location;
-    private List     stream;
+    protected String   title;
+    protected DateTime time;
+    protected String   location;
+    protected List     stream;
 
     public Event(String   title
                , DateTime time
