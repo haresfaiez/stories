@@ -7,28 +7,37 @@ import java.util.List;
 
 public class EventBuilder {
 
+    public static final DateTime NULL_TIME   = DateTime.parse("0000-01-01");
+    public static final String NULL_TITLE    = "";
+    public static final String NULL_LOCATION = "";
+    public static final List NULL_STREAM     = new ArrayList<>();
+
     private Event product;
 
-    public EventBuilder() {
-        product = new Event("", DateTime.parse("0000-01-01"), "", new ArrayList<>());
+    protected EventBuilder() {
+        product = new Event(NULL_TITLE
+                          , NULL_TIME
+                          , NULL_LOCATION
+                          , NULL_STREAM);
+
     }
 
-    public EventBuilder at(DateTime time) {
+    protected EventBuilder at(DateTime time) {
         product.time = time;
         return this;
     }
 
-    public EventBuilder in(String location) {
+    protected EventBuilder in(String location) {
         product.location = location;
         return this;
     }
 
-    public EventBuilder withUpdates(List updates) {
+    protected EventBuilder withUpdates(List updates) {
         product.stream.addAll(updates);
         return this;
     }
 
-    public Event event() {
+    protected Event event() {
         return product;
     }
 }
