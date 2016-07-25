@@ -3,7 +3,6 @@ package stories.event;
 import org.joda.time.DateTime;
 
 public class EventRepository {
-
     private EventBuilder builder;
 
     public EventRepository(EventBuilder builder) {

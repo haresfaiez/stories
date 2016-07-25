@@ -3,7 +3,6 @@ package stories.event;
 import org.joda.time.DateTime;
 
 class Update {
-
     private Participant author;
     private String      message;
     private DateTime    time;

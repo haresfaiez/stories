@@ -14,8 +14,8 @@ public class EventFactoryTest {
     @Test
     public void buildEvent() {
         DateTime time = aTime();
-
         EventBuilder builder = new EventBuilder();
+
         Event actual         = builder.at(time)
                                       .in("Tunis")
                                       .withUpdates(new ArrayList<>())
